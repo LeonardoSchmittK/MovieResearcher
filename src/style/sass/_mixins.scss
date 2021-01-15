@@ -1,0 +1,15 @@
+@mixin textType($type) {
+	@if $type == "important-text" {
+		font-size: 3.2em;
+		font-family: $primaryFont;
+		color: $primaryColor;
+	} @else if $type == "secondary-text" {
+		font-size: 3.2em;
+		font-family: $primaryFont;
+		color: $primaryColor;
+	} @else {
+		font-size: 3.2em;
+		font-family: $primaryFont;
+		color: $primaryColor;
+	}
+}

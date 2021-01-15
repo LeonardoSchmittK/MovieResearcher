@@ -1,2 +1,17 @@
-body {
-  background-color: pink; }
+@import url("https://fonts.googleapis.com/css2?family=Lalezar&family=Metrophobic&family=Poppins:wght@600&display=swap");
+body,
+html {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0; }
+
+button,
+input {
+  border: 0;
+  outline: none;
+  cursor: pointer; }
+
+h1 {
+  font-size: 3.2em;
+  font-family: "Lalezar", cursive, arial;
+  color: #6c63ff; }

@@ -20,6 +20,124 @@
 		<script defer src="/src/script/index.js" type="text/javascript"></script>
 	</head>
 	<body>
-		<h1>Hello, world</h1>
+		<header class="header">
+			<div class="ornament">
+				<svg
+					width="503"
+					height="138"
+					viewBox="0 0 503 138"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<g filter="url(#filter0_d)">
+						<path
+							d="M48.1856 75H492L438.742 131H0L48.1856 75Z"
+							fill="#F8F8F8"
+						/>
+						<path
+							d="M1.08985 130.5L48.415 75.5H490.834L438.528 130.5H1.08985Z"
+							stroke="#6C63FF"
+						/>
+					</g>
+					<path
+						d="M443.049 74.3422L253.628 36.5976L264.463 1.47103L487.855 74.3422L443.049 74.3422Z"
+						fill="white"
+						stroke="black"
+					/>
+					<path
+						d="M278 6.31454L287.501 9.4344L278 40.098L271.5 40.098L267 38.098L278 6.31454Z"
+						fill="#6C63FF"
+					/>
+					<path
+						d="M303.23 13.9841L312.731 17.1039L304.1 45.1178L297.655 44.9504L293.141 42.9913L303.23 13.9841Z"
+						fill="#6C63FF"
+					/>
+					<path
+						d="M325.943 22.0854L335.444 25.2053L328.023 49.5335L321.655 49.1332L317.123 47.2311L325.943 22.0854Z"
+						fill="#6C63FF"
+					/>
+					<path
+						d="M352.769 30.7429L362.27 33.8627L355.954 54.8274L349.655 54.2147L345.106 52.3646L352.769 30.7429Z"
+						fill="#6C63FF"
+					/>
+					<path
+						d="M378.896 38.8236L388.397 41.9435L383.337 59.0838L377.118 58.2293L372.549 56.4384L378.896 38.8236Z"
+						fill="#6C63FF"
+					/>
+					<path
+						d="M406.694 48.7191L416.195 51.839L411.513 67.8289L405.317 66.9018L400.743 65.1287L406.694 48.7191Z"
+						fill="#6C63FF"
+					/>
+					<defs>
+						<filter
+							id="filter0_d"
+							x="0"
+							y="75"
+							width="503"
+							height="63"
+							filterUnits="userSpaceOnUse"
+							color-interpolation-filters="sRGB"
+						>
+							<feFlood flood-opacity="0" result="BackgroundImageFix" />
+							<feColorMatrix
+								in="SourceAlpha"
+								type="matrix"
+								values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+							/>
+							<feOffset dx="11" dy="7" />
+							<feColorMatrix
+								type="matrix"
+								values="0 0 0 0 0.423529 0 0 0 0 0.388235 0 0 0 0 1 0 0 0 1 0"
+							/>
+							<feBlend
+								mode="normal"
+								in2="BackgroundImageFix"
+								result="effect1_dropShadow"
+							/>
+							<feBlend
+								mode="normal"
+								in="SourceGraphic"
+								in2="effect1_dropShadow"
+								result="shape"
+							/>
+						</filter>
+					</defs>
+				</svg>
+				<h1>Movie Researcher</h1>
+			</div>
+
+			<button type="button">
+				<svg
+					width="140"
+					height="32"
+					viewBox="0 0 140 32"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+					class="search-button"
+				>
+					<path d="M23.2472 0H140L117.269 32H0L23.2472 0Z" fill="#49FF90" />
+				</svg>
+				<span>Search</span>
+			</button>
+
+			<div class="search-bar">
+				<i class="fas fa-search"></i>
+				<input
+					type="text"
+					id="movie-title"
+					placeholder="Type in a movie/tv show"
+				/>
+			</div>
+		</header>
+		<div class="banner screens-animation">
+			<section class="movie-card">
+				<img
+					src="/src/resources/svg/img/bg-cinema.png"
+					alt="PNG of a person watching at the armchair watching a movie"
+				/>
+				<h1>Title</h1>
+			</section>
+		</div>
+		<footer class="footer">Made by Leoschmittk</footer>
 	</body>
 </html>

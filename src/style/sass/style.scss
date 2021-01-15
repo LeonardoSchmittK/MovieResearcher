@@ -1,3 +1,10 @@
-body {
-	background-color: pink;
+@import "./_variables";
+@import "./_presets";
+@import "./_mixins";
+@import "./_head";
+@import "./_body";
+@import "./_footer";
+
+h1 {
+	@include textType("secondary-text");
 }
