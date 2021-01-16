@@ -3,3 +3,17 @@
 		padding-left: 10px;
 	}
 }
+
+// @keyframes cross-window {
+// 	to {
+// 		left: 2000px;
+// 	}
+// }
+
+@keyframes cross-window {
+	to {
+		opacity: 0.03;
+		// transform: scale(1.2);
+		transform: translateX(10px) scale(1.2);
+	}
+}

@@ -5,14 +5,27 @@ html {
   padding: 0;
   margin: 0; }
 
+body {
+  background-color: #ffffff;
+  overflow-x: hidden; }
+
 button {
   border: none;
   outline: none;
   cursor: pointer; }
 
+::selection {
+  background-color: #4e4e4e;
+  color: #ffffff; }
+
 @keyframes bounce {
   to {
     padding-left: 10px; } }
+
+@keyframes cross-window {
+  to {
+    opacity: 0.03;
+    transform: translateX(10px) scale(1.2); } }
 
 .header {
   width: 540px;
@@ -70,6 +83,8 @@ button {
       color: #149714; }
     .header__search-button:hover i {
       animation: bounce linear 0.5s alternate infinite; }
+    .header__search-button i:hover {
+      animation-play-state: paused; }
     .header__search-button span {
       top: 4px;
       left: 40px;
@@ -134,5 +149,77 @@ button {
         right: 40px;
         top: 1px; } }
 
-body {
-  overflow-x: hidden; }
+@keyframes bounce {
+  to {
+    padding-left: 10px; } }
+
+@keyframes cross-window {
+  to {
+    opacity: 0.03;
+    transform: translateX(10px) scale(1.2); } }
+
+.banner {
+  width: 100%;
+  height: auto;
+  position: relative;
+  padding: 30px; }
+  .banner__card {
+    width: 20%;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+    padding: 50px;
+    border-radius: 50px; }
+  .banner__image {
+    display: block;
+    margin: auto;
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: -99999; }
+  .banner .screen {
+    height: 120px;
+    position: absolute;
+    background-color: #524b4b;
+    z-index: -9999; }
+
+@media only screen and (max-width: 1100px) {
+  .banner__card {
+    width: 50%; }
+  .banner .screen {
+    display: none; } }
+
+.footer {
+  background-color: #6c63ff;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  padding: 10px;
+  font-size: 1.2em;
+  font-family: "Poppins", cursive, Helvetica, arial;
+  color: #4e4e4e;
+  color: #ece7e7; }
+  .footer__Link {
+    color: white; }
+    .footer__Link:visited {
+      color: #9c96ff; }
+  .footer__icon {
+    padding-right: 5px;
+    background-color: rgba(255, 255, 255, 0.288);
+    text-align: center;
+    padding: 5px;
+    border-radius: 50%;
+    color: #6c63ff; }
+    .footer__icon:hover {
+      transform: scale(1.1); }
+  .footer mark {
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.288);
+    color: #6c63ff; }
+
+@media only screen and (max-width: 650px) {
+  .footer {
+    padding: 2px;
+    font-size: 10px; }
+    .footer mark {
+      padding: 2px; } }

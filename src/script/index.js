@@ -1,43 +1,48 @@
-// const el = window.document.querySelector(".header__search-movie");
-// var typed = new Typed(
-// 	'window.document.querySelector(".header__search-movie")',
-// 	{
-// 		strings: [
-// 			"The Avengers",
-// 			"Toy Story",
-// 			"Friends",
-// 			"Titanic",
-// 			"The Dark Knight",
-// 			"Avatar",
-// 			"Once Upon a Time in Hollywood ",
-// 		],
-// 		typeSpeed: 50,
-// 		backSpeed: 50,
-// 	}
-// );
+const banner = window.document.getElementById("screens");
 
-const type = document.addEventListener("DOMContentLoaded", function () {
-	new Typed("#search-movie", {
-		strings: [
-			"The Avengers",
-			"Mulan",
-			"The Dark Knight",
-			"Spider-Man 2",
-			"Jurassic Park ",
-			"Tenet",
-			"Lighthouse",
-			"The Wolf of Wall Street",
-			"Friends",
-			"The Office",
-			"The Witcher",
-			"Toy Story",
-			"Kill: Bill",
-			"Split",
-		],
-		typeSpeed: 120,
-		backSpeed: 200,
-		attr: "placeholder",
-		bindInputFocusEvents: true,
-		loop: true,
-	});
-});
+// (function animateScreens() {
+// 	let scr = 1;
+// 	let amount = Math.floor(Math.random() * 10) + 1;
+// 	for (scr; scr <= amount; ++scr) {
+// 		let screen = window.document.createElement("div");
+// 		screen.style.width = `${Math.floor(Math.random() * 400) + 200}px`;
+// 		screen.setAttribute("class", `banner__screen-${scr} screen`);
+// 		screen.style.top = `${Math.floor(Math.random() * 500) + 10}px`;
+// 		screen.style.left = `${Math.floor(Math.random() * -350) - 50}px`;
+// 		screen.style.animation = `cross-window ${
+// 			Math.floor(Math.random() * 50) + 2
+// 		}s linear alternate infinite`;
+// 		banner.appendChild(screen);
+// 	}
+// })();
+
+// (function animateScreens() {
+// 	let scr = 1;
+// 	let amount = Math.floor(Math.random() * 10) + 1;
+// 	for (scr; scr <= amount; ++scr) {
+// 		let screen = window.document.createElement("div");
+// 		screen.style.width = `${Math.floor(Math.random() * 400) + 200}px`;
+// 		screen.setAttribute("class", `banner__screen-${scr} screen`);
+// 		screen.style.top = `${Math.floor(Math.random() * 500) + 10}px`;
+// 		screen.style.left = `${Math.floor(Math.random() * 350) - 50}px`;
+// 		screen.style.animation = `cross-window ${
+// 			Math.floor(Math.random() * 50) + 2
+// 		}s linear alternate infinite`;
+// 		banner.appendChild(screen);
+// 	}
+// })();
+
+(function animateScreens() {
+	let scr = 1;
+	let amount = Math.floor(Math.random() * 10) + 5;
+	const animationTime = Math.floor(Math.random() * 2) + 0.5;
+	for (scr; scr <= amount; ++scr) {
+		var screen = window.document.createElement("div");
+		screen.style.width = `${Math.floor(Math.random() * 400) + 200}px`;
+		screen.setAttribute("class", `banner__screen-${scr} screen`);
+		screen.style.top = `${Math.floor(Math.random() * 500) + 10}px`;
+		screen.style.left = `${Math.floor(Math.random() * 1500) - 10}px`;
+		screen.style.animation = `cross-window ${animationTime}s  forwards`;
+		banner.appendChild(screen);
+	}
+})();

@@ -5,8 +5,18 @@ html {
 	margin: 0;
 }
 
+body {
+	background-color: $white;
+	overflow-x: hidden;
+}
+
 button {
 	border: none;
 	outline: none;
 	cursor: pointer;
+}
+
+::selection {
+	background-color: $secondaryColor;
+	color: $white;
 }

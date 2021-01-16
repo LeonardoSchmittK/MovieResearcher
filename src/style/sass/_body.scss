@@ -1,0 +1,53 @@
+@import "./keyframes";
+.banner {
+	width: 100%;
+	height: auto;
+	position: relative;
+	padding: 30px;
+	&__card {
+		// width: 350px;
+		width: 20%;
+		height: auto;
+		margin: 0 auto;
+		position: relative;
+		padding: 50px;
+		// border: 5px solid $primaryColor;
+		border-radius: 50px;
+		// box-shadow: inset 1px 1px 8px $grey, 5px 5px 30px lighten($grey, 25%);
+		// z-index: 99999;
+		// background-color: $white;
+	}
+	&__image {
+		display: block;
+		margin: auto;
+		width: 100%;
+		height: auto;
+		position: relative;
+		z-index: -99999;
+	}
+	.screen {
+		height: 120px;
+		position: absolute;
+		background-color: $grey;
+		z-index: -9999;
+	}
+}
+
+@media only screen and (max-width: 1100px) {
+	.banner {
+		&__card {
+			width: 50%;
+		}
+		.screen {
+			display: none;
+		}
+	}
+}
+
+// @media only screen and (max-width: 650px) {
+// 	.banner {
+// 		&__card {
+// 			width: 70%;
+// 		}
+// 	}
+// }
