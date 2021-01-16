@@ -21,7 +21,7 @@
 	</head>
 	<body>
 		<header class="header">
-			<div class="ornament">
+			<div class="header__ornament">
 				<svg
 					width="503"
 					height="138"
@@ -103,10 +103,19 @@
 						</filter>
 					</defs>
 				</svg>
-				<h1>Movie Researcher</h1>
+				<h1 class="header__title">Movie Researcher</h1>
 			</div>
+			<div class="header__search-bar">
+				<i class="header__search-icon fas fa-search"></i>
 
-			<button type="button">
+				<input
+					id="search-movie"
+					class="header__search-movie"
+					type="text"
+					placeholder="Text in a movie or tv show"
+				/>
+			</div>
+			<button class="header__search-button" type="button">
 				<svg
 					width="140"
 					height="32"
@@ -117,19 +126,11 @@
 				>
 					<path d="M23.2472 0H140L117.269 32H0L23.2472 0Z" fill="#49FF90" />
 				</svg>
-				<span>Search</span>
+				<span> Search<i class="fas fa-arrow-right"></i></span>
 			</button>
-
-			<div class="search-bar">
-				<i class="fas fa-search"></i>
-				<input
-					type="text"
-					id="movie-title"
-					placeholder="Type in a movie/tv show"
-				/>
-			</div>
 		</header>
-		<div class="banner screens-animation">
+
+		<!-- <div class="banner screens-animation">
 			<section class="movie-card">
 				<img
 					src="/src/resources/svg/img/bg-cinema.png"
@@ -138,6 +139,6 @@
 				<h1>Title</h1>
 			</section>
 		</div>
-		<footer class="footer">Made by Leoschmittk</footer>
+		<footer class="footer">Made by Leoschmittk</footer> -->
 	</body>
 </html>

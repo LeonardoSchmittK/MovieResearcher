@@ -1,10 +1,11 @@
 @import "./_variables";
 @import "./_presets";
 @import "./_mixins";
+@import "./_keyframes";
 @import "./_head";
 @import "./_body";
 @import "./_footer";
 
-h1 {
-	@include textType("secondary-text");
+body {
+	overflow-x: hidden;
 }
