@@ -1,14 +1,63 @@
 const apikey = "a1dd21cb";
-const inputVal = document.querySelector(".header__search-movie");
 const searchButton = document.querySelector(".header__search-button");
+const card = document.querySelector(".banner__card");
+
 searchButton.onclick = searchMovie;
 
 function searchMovie() {
-	const movie = inputVal.value;
+	const movieInput = document.querySelector("#search-movie");
+	applyAPI(movieInput.value);
+}
+
+function applyAPI(movie) {
 	fetch(`http://www.omdbapi.com/?apikey=${apikey}&t=${movie}`)
 		.then((data) => data.json())
-		.then((data) => console.log(data))
-		.catch((err) => console.log(err));
+		.then((data) => checkMovie(data))
+		.catch((err) => handleError(err));
+}
+
+function handleError(err = "Movie not found") {
+	printMovieCard(false);
+}
+function checkMovie(movie) {
+	if (movie.Error === "Movie not found!") return handleError();
+	else {
+		return printMovieCard(movie);
+	}
+}
+function printMovieCard(movie) {
+	card.classList.add("banner__movie-found");
+	deleteImage(movie);
+}
+
+function deleteImage(movie) {
+	window.document.querySelector(".banner__image").style.display = "none";
+	printMovieInfo(movie);
+}
+
+function printMovieInfo(movie) {
+	const {
+		Title,
+		Plot,
+		Poster,
+		Year,
+		Genre,
+		Director,
+		Runtime,
+		imdbRating,
+		Released,
+	} = movie;
+	const content = document.createElement("div");
+	const markup = `<h1>${Title}</h1>
+ <p><mark>About:</mark>${Plot}</p>
+ <p><mark>Director</mark>${Director}</p>
+ <p><mark>Release:</mark>${Released}</p>
+	<p><mark>IMDb:</mark>${imdbRating}</p>
+	<img src=${Poster} alt=${Title}/>
+
+	`;
+	content.innerHTML = markup;
+	card.appendChild(content);
 }
 
 // function executeMovie(data) {

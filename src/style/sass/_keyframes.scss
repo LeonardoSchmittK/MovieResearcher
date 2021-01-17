@@ -11,9 +11,17 @@
 // }
 
 @keyframes cross-window {
+	50% {
+		transform: translateX(100px);
+	}
 	to {
-		opacity: 0.03;
-		// transform: scale(1.2);
-		transform: translateX(10px) scale(1.2);
+		transform: translateX(50px);
+	}
+}
+
+@keyframes opacityToggle {
+	to {
+		opacity: 0.2;
+		transform: scale(1.2);
 	}
 }

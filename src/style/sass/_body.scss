@@ -11,12 +11,15 @@
 		margin: 0 auto;
 		position: relative;
 		padding: 50px;
-		// border: 5px solid $primaryColor;
 		border-radius: 50px;
-		// box-shadow: inset 1px 1px 8px $grey, 5px 5px 30px lighten($grey, 25%);
-		// z-index: 99999;
-		// background-color: $white;
 	}
+
+	&__movie-found {
+		background-color: $white;
+		border: 5px solid $primaryColor;
+		box-shadow: inset 1px 1px 8px $grey, 5px 5px 30px lighten($grey, 25%);
+	}
+
 	&__image {
 		display: block;
 		margin: auto;
@@ -25,6 +28,7 @@
 		position: relative;
 		z-index: -99999;
 	}
+
 	.screen {
 		height: 120px;
 		position: absolute;
