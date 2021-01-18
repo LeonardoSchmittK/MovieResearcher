@@ -1,11 +1,15 @@
 const apikey = "a1dd21cb";
 const searchButton = document.querySelector(".header__search-button");
 const card = document.querySelector(".banner__card");
+const movieInput = document.querySelector("#search-movie");
 
 searchButton.onclick = searchMovie;
 
+document.body.onkeypress = (e) => {
+	if (e.keyCode === 13) searchMovie();
+};
+
 function searchMovie() {
-	const movieInput = document.querySelector("#search-movie");
 	applyAPI(movieInput.value);
 }
 
@@ -17,13 +21,21 @@ function applyAPI(movie) {
 }
 
 function handleError(err = "Movie not found") {
-	printMovieCard(false);
+	var count = 0;
+	let setError = setInterval(function () {
+		movieInput.value = "Not found";
+		count++;
+		console.log(count);
+
+		if (count === 2) {
+			clearTimeout(setError);
+			movieInput.value = "";
+		}
+	}, 1000);
 }
 function checkMovie(movie) {
 	if (movie.Error === "Movie not found!") return handleError();
-	else {
-		return printMovieCard(movie);
-	}
+	else return printMovieCard(movie);
 }
 function printMovieCard(movie) {
 	card.classList.add("banner__movie-found");
@@ -39,25 +51,58 @@ function printMovieInfo(movie) {
 	const {
 		Title,
 		Plot,
-		Poster,
-		Year,
-		Genre,
 		Director,
-		Runtime,
+		Year,
 		imdbRating,
-		Released,
+		Genre,
+		Writer,
+		Poster,
 	} = movie;
-	const content = document.createElement("div");
-	const markup = `<h1>${Title}</h1>
- <p><mark>About:</mark>${Plot}</p>
- <p><mark>Director</mark>${Director}</p>
- <p><mark>Release:</mark>${Released}</p>
-	<p><mark>IMDb:</mark>${imdbRating}</p>
-	<img src=${Poster} alt=${Title}/>
+	const movieInfo = [Title, Plot, Director, Year, imdbRating, Genre];
+	const movieInfoClasses = [
+		"Title",
+		"Plot",
+		"Director",
+		"Year",
+		"imdbRating",
+		"Genre",
+	];
+	// const y = movieInfoClasses.map((info, i) => {
+	// 	movieInfo.map((infoMovie, index) => {
+	// 		// console.log(`${movieInfoClasses[i]}------------${movieInfo[i]}`);
 
-	`;
+	// 		window.document.querySelector(`.movie-${movieInfoClasses[i]}`).innerHTML =
+	// 			movieInfo[i];
+	// 	});
+	// });
+	// const movieContent = window.document.querySelector(".banner__content");
+	// movieContent.style.display = "block";
+
+	const content = document.createElement("li");
+	content.setAttribute("class", "banner__content");
+	const markup = `<h1 title='${Title}'>${Title}</h1>
+	<p><mark>About:</mark>${Plot}</p>
+	<p><mark>${Director !== "N/A" ? "Director" : "Writers"}</mark>${
+		Director !== "N/A" ? Director : Writer
+	}</p>
+	<p><mark>Release:</mark>${Year}</p>
+	<p style='color:${
+		imdbRating > 8.7 ? "#DAA520" : imdbRating <= 5 ? "red" : "green"
+	}'><mark>IMDb:</mark>${imdbRating}</p>
+	<img style="display:${
+		Poster === "N/A" ? "none" : "block"
+	}" id='movie-img' class='banner__movie-img' src=${Poster} alt=${Title}-poster/>
+<span><i class='fas fa-times'></i></span>
+		`;
+
 	content.innerHTML = markup;
+	content.style.height =
+		Title.length >= 42 ? "570px" : Title.length > 26 ? "450px" : "370px";
+	card.style.width = "inherit";
+	card.style.marginLeft = "-30px";
 	card.appendChild(content);
+	movieInput.value = "";
+	movieInput.focus();
 }
 
 // function executeMovie(data) {

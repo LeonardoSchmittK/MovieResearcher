@@ -21,3 +21,12 @@ button {
 	background-color: $secondaryColor;
 	color: $white;
 }
+
+mark {
+	background-color: $primaryColor;
+	@include textType("secondary-text");
+	font-size: 1em;
+	padding: 5px;
+	margin-right: 10px;
+	color: #fff;
+}
