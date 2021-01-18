@@ -1,144 +1,146 @@
-const apikey = "a1dd21cb";
-const searchButton = document.querySelector(".header__search-button");
-const card = document.querySelector(".banner__card");
-const movieInput = document.querySelector("#search-movie");
+const App = (function () {
+	const searchButton = document.querySelector(".header__search-button");
+	const card = document.querySelector(".banner__card");
+	const movieInput = document.querySelector("#search-movie");
+	const titles = [];
+	searchButton.onclick = searchMovie;
 
-searchButton.onclick = searchMovie;
+	document.body.onkeypress = (event) => {
+		if (event.keyCode === 13) searchMovie();
+	};
 
-document.body.onkeypress = (e) => {
-	if (e.keyCode === 13) searchMovie();
-};
+	function searchMovie() {
+		applyAPI(movieInput.value);
+	}
 
-function searchMovie() {
-	applyAPI(movieInput.value);
-}
+	function applyAPI(movie) {
+		const apikey = "a1dd21cb";
 
-function applyAPI(movie) {
-	fetch(`http://www.omdbapi.com/?apikey=${apikey}&t=${movie}`)
-		.then((data) => data.json())
-		.then((data) => checkMovie(data))
-		.catch((err) => handleError(err));
-}
+		fetch(`http://www.omdbapi.com/?apikey=${apikey}&t=${movie}`)
+			.then((data) => data.json())
+			.then((data) => {
+				titles.push(data.Title);
+				checkMovie(data);
+			})
+			.catch((err) => handleError(err));
+	}
 
-function handleError(err = "Movie not found") {
-	var count = 0;
-	let setError = setInterval(function () {
-		movieInput.value = "Not found";
-		count++;
-		console.log(count);
+	function handleError(err = "Movie not found") {
+		var count = 0;
+		let setError = setInterval(function () {
+			movieInput.value = "Not found";
+			count++;
+			console.log(count);
 
-		if (count === 2) {
-			clearTimeout(setError);
-			movieInput.value = "";
-		}
-	}, 1000);
-}
-function checkMovie(movie) {
-	if (movie.Error === "Movie not found!") return handleError();
-	else return printMovieCard(movie);
-}
-function printMovieCard(movie) {
-	card.classList.add("banner__movie-found");
-	deleteImage(movie);
-}
+			if (count === 2) {
+				clearTimeout(setError);
+				executeInputInitialBehavior();
+			}
+		}, 1000);
+	}
+	function checkMovie(movie) {
+		if (movie.Error === "Movie not found!") return handleError();
+		else return printMovieCard(movie);
+	}
+	function printMovieCard(movie) {
+		card.classList.add("banner__movie-found");
+		deleteSvgImage(movie);
+	}
 
-function deleteImage(movie) {
-	window.document.querySelector(".banner__image").style.display = "none";
-	printMovieInfo(movie);
-}
+	function deleteSvgImage(movie) {
+		window.document.querySelector(".banner__image").style.display = "none";
+		printMovieInfo(movie);
+	}
 
-function printMovieInfo(movie) {
-	const {
-		Title,
-		Plot,
-		Director,
-		Year,
-		imdbRating,
-		Genre,
-		Writer,
-		Poster,
-	} = movie;
-	const movieInfo = [Title, Plot, Director, Year, imdbRating, Genre];
-	const movieInfoClasses = [
-		"Title",
-		"Plot",
-		"Director",
-		"Year",
-		"imdbRating",
-		"Genre",
-	];
-	// const y = movieInfoClasses.map((info, i) => {
-	// 	movieInfo.map((infoMovie, index) => {
-	// 		// console.log(`${movieInfoClasses[i]}------------${movieInfo[i]}`);
-
-	// 		window.document.querySelector(`.movie-${movieInfoClasses[i]}`).innerHTML =
-	// 			movieInfo[i];
-	// 	});
-	// });
-	// const movieContent = window.document.querySelector(".banner__content");
-	// movieContent.style.display = "block";
-
-	const content = document.createElement("li");
-	content.setAttribute("class", "banner__content");
-	const markup = `<h1 title='${Title}'>${Title}</h1>
+	function printMovieInfo(movie) {
+		const {
+			Title,
+			Plot,
+			Director,
+			Year,
+			Runtime,
+			imdbRating,
+			Genre,
+			Writer,
+			Poster,
+		} = movie;
+		// if (movieInput.value === Title) alert("ola");
+		const newTitles = [...new Set(titles)];
+		if (JSON.stringify(newTitles) !== JSON.stringify(titles)) {
+			titles.pop();
+			return handleError();
+		} else {
+			const markup = `<h1 title='${Title}'>${Title}</h1>
 	<p><mark>About:</mark>${Plot}</p>
-	<p><mark>${Director !== "N/A" ? "Director" : "Writers"}</mark>${
-		Director !== "N/A" ? Director : Writer
-	}</p>
+	<p><mark>${
+		Director !== "N/A" ? "Director" : "Writers"
+	}</mark>${checkDirectorExistence(Director, Writer)}</p>
 	<p><mark>Release:</mark>${Year}</p>
-	<p style='color:${
-		imdbRating > 8.7 ? "#DAA520" : imdbRating <= 5 ? "red" : "green"
-	}'><mark>IMDb:</mark>${imdbRating}</p>
-	<img style="display:${
-		Poster === "N/A" ? "none" : "block"
-	}" id='movie-img' class='banner__movie-img' src=${Poster} alt=${Title}-poster/>
+	<p style='color:${rankRating(imdbRating)}'><mark>IMDb:</mark>${imdbRating}</p>
+	<p><mark>Runtime:</mark>${Runtime}</p>
+	<img style="display:${validatePosterSrc(
+		Poster
+	)}" id='movie-img' class='banner__movie-img' src=${Poster} alt=${Title}-poster/>
 <span><i class='fas fa-times'></i></span>
 		`;
 
-	content.innerHTML = markup;
-	content.style.height =
-		Title.length >= 42 ? "570px" : Title.length > 26 ? "450px" : "370px";
-	card.style.width = "inherit";
-	card.style.marginLeft = "-30px";
-	card.appendChild(content);
-	movieInput.value = "";
-	movieInput.focus();
-}
+			const content = makeElement("li", "banner__content", markup);
 
-// function executeMovie(data) {
-// 	document.querySelector("#movie-poster").src = data.Poster;
-// 	document.querySelector("h1").textContent = data.Title;
-// 	document.querySelector("h2").textContent = data.imdbRating;
-// }
+			content.style.height = calcCardHeight(Title);
+			card.style.cssText = "width:inherit;margin-left:-30px;";
 
-// String.prototype.capitalize = function () {
-// 	const movie = this.split(/\s+/);
-// 	const x = movie.map((item, key) => {
-// 		return [...item];
-// 	});
-// 	const res = x.map((item, key) => {
-// 		const cut = item.slice(1);
-// 		const res = item[0].toUpperCase();
-// 		const res2 = res + cut.join("");
-// 		return res2;
-// 	});
-// 	return res.join("-");
-// };
+			card.appendChild(content);
 
-// const API_KEY = "bc2b82a37c132259573b89350a001724";
-// const API_BASE = "https://api.themoviedb.org/3";
-// const basicFetch = async (endpoint) => {
-// 	const req = await fetch(`${API_BASE}${endpoint}`);
-// 	const json = await req.json();
-// 	return json;
-// };
+			// sortCards(content);
+			executeInputInitialBehavior();
+		}
+	}
 
-// const res = await basicFetch(
-// 	`/discover/tv?with_network=213&language=pt-BR&_api_key=${API_KEY}`
-// );
-// fetch(
-// 	`${API_BASE}/discover/tv?with_network=213&language=pt-BR&api_key=${API_KEY}`
-// )
-// 	.then((data) => data.json())
-// 	.then((data) => console.log(data.results[22].name))
-// 	.catch((err) => console.log(err));
+	function validatePosterSrc(src) {
+		return src === "N/A" ? "none" : "block";
+	}
+
+	function rankRating(rating) {
+		if (rating < 6.0) return "#FF0000";
+		else if (rating > 8.7) return "#b29600";
+		else return "#008000";
+	}
+
+	function checkDirectorExistence(director, writer) {
+		return director === "N/A" ? writer : director;
+	}
+
+	function calcCardHeight(title) {
+		if (title.length > 43) return "570px";
+		else if (title.length > 26) return "480px";
+		else return "370px";
+	}
+
+	function executeInputInitialBehavior() {
+		movieInput.value = "";
+		movieInput.focus();
+	}
+
+	function makeElement(el = "div", attrClass, content = "This is a element") {
+		const element = document.createElement(el);
+		element.setAttribute("class", attrClass);
+		element.innerHTML = content;
+		return element;
+	}
+	// function sortCards(cards) {
+	// 	const movies = [
+	// 		...window.document.getElementsByClassName("banner__content"),
+	// 	].reverse();
+	// 	movies.map((item) => {
+	// 		card.appendChild(item);
+	// 	});
+
+	// 	movies.map((item) => {
+	// 		movies.filter((a) => {
+	// 			console.log(item);
+	// 		});
+	// 	});
+	// 	console.log(movies);
+	// }
+	// sortCards();
+})();

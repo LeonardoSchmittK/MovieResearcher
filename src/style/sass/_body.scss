@@ -75,8 +75,8 @@
 
 	&__image {
 		display: block;
-		margin: auto;
-		width: 300%;
+		margin: 50px auto;
+		width: 125%;
 		height: auto;
 		position: relative;
 		z-index: -99999;
@@ -94,7 +94,6 @@
 	.banner {
 		&__card {
 			width: 50%;
-			// grid-template-columns: repeat(2, 1fr);
 		}
 		.screen {
 			display: none;
@@ -105,8 +104,6 @@
 @media only screen and (max-width: 650px) {
 	.banner {
 		&__card {
-			width: 70%;
-			// grid-template-columns: repeat(1, 1fr);
 			.banner__content {
 				margin-left: 35px;
 			}

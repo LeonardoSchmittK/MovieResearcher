@@ -246,8 +246,8 @@ mark {
         color: #524b4b; }
   .banner__image {
     display: block;
-    margin: auto;
-    width: 300%;
+    margin: 50px auto;
+    width: 125%;
     height: auto;
     position: relative;
     z-index: -99999; }
@@ -264,10 +264,8 @@ mark {
     display: none; } }
 
 @media only screen and (max-width: 650px) {
-  .banner__card {
-    width: 70%; }
-    .banner__card .banner__content {
-      margin-left: 35px; } }
+  .banner__card .banner__content {
+    margin-left: 35px; } }
 
 .footer {
   background-color: #6c63ff;
