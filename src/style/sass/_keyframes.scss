@@ -31,3 +31,14 @@
 		// filter: drop-shadow(1px 1px 15px $primaryColor);
 	}
 }
+
+@keyframes removePoster {
+	50% {
+		transform: translateX(200px);
+	}
+	to {
+		transform: translateX(-100px);
+		z-index: -9999;
+		visibility: hidden;
+	}
+}

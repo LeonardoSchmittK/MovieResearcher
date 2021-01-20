@@ -13,6 +13,10 @@
 		"js-image-zoom": "^0.7.0",
 		"node-sass": "^5.0.0",
 		"typed.js": "^2.0.11",
-		"vivus": "^0.4.5"
+		"vivus": "^0.4.5",
+		"zooming": "^2.1.1"
+	},
+	"dependencies": {
+		"medium-zoom": "^1.0.6"
 	}
 }
