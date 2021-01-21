@@ -218,7 +218,6 @@ mark {
     .banner__card .banner__content {
       position: relative;
       width: 300px;
-      height: 450px;
       padding: 20px;
       border-radius: 35px;
       margin: 50px;
@@ -288,6 +287,27 @@ mark {
           transition: all ease 0.2s; }
           .banner__card .banner__content .banner__card-icons .card-icon:hover {
             transform: scale(1.1); }
+      .banner__card .banner__content .icons-content-container {
+        width: 300px;
+        height: auto;
+        background-color: rgba(221, 221, 221, 0.515);
+        border-radius: 15px;
+        position: relative;
+        margin-top: 10px; }
+        .banner__card .banner__content .icons-content-container p {
+          width: 50%;
+          padding: 10px 10px 10px 20px;
+          transition: all ease 1s; }
+        .banner__card .banner__content .icons-content-container::before {
+          content: "";
+          position: absolute;
+          top: -16px;
+          left: 0;
+          width: 20px;
+          height: 20px;
+          background-color: inherit;
+          clip-path: polygon(20% 100%, 0 0, 100% 100%, 0% 100%);
+          border-radius: 20px; }
       .banner__card .banner__content figure {
         width: 46%;
         height: 230px;
@@ -300,41 +320,44 @@ mark {
         transition: all ease 0.3s; }
         .banner__card .banner__content figure:hover {
           transform: translateX(55px) translateY(40px); }
-        .banner__card .banner__content figure:hover i {
-          bottom: -50px; }
+        .banner__card .banner__content figure:hover figcaption {
+          bottom: -55px; }
         .banner__card .banner__content figure .banner__movie-img {
           width: 100%;
-          height: auto;
+          height: inherit;
           border-radius: 25px;
           border: 5px solid #6c63ff; }
-        .banner__card .banner__content figure i {
+        .banner__card .banner__content figure figcaption {
           transition: all ease 0.3s;
-          color: #6c63ff;
           font-size: 1.1em;
           position: absolute;
           bottom: 10px;
-          left: 30px;
+          left: 10px;
           z-index: -999;
           padding: 5px;
-          border-radius: 10px; }
-          .banner__card .banner__content figure i:hover {
-            transform: scale(1.1); }
+          border-radius: 10px;
+          width: 200px;
+          display: flex; }
+          .banner__card .banner__content figure figcaption i {
+            color: #6c63ff;
+            background-color: #ffffff;
+            font-size: 1.4em;
+            padding: 10px;
+            border-radius: 20px;
+            margin-right: 10px; }
+            .banner__card .banner__content figure figcaption i:hover {
+              transform: scale(1.1); }
       .banner__card .banner__content .zoomed-poster {
         width: 100%;
         transform: none;
-        top: -50px;
-        left: -30px; }
-        .banner__card .banner__content .zoomed-poster img {
-          height: 450px; }
+        top: -20px;
+        left: -30px;
+        z-index: 999; }
         .banner__card .banner__content .zoomed-poster:hover {
-          transform: none;
-          box-shadow: 4px 30px 0 #d0cccc; }
-        .banner__card .banner__content .zoomed-poster:hover i {
-          bottom: -246px; }
-        .banner__card .banner__content .zoomed-poster i {
-          bottom: -246px;
-          left: 0;
-          z-index: 9999; }
+          transform: translate(5px, -5px); }
+        .banner__card .banner__content .zoomed-poster figcaption {
+          bottom: -50px;
+          z-index: 999; }
   .banner__image {
     display: block;
     margin: 50px auto;
@@ -367,7 +390,8 @@ mark {
   font-size: 1.2em;
   font-family: "Poppins", cursive, Helvetica, arial;
   color: #4e4e4e;
-  color: #ece7e7; }
+  color: #ece7e7;
+  z-index: 99999999999; }
   .footer__Link {
     color: white; }
     .footer__Link:visited {

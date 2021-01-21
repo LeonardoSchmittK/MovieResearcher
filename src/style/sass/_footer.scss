@@ -6,6 +6,7 @@
 	padding: 10px;
 	@include textType("text");
 	color: rgb(236, 231, 231);
+	z-index: 99999999999;
 	&__Link {
 		color: white;
 		&:visited {
