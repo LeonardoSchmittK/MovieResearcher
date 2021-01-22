@@ -265,7 +265,8 @@ mark {
         line-height: 40px;
         white-space: "...";
         overflow: hidden;
-        text-overflow: ellipsis; }
+        position: relative;
+        z-index: 999; }
       .banner__card .banner__content p {
         line-height: 20px;
         font-family: "Poppins", cursive, Helvetica, arial;
@@ -275,6 +276,7 @@ mark {
         display: flex;
         width: 50%; }
         .banner__card .banner__content .banner__card-icons .card-icon {
+          cursor: pointer;
           background-color: #6c63ff;
           color: #ffffff;
           border-radius: 30px;

@@ -77,6 +77,7 @@ const App = (function () {
 
 				removePoster(item);
 				increasePoster(item, movie);
+				printCardIconsContent(item);
 				item.childNodes[1].childNodes[0].onclick = () => {
 					item.style.display = "none";
 					let i = cards.indexOf(item);
@@ -117,8 +118,14 @@ const App = (function () {
 		return `
 			<span><i  class="remove-card-icon fas fa-times"></i> </span>
 			<h1  title='${Title}'>${Title}</h1>
+			<div class='genres-container'> 
+      ${printGenresLabels(Genre)}
+			</div>
 	<p style='color:${checkExistence(Plot)};' ><mark>About:</mark>${Plot}</p>
-	<p style='color:${checkExistence(Plot)};'><mark>${checkDirectorLabel(Director)}
+	<p style='color:${checkExistence(
+		Director,
+		Writer
+	)};'><mark>${checkDirectorLabel(Director)}
 	</mark>${checkDirectorExistence(Director, Writer)}</p>
 	<p style='color:${checkExistence(Year)};'><mark>Release:</mark>${Year}</p>
 	<p style='color:${rankRating(imdbRating)};'><mark>IMDb:</mark>${imdbRating}</p>
@@ -127,28 +134,28 @@ const App = (function () {
 	)};'><mark>Runtime:</mark>${Runtime}</p>
 	<div class='banner__card-icons'>
 
-			   <i onclick='document.querySelector(".icons-content").innerHTML="${Awards}"' title='${Awards}'  style='display:${checkCardIconVisibility(
+			   <i  title='${Awards}'  style='display:${checkCardIconVisibility(
 			Awards
 		)};' class="card-icon fas fa-trophy"></i>
 
-		<i onclick='document.querySelector(".icons-content").innerHTML="${Production}"'  title='${Production}'	style='display:${checkCardIconVisibility(
+		<i   title='${Production}'	style='display:${checkCardIconVisibility(
 			Production
 		)};'  class="card-icon fas fa-film"></i> 
 
-	  	<i onclick='document.querySelector(".icons-content").innerHTML="${Actors}"'  title='${Actors}' style='display:${checkCardIconVisibility(
+	  	<i   title='${Actors}' style='display:${checkCardIconVisibility(
 			Actors
 		)};'  class=" card-icon fas fa-users"></i>  
 
 
-				  	<i onclick='document.querySelector(".icons-content").innerHTML="${BoxOffice}"'  title='${BoxOffice}' style='display:${checkCardIconVisibility(
+				  	<i   title='${BoxOffice}' style='display:${checkCardIconVisibility(
 			BoxOffice
 		)};'  class="card-icon fas fa-dollar-sign"></i>  
 
 	</div>
-<div class='icons-content-container'>
-						<p class='icons-content'>${Awards}</p>
+<div style='display:none;' class='icons-content-container'>
+						<p class='icons-content'></p>
 	</div>
-		
+
 		<figure  style='display:${validatePosterSrc(Poster)};' id='movie-img'/>
 		<img   class='banner__movie-img' src='${Poster}' alt='${Title}-poster'/>
   <figcaption><i  class='remove-poster-icon fas fa-times'></i><i class="increase-poster-icon fas fa-chart-line"></i></figcaption>
@@ -157,16 +164,15 @@ const App = (function () {
 		`;
 	}
 
-	function increasePoster(item, movie) {
+	function increasePoster(item) {
 		const poster = item.childNodes[item.childNodes.length - 2];
-
 		const increasePosterIcon =
 			item.childNodes[item.childNodes.length - 2].childNodes[3].childNodes[1];
 
 		let x = (increasePosterIcon.onclick = () => {
 			poster.classList.add("zoomed-poster");
 			increasePosterIcon.style.transform = "rotate(180deg)";
-			poster.style.height = calcCardHeight(movie);
+			poster.style.height = item.style.height;
 
 			increasePosterIcon.onclick = () => {
 				poster.classList.remove("zoomed-poster");
@@ -177,13 +183,14 @@ const App = (function () {
 				increasePosterIcon.onclick = () => x();
 			};
 		});
-		// window.document.querySelector(".banner__movie-img").onclick = () => {
-		// 	window.document.querySelector("figure").classList.add("zoomed-poster");
-		// };
 	}
 
-	function checkExistence(info) {
-		if (info === "N/A") return "#A9A9A9";
+	function checkExistence(info, complement) {
+		if (complement) {
+			if (info === "N/A" && complement === "N/A") return "#A9A9A9";
+		} else {
+			if (info === "N/A") return "#A9A9A9";
+		}
 	}
 
 	function removePoster(item) {
@@ -192,9 +199,53 @@ const App = (function () {
 			item.childNodes[item.childNodes.length - 2].childNodes[3].childNodes[0];
 		removePosterIcon.onclick = () => {
 			poster.classList.remove("zoomed-poster");
-			console.log((item.childNodes[17].childNodes[1].style.width = "80%"));
+			item.childNodes[19].childNodes[1].style.width = "80%";
 			poster.style.animation = "removePoster 1s ease-in-out forwards";
+			setTimeout(function () {
+				poster.style.display = "none";
+			}, 1200);
 		};
+	}
+
+	function printCardIconsContent(item) {
+		const iconsContainer = item.childNodes[17];
+		const iconsContentContainer = item.childNodes[19];
+		console.log(iconsContainer);
+		console.log(iconsContentContainer);
+
+		iconsContainer.onclick = () => {
+			iconsContentContainer.style.display = "block";
+		};
+		iconsContainer.childNodes[1].onclick = () => {
+			iconsContentContainer.childNodes[1].innerHTML =
+				iconsContainer.childNodes[1].title;
+		};
+		iconsContainer.childNodes[3].onclick = () => {
+			iconsContentContainer.childNodes[1].innerHTML =
+				iconsContainer.childNodes[3].title;
+		};
+
+		iconsContainer.childNodes[5].onclick = () => {
+			iconsContentContainer.childNodes[1].innerHTML =
+				iconsContainer.childNodes[5].title;
+		};
+		iconsContainer.childNodes[7].onclick = () => {
+			iconsContentContainer.childNodes[1].innerHTML =
+				iconsContainer.childNodes[7].title;
+		};
+	}
+
+	function printGenresLabels(genre) {
+		const splitGenres = genre.split(",");
+		const genres = [];
+		const removeSpaces = splitGenres.map((genre, i) => {
+			return genre.indexOf(" ") !== -1 ? `#${genre.slice(1)}` : `#${genre}`;
+		});
+		removeSpaces.map((genre) => {
+			genres.push(`<span class='genres'>${genre}</span>`);
+		});
+
+		return genres.join(" ");
 	}
 
 	function rankRating(rating) {
@@ -214,7 +265,7 @@ const App = (function () {
 
 	function calcCardHeight({ Title }) {
 		if (Title.length > 43) return "730px";
-		else if (Title.length > 26) return "540px";
+		else if (Title.length > 26) return "550px";
 		else return "450px";
 	}
 

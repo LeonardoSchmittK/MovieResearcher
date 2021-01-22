@@ -66,7 +66,8 @@
 				line-height: 40px;
 				white-space: "...";
 				overflow: hidden;
-				text-overflow: ellipsis;
+				position: relative;
+				z-index: 999;
 			}
 			p {
 				line-height: 20px;
@@ -78,6 +79,7 @@
 				display: flex;
 				width: 50%;
 				.card-icon {
+					cursor: pointer;
 					background-color: $primaryColor;
 					color: $white;
 					border-radius: 30px;
