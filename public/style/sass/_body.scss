@@ -56,8 +56,87 @@
 					transform: rotate(140deg);
 				}
 			}
+			.genres-container {
+				margin-top: 10px;
+				width: 100%;
+				overflow: auto;
+				display: none;
+			}
+
+			.genres-container.toggle-genres {
+				display: flex;
+				flex-wrap: nowrap;
+				overflow: auto;
+			}
+
+			.genres {
+				padding: 5px;
+				font-family: $secondaryFont;
+				font-size: 10px;
+			}
+			.genres[data-genre="#Animation"] {
+				background-color: $animationColor;
+			}
+			.genres[data-genre="#Adventure"] {
+				background-color: $adventureColor;
+			}
+			.genres[data-genre="#Family"] {
+				background-color: $familyColor;
+			}
+			.genres[data-genre="#Action"] {
+				background-color: $actionColor;
+			}
+			.genres[data-genre="#Horror"] {
+				background-color: $horrorColor;
+			}
+			.genres[data-genre="#Comedy"] {
+				background-color: $comedyColor;
+			}
+			.genres[data-genre="#Fantasy"] {
+				background-color: $fantasyColor;
+			}
+			.genres[data-genre="#Romance"] {
+				background-color: $romanceColor;
+			}
+			.genres[data-genre="#Sci-Fi"] {
+				background-color: $sci-fiColor;
+			}
+			.genres[data-genre="#Thriller"] {
+				background-color: $thrillerColor;
+			}
+			.genres[data-genre="#Drama"] {
+				background-color: $dramaColor;
+			}
+			.genres[data-genre="#Mystery"] {
+				background-color: $mysteryColor;
+			}
+			.genres[data-genre="#History"] {
+				background-color: $historyColor;
+			}
+			.genres[data-genre="#War"] {
+				background-color: $warColor;
+			}
+			.genres[data-genre="#Crime"] {
+				background-color: $crimeColor;
+			}
+			.genres[data-genre="#Short"] {
+				background-color: $shortColor;
+			}
+			.genres[data-genre="#Music"] {
+				background-color: $musicColor;
+			}
+			.genres[data-genre="#Musical"] {
+				background-color: $musicalColor;
+			}
+			// @for $i from 1 through 10 {
+			// 	.genres:nth-child(#{$i}) {
+			// 		background-color: lighten($primaryColor, $i * 5%);
+			// 	}
+			// }
+
 			h1 {
 				@include textType("important-text");
+				cursor: pointer;
 				color: $grey;
 				text-shadow: 1px 5px 1px lighten($grey, 50%);
 				margin-top: 10px;

@@ -8,7 +8,7 @@
 		<link
 			rel="stylesheet icon"
 			type="image/png"
-			href="/src/resources/svg/img/icon.png"
+			href="resources/svg/img/icon.png"
 		/>
 		<!-- Icons  -->
 		<link
@@ -18,15 +18,33 @@
 			crossorigin="anonymous"
 		/>
 		<!-- Style-->
-		<link rel="stylesheet" href="/src/style/css/style.css" />
+		<link rel="stylesheet" href="style/css/style.css" type="text/css" />
 
 		<!-- script-->
 		<script defer src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-		<script defer src="/src/script/index.js" src="text/javascript"></script>
-		<script defer src="/src/script/typed.js" type="text/javascript"></script>
-		<script defer src="/src/script/API.js" type="text/javascript"></script>
+		<script defer src="script/index.js" type="text/javascript"></script>
+		<script defer src="script/typed.js" type="text/javascript"></script>
+		<script defer src="script/API.js" type="text/javascript"></script>
+
+		<script defer src="../node_modules/firebase/firebase.js"></script>
+		<script defer src="script/firebaseConfig.js"></script>
 	</head>
 	<body>
+		<article>
+			<form>
+				<label for="emailInput">E-mail:</label>
+				<input id="emailInput" required type="email" />
+				<br />
+
+				<label for="passwordInput">Password:</label>
+				<input id="passwordInput" required type="password" />
+				<br />
+
+				<button class="btnLogin">Log in</button>
+				<button class="btnRegister">Register</button>
+				<button class="btnLogout">Log out</button>
+			</form>
+		</article>
 		<header class="header">
 			<div class="header__ornament">
 				<svg
@@ -136,7 +154,7 @@
 				<ul class="banner__card">
 					<img
 						class="banner__image"
-						src="/src/resources/svg/img/bg-cinema.png"
+						src="../resources/svg/img/bg-cinema.png"
 						alt="PNG of a person watching at the armchair watching a movie"
 					/>
 				</ul>

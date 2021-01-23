@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"sass": "node-sass --watch src/style/sass/ -o src/style/css"
+		"sass": "node-sass --watch style/sass/ -o style/css"
 	},
 	"keywords": [],
 	"author": "Leonardo Schmitt",
@@ -17,6 +17,8 @@
 		"zooming": "^2.1.1"
 	},
 	"dependencies": {
+		"express": "^4.17.1",
+		"firebase": "^8.2.4",
 		"medium-zoom": "^1.0.6"
 	}
 }
