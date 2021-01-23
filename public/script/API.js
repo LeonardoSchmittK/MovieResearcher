@@ -18,7 +18,9 @@ const App = (function () {
 	function applyAPI(movie) {
 		// if (movie.length === 0) return handleError("Type in something");
 		const apikey = "a1dd21cb";
-		fetch(`http://www.omdbapi.com/?apikey=${apikey}&t=${movie}`)
+		fetch(`http://www.omdbapi.com/?apikey=${apikey}&t=${movie}`, {
+			method: "GET",
+		})
 			.then((data) => data.json())
 			.then((data) => {
 				checkMovie(data);
