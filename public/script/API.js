@@ -78,6 +78,7 @@ const App = (function () {
 				removePoster(item);
 				increasePoster(item, movie);
 				printCardIconsContent(item);
+				printGenres(item);
 				item.childNodes[1].childNodes[0].onclick = () => {
 					item.style.display = "none";
 					let i = cards.indexOf(item);
@@ -242,10 +243,25 @@ const App = (function () {
 			return genre.indexOf(" ") !== -1 ? `#${genre.slice(1)}` : `#${genre}`;
 		});
 		removeSpaces.map((genre) => {
-			genres.push(`<span class='genres'>${genre}</span>`);
+			genres.push(`<span data-genre='${genre}' class='genres'>${genre}</span>`);
 		});
 
 		return genres.join(" ");
+	}
+
+	function printGenres(item) {
+		const genresContainer = item.childNodes[5];
+		let toggleGenres = (item.childNodes[3].onclick = () => {
+			genresContainer.classList.add("toggle-genres");
+
+			item.childNodes[3].onclick = () => {
+				genresContainer.classList.remove("toggle-genres");
+
+				item.childNodes[3].onclick = () => {
+					toggleGenres();
+				};
+			};
+		});
 	}
 
 	function rankRating(rating) {
@@ -264,9 +280,9 @@ const App = (function () {
 	}
 
 	function calcCardHeight({ Title }) {
-		if (Title.length > 43) return "730px";
-		else if (Title.length > 26) return "550px";
-		else return "450px";
+		if (Title.length > 43) return "750px";
+		else if (Title.length > 26) return "580px";
+		else return "480px";
 	}
 
 	function checkCardIconVisibility(value) {
@@ -284,4 +300,58 @@ const App = (function () {
 		element.innerHTML = content;
 		return element;
 	}
+
+	const btnLogin = window.document.querySelector(".btnLogin");
+	const btnRegister = window.document.querySelector(".btnRegister");
+	const btnLogout = window.document.querySelector(".btnLogout");
+	const passwordInput = window.document.querySelector("#passwordInput");
+	const emailInput = window.document.querySelector("#emailInput");
+
+	const form = window.document.querySelector("form");
+
+	btnRegister.onclick = (e) => {
+		e.preventDefault();
+
+		firebase
+			.auth()
+			.createUserWithEmailAndPassword(emailInput.value, passwordInput.value)
+			.then((result) => {
+				alert(`Welcome, ${emailInput.value}`);
+				console.log(result);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	btnLogin.onclick = (e) => {
+		e.preventDefault();
+		firebase
+			.auth()
+			.signInWithEmailAndPassword(emailInput.value, passwordInput.value)
+			.then((result) => {
+				console.log(result);
+				document.writeln("welcome" + emailInput.value);
+			})
+			.catch((err) => {
+				console.log(err.code);
+				console.log(err.message);
+				alert("Went through an error");
+			});
+	};
+	btnLogout.onclick = (e) => {
+		e.preventDefault();
+
+		firebase
+			.auth()
+			.signOut()
+			.then(
+				() => {
+					document.writeln("n autenticado");
+				},
+				function (err) {
+					console.log(err);
+				}
+			);
+	};
 })();

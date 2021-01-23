@@ -253,10 +253,60 @@ mark {
           width: 70px;
           height: 20px;
           transform: rotate(140deg); }
+      .banner__card .banner__content .genres-container {
+        margin-top: 10px;
+        width: 100%;
+        overflow: auto;
+        display: none; }
+      .banner__card .banner__content .genres-container.toggle-genres {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: auto; }
+      .banner__card .banner__content .genres {
+        padding: 5px;
+        font-family: "Metrophobic", cursive, arial;
+        font-size: 10px; }
+      .banner__card .banner__content .genres[data-genre="#Animation"] {
+        background-color: #00800056; }
+      .banner__card .banner__content .genres[data-genre="#Adventure"] {
+        background-color: #0000ff69; }
+      .banner__card .banner__content .genres[data-genre="#Family"] {
+        background-color: #ffff0077; }
+      .banner__card .banner__content .genres[data-genre="#Action"] {
+        background-color: #80808070; }
+      .banner__card .banner__content .genres[data-genre="#Horror"] {
+        background-color: #2d2d3172; }
+      .banner__card .banner__content .genres[data-genre="#Comedy"] {
+        background-color: #3dcbeb62; }
+      .banner__card .banner__content .genres[data-genre="#Fantasy"] {
+        background-color: #ffa60074; }
+      .banner__card .banner__content .genres[data-genre="#Romance"] {
+        background-color: #ffc0cb85; }
+      .banner__card .banner__content .genres[data-genre="#Sci-Fi"] {
+        background-color: #423a5a85; }
+      .banner__card .banner__content .genres[data-genre="#Thriller"] {
+        background-color: #306d4985; }
+      .banner__card .banner__content .genres[data-genre="#Drama"] {
+        background-color: #9d828246; }
+      .banner__card .banner__content .genres[data-genre="#Mystery"] {
+        background-color: #35162885; }
+      .banner__card .banner__content .genres[data-genre="#History"] {
+        background-color: #a1a54b85; }
+      .banner__card .banner__content .genres[data-genre="#War"] {
+        background-color: #c4363685; }
+      .banner__card .banner__content .genres[data-genre="#Crime"] {
+        background-color: #5c000085; }
+      .banner__card .banner__content .genres[data-genre="#Short"] {
+        background-color: #dc8adc85; }
+      .banner__card .banner__content .genres[data-genre="#Music"] {
+        background-color: #4f069785; }
+      .banner__card .banner__content .genres[data-genre="#Musical"] {
+        background-color: #27c77785; }
       .banner__card .banner__content h1 {
         font-size: 2.8em;
         font-family: "Lalezar", cursive, arial;
         color: #6c63ff;
+        cursor: pointer;
         color: #524b4b;
         text-shadow: 1px 5px 1px #d0cccc;
         margin-top: 10px;
