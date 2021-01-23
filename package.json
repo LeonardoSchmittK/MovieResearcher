@@ -1,7 +1,7 @@
 {
-	"name": "searchMovies",
+	"name": "search-movies",
 	"version": "1.0.0",
-	"description": "",
+	"description": "A app to search for movies or series using an API",
 	"main": "index.js",
 	"scripts": {
 		"sass": "node-sass --watch style/sass/ -o style/css"
@@ -9,6 +9,9 @@
 	"keywords": [],
 	"author": "Leonardo Schmitt",
 	"license": "MIT",
+	"engines": {
+		"node": "10.15.3"
+	},
 	"devDependencies": {
 		"js-image-zoom": "^0.7.0",
 		"node-sass": "^5.0.0",
