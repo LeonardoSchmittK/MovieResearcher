@@ -11,8 +11,11 @@ body {
 
 button {
   border: none;
-  outline: none;
   cursor: pointer; }
+
+input,
+button {
+  outline: none; }
 
 ::selection {
   background-color: #4e4e4e;

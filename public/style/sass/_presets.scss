@@ -13,10 +13,13 @@ body {
 
 button {
 	border: none;
-	outline: none;
 	cursor: pointer;
 }
 
+input,
+button {
+	outline: none;
+}
 ::selection {
 	background-color: $secondaryColor;
 	color: $white;
