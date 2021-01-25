@@ -14,8 +14,10 @@ const btnRegister = window.document.querySelector(".btnRegister");
 const btnLogout = window.document.querySelector(".btnLogout");
 const passwordInput = window.document.querySelector("#passwordInput");
 const emailInput = window.document.querySelector("#emailInput");
-
-const form = window.document.querySelector("form");
+const perfilLogged = window.document.querySelector(".auth__perfil");
+const form = window.document.querySelector(".auth__form");
+const username = window.document.querySelector(".auth__username");
+const errorMessage = window.document.querySelector(".auth__error");
 
 btnRegister.onclick = (e) => {
 	e.preventDefault();
@@ -24,11 +26,12 @@ btnRegister.onclick = (e) => {
 		.auth()
 		.createUserWithEmailAndPassword(emailInput.value, passwordInput.value)
 		.then((result) => {
-			alert(`Welcome, ${emailInput.value}`);
-			console.log(result);
+			form.style.display = "none";
+			perfilLogged.style.display = "flex";
 		})
 		.catch((err) => {
-			console.log(err);
+			errorMessage.style.display = "block";
+			errorMessage.innerHTML = `<i class="fas fa-exclamation-triangle"></i>${err.message}`;
 		});
 };
 
@@ -39,12 +42,14 @@ btnLogin.onclick = (e) => {
 		.signInWithEmailAndPassword(emailInput.value, passwordInput.value)
 		.then((result) => {
 			console.log(result);
-			document.writeln("welcome" + emailInput.value);
+			perfilLogged.style.display = "flex";
 		})
 		.catch((err) => {
 			console.log(err.code);
 			console.log(err.message);
-			alert("Went through an error");
+			errorMessage.style.display = "block";
+
+			errorMessage.innerHTML = `<i class="fas fa-exclamation-triangle"></i>${err.message}`;
 		});
 };
 btnLogout.onclick = (e) => {
@@ -55,10 +60,24 @@ btnLogout.onclick = (e) => {
 		.signOut()
 		.then(
 			() => {
-				document.writeln("n autenticado");
+				form.style.display = "flex";
+				perfilLogged.style.display = "none";
 			},
 			function (err) {
 				console.log(err);
 			}
 		);
 };
+console.log("auth");
+
+firebase.auth().onAuthStateChanged(function (user) {
+	if (user) {
+		form.style.display = "none";
+		perfilLogged.style.display = "flex";
+		username.textContent = user.email.split("@")[0];
+		console.log(user);
+	} else {
+		form.style.display = "flex";
+		errorMessage.style.display = "none";
+	}
+});

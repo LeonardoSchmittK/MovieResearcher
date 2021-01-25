@@ -15,7 +15,11 @@ button {
 
 input,
 button {
-  outline: none; }
+  outline: none;
+  filter: none; }
+
+input:invalid {
+  box-shadow: none; }
 
 ::selection {
   background-color: #4e4e4e;
@@ -471,3 +475,99 @@ mark {
     font-size: 10px; }
     .footer mark {
       padding: 2px; } }
+
+.auth {
+  max-width: 350px;
+  width: 200px;
+  position: fixed;
+  right: 30px;
+  top: 30px;
+  padding: 15px;
+  box-shadow: inset 0px 0px 3px #dddada;
+  border-radius: 20px;
+  z-index: 99999;
+  background-color: #ffffff;
+  font-family: "Metrophobic", cursive, arial; }
+  .auth__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center; }
+  .auth__title {
+    margin: 5px 0 5px 0;
+    font-size: 2.8em;
+    font-family: "Lalezar", cursive, arial;
+    color: #6c63ff; }
+  .auth__input-container {
+    position: relative;
+    height: 40px;
+    margin-top: 10px; }
+    .auth__input-container input {
+      padding: 5px;
+      border: none;
+      border-left: 4px solid #6c63ff;
+      box-shadow: inset 0px 0px 3px #dddada;
+      border-radius: 3px;
+      border-top-left-radius: 8px; }
+  .auth__label {
+    position: absolute;
+    top: -20px; }
+  .auth__submits {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly; }
+  .auth__btn {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: inset 0px 0px 3px #dddada;
+    border-radius: 3px; }
+  .auth__error {
+    width: 90%;
+    margin-bottom: 10px;
+    font-family: "Metrophobic", cursive, arial;
+    font-size: 15px;
+    color: #f58b28;
+    display: none; }
+  .auth__loginWithGoogle {
+    margin-top: 10px;
+    color: #e97255; }
+    .auth__loginWithGoogle i {
+      padding-right: 3px; }
+  .auth__perfil {
+    margin-top: 20px;
+    display: none;
+    align-items: center; }
+  .auth__user-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #6c63ff;
+    height: 50px;
+    border-radius: 20px; }
+  .auth__logout {
+    align-self: flex-end;
+    width: 70px;
+    transform: translate(-20px, 10px); }
+  .auth__user-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 5px solid #6c63ff;
+    transform: translate(-10px); }
+  .auth__username {
+    padding: 10px;
+    width: 100%;
+    line-height: 25px;
+    font-size: 2.3em;
+    font-family: "Metrophobic", cursive, arial;
+    color: #4e4e4e;
+    transform: translate(-10px);
+    font-size: 20px; }
+  .auth__btn {
+    height: 30px; }

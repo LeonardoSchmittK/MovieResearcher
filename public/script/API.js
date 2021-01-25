@@ -2,9 +2,7 @@ const App = (function () {
 	const searchButton = document.querySelector(".header__search-button");
 	const banner = document.querySelector(".banner__card");
 	const movieInput = document.querySelector("#search-movie");
-	const titles = [];
-	const cards = [];
-
+	const [titles, cards] = [[], []];
 	searchButton.onclick = searchMovie;
 
 	document.body.onkeypress = (event) => {
@@ -16,7 +14,6 @@ const App = (function () {
 	}
 
 	function applyAPI(movie) {
-		// if (movie.length === 0) return handleError("Type in something");
 		const apikey = "a1dd21cb";
 		fetch(`http://www.omdbapi.com/?apikey=${apikey}&t=${movie}`, {
 			method: "GET",
@@ -83,7 +80,7 @@ const App = (function () {
 				printGenres(item);
 				item.childNodes[1].childNodes[0].onclick = () => {
 					item.style.display = "none";
-					let i = cards.indexOf(item);
+					let i = titles.indexOf(item);
 					console.log(i);
 					removeIndex(i);
 				};
@@ -100,7 +97,7 @@ const App = (function () {
 	}
 
 	function removeIndex(i) {
-		cards.splice(i, 1);
+		titles.splice(i, 1);
 	}
 
 	function cardContent({

@@ -25,20 +25,41 @@
 		<link rel="stylesheet" href="style/css/style.css" type="text/css" />
 	</head>
 	<body>
-		<article>
-			<form>
-				<label for="emailInput">E-mail:</label>
-				<input id="emailInput" required type="email" />
+		<article class="auth">
+			<form class="auth__form">
+				<h2 class="auth__title">Login</h2>
+				<div class="auth__input-container">
+					<label class="auth__label" for="emailInput">E-mail: </label>
+					<input minlength="6" id="emailInput" required type="email" />
+				</div>
+
 				<br />
 
-				<label for="passwordInput">Password:</label>
-				<input id="passwordInput" required type="password" />
-				<br />
+				<div class="auth__input-container">
+					<label class="auth__label" for="passwordInput">Password:</label>
+					<input minlength="6" id="passwordInput" required type="password" />
+				</div>
 
-				<button class="btnLogin">Log in</button>
-				<button class="btnRegister">Register</button>
-				<button class="btnLogout">Log out</button>
+				<br />
+				<span class="auth__error">
+					<i class="fas fa-exclamation-triangle"></i>
+				</span>
+				<div class="auth__submits">
+					<button class="auth__login auth__btn btnLogin">Log in</button>
+					<button class="auth__register auth__btn btnRegister">Register</button>
+				</div>
+				<span><sup>____ </sup>or<sup> ____</sup></span>
+				<button class="auth__loginWithGoogle auth__btn">
+					<i class="fab fa-google"></i> With Google
+				</button>
 			</form>
+			<div class="auth__perfil">
+				<div class="auth__user-info">
+					<img class="auth__user-img" src="user-unlogged.png" />
+					<h2 class="auth__username">Leoeyeschmittk</h2>
+				</div>
+				<button class="auth__logout auth__btn btnLogout">Log out</button>
+			</div>
 		</article>
 		<header class="header">
 			<div class="header__ornament">
@@ -128,7 +149,7 @@
 			<div class="header__search-bar">
 				<i class="header__search-icon fas fa-search"></i>
 
-				<input id="search-movie" class="header__search-movie" type="text" />
+				<input id="search-movie" class="header__search-movie" type="search" />
 			</div>
 			<button class="header__search-button" type="button">
 				<svg

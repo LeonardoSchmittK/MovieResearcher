@@ -19,7 +19,13 @@ button {
 input,
 button {
 	outline: none;
+	filter: none;
 }
+
+input:invalid {
+	box-shadow: none;
+}
+
 ::selection {
 	background-color: $secondaryColor;
 	color: $white;
