@@ -2,6 +2,15 @@ const App = (function () {
 	const searchButton = document.querySelector(".header__search-button");
 	const banner = document.querySelector(".banner__card");
 	const movieInput = document.querySelector("#search-movie");
+	const imageBg = document.querySelector("#banner__image");
+
+	function sortBannerImage() {
+		const imageBgSrcs = ["bg-cinema", "bg-cinema-2", "bg-cinema-3"];
+		const sortImageBg = Math.floor(Math.random() * imageBgSrcs.length);
+		imageBg.src = `resources/img/${imageBgSrcs[sortImageBg]}.png`;
+	}
+	sortBannerImage();
+
 	const [titles, cards] = [[], []];
 	searchButton.onclick = searchMovie;
 
@@ -50,13 +59,14 @@ const App = (function () {
 		}
 	}
 	function printMovieCard(movie) {
-		banner.classList.add("banner__movie-found");
-		deleteSvgImage(movie);
+		// banner.classList.add("banner__movie-found");
+		deleteSvgImage(true);
+		printMovieInfo(movie);
 	}
 
-	function deleteSvgImage(movie) {
-		window.document.querySelector(".banner__image").style.display = "none";
-		printMovieInfo(movie);
+	function deleteSvgImage(isPresent) {
+		if (!isPresent) imageBg.classList.remove("banner__disableImgRender");
+		else imageBg.classList.add("banner__disableImgRender");
 	}
 	function printMovieInfo(movie) {
 		const newTitles = [...new Set(titles)];
@@ -68,9 +78,10 @@ const App = (function () {
 			const content = makeElement("li", "banner__content", markup);
 
 			content.style.height = calcCardHeight(movie);
-			banner.style.cssText = "width:inherit;margin-left:-30px;";
+			banner.style.cssText = "width:100%;margin-left:-30px;";
 			cards.push(content);
 			cards.reverse();
+
 			cards.map((item) => {
 				banner.appendChild(item);
 
@@ -83,10 +94,11 @@ const App = (function () {
 					let i = titles.indexOf(item);
 					console.log(i);
 					removeIndex(i);
+					if (titles.length === 0) {
+						deleteSvgImage(false);
+						banner.style.cssText = "width:20%;";
+					}
 				};
-
-				// removePoster(item);
-				// increasePoster(item);
 			});
 			executeInputInitialBehavior();
 		}
@@ -299,4 +311,13 @@ const App = (function () {
 		element.innerHTML = content;
 		return element;
 	}
+
+	const authInputEffect = [
+		...window.document.getElementsByClassName("auth__input"),
+	];
+	authInputEffect.map((input) => {
+		input.onclick = () => {
+			input.labels[0].classList.add("toggle");
+		};
+	});
 })();

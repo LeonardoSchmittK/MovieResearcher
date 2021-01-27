@@ -61,6 +61,13 @@ mark {
     z-index: -9999;
     visibility: hidden; } }
 
+@keyframes bounce-login {
+  from {
+    transform: translate(30px);
+    filter: drop-shadow(0 10px 30px #6c63ff); }
+  50% {
+    transform: translate(-20px); } }
+
 .header {
   width: 540px;
   margin: auto;
@@ -208,6 +215,13 @@ mark {
     transform: translateX(-100px);
     z-index: -9999;
     visibility: hidden; } }
+
+@keyframes bounce-login {
+  from {
+    transform: translate(30px);
+    filter: drop-shadow(0 10px 30px #6c63ff); }
+  50% {
+    transform: translate(-20px); } }
 
 .banner {
   width: 100%;
@@ -424,6 +438,10 @@ mark {
     height: auto;
     position: relative;
     z-index: -99999; }
+  .banner__disableImgRender {
+    width: 100px;
+    display: none;
+    border: 29px solid red; }
   .banner .screen {
     height: 120px;
     position: absolute;
@@ -487,34 +505,77 @@ mark {
   border-radius: 20px;
   z-index: 99999;
   background-color: #ffffff;
-  font-family: "Metrophobic", cursive, arial; }
-  .auth__form {
+  font-family: "Metrophobic", cursive, arial;
+  overflow: hidden;
+  border: 5px solid #6c63ff; }
+  .auth.animation-to-login {
+    animation: bounce-login 0.4s ease-in alternate; }
+  .auth__toggle {
+    float: right;
+    color: #9d9494;
+    border-radius: 50%;
+    background-color: #ffffff;
+    width: 30px;
+    height: 30px;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer; }
+    .auth__toggle:hover {
+      background-color: #f2f2f2; }
+    .auth__toggle .toggle.up {
+      transform: rotate(180deg); }
+  .auth__user-icon {
+    position: absolute;
+    bottom: -20px;
+    right: -35px;
+    font-size: 12em;
+    color: #e9e6e6;
+    z-index: -9; }
+  .auth__form {
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-self: center; }
+  .auth__form.toggleFormDown {
+    display: flex; }
   .auth__title {
-    margin: 5px 0 5px 0;
+    text-align: center;
+    margin: -5px 0 5px 0;
     font-size: 2.8em;
     font-family: "Lalezar", cursive, arial;
     color: #6c63ff; }
   .auth__input-container {
     position: relative;
-    height: 40px;
-    margin-top: 10px; }
-    .auth__input-container input {
-      padding: 5px;
-      border: none;
-      border-left: 4px solid #6c63ff;
-      box-shadow: inset 0px 0px 3px #dddada;
-      border-radius: 3px;
-      border-top-left-radius: 8px; }
+    height: 40px; }
+    .auth__input-container.beneath {
+      margin: 10px 0 20px 0; }
+  .auth__input {
+    padding: 5px;
+    border-top-left-radius: 8px;
+    border-radius: 20px;
+    padding: 10px;
+    border: 3px solid #9c96ff;
+    box-shadow: inset 0px 0px 3px #dddada; }
+    .auth__input:focus {
+      border: 3px solid #6c63ff;
+      border-left: 4px solid #6c63ff; }
   .auth__label {
     position: absolute;
-    top: -20px; }
+    top: 10px;
+    left: 15px;
+    transition: all 0.3s ease;
+    background-color: #ffffff;
+    padding: 0 3px 0 3px;
+    cursor: text; }
+    .auth__label.toggle {
+      top: -10px;
+      left: 10px; }
+  .auth__separator {
+    color: #524b4b; }
   .auth__submits {
     width: 100%;
-    margin-top: 10px;
+    margin-top: -20px;
     margin-bottom: 10px;
     display: flex;
     align-items: center;
@@ -526,14 +587,23 @@ mark {
     align-items: center;
     background-color: #ffffff;
     box-shadow: inset 0px 0px 3px #dddada;
-    border-radius: 3px; }
+    border-radius: 3px;
+    transition: all ease-in-out 0.2s;
+    border: 3px solid #6c63ff;
+    border-radius: 20px; }
+    .auth__btn:hover {
+      transform: translateY(-3px); }
   .auth__error {
     width: 90%;
     margin-bottom: 10px;
     font-family: "Metrophobic", cursive, arial;
     font-size: 15px;
     color: #f58b28;
-    display: none; }
+    display: none;
+    background-color: #fde7d3;
+    padding: 10px; }
+  .auth__error.printError {
+    display: flex; }
   .auth__loginWithGoogle {
     margin-top: 10px;
     color: #e97255; }
@@ -553,7 +623,9 @@ mark {
   .auth__logout {
     align-self: flex-end;
     width: 70px;
-    transform: translate(-20px, 10px); }
+    position: absolute;
+    top: 0;
+    right: 0; }
   .auth__user-img {
     width: 50px;
     height: 50px;
@@ -569,5 +641,3 @@ mark {
     color: #4e4e4e;
     transform: translate(-10px);
     font-size: 20px; }
-  .auth__btn {
-    height: 30px; }

@@ -13,7 +13,11 @@
 
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<meta http-equiv="X-UA-Copatible" content="ie=edge" />
-		<link rel="stylesheet icon" type="image/png" href="icon.png" />
+		<link
+			rel="stylesheet icon"
+			type="image/png"
+			href="resources/img/favicon.png"
+		/>
 		<!-- Icons  -->
 		<link
 			rel="stylesheet"
@@ -26,39 +30,68 @@
 	</head>
 	<body>
 		<article class="auth">
-			<form class="auth__form">
-				<h2 class="auth__title">Login</h2>
+			<span class="auth__toggle"><i class="fas fa-caret-down"></i></span>
+			<span> <i class="auth__user-icon far fa-user"></i></span>
+			<h2 class="auth__title">Login</h2>
+
+			<form onsubmit="alert('eeeee')" class="auth__form">
 				<div class="auth__input-container">
 					<label class="auth__label" for="emailInput">E-mail: </label>
-					<input minlength="6" id="emailInput" required type="email" />
+					<input
+						class="auth__input"
+						minlength="6"
+						id="emailInput"
+						required
+						type="email"
+					/>
 				</div>
 
 				<br />
 
-				<div class="auth__input-container">
+				<div class="auth__input-container beneath">
 					<label class="auth__label" for="passwordInput">Password:</label>
-					<input minlength="6" id="passwordInput" required type="password" />
+					<input
+						class="auth__input"
+						minlength="6"
+						id="passwordInput"
+						required
+						type="password"
+					/>
 				</div>
 
 				<br />
 				<span class="auth__error">
-					<i class="fas fa-exclamation-triangle"></i>
+					<i class="auth__user-icon fas fa-exclamation-triangle"></i>
 				</span>
 				<div class="auth__submits">
-					<button class="auth__login auth__btn btnLogin">Log in</button>
-					<button class="auth__register auth__btn btnRegister">Register</button>
+					<button type="submit" class="auth__login auth__btn btnLogin">
+						Log in
+					</button>
+					<button
+						type="submit"
+						form="auth__form"
+						class="auth__register auth__btn btnRegister"
+					>
+						Register
+					</button>
 				</div>
-				<span><sup>____ </sup>or<sup> ____</sup></span>
-				<button class="auth__loginWithGoogle auth__btn">
+				<span class="auth__separator"><sup>____ </sup>or<sup> ____</sup></span>
+				<button class="auth__loginWithGoogle btnGoogleAuth auth__btn">
 					<i class="fab fa-google"></i> With Google
 				</button>
 			</form>
 			<div class="auth__perfil">
 				<div class="auth__user-info">
-					<img class="auth__user-img" src="user-unlogged.png" />
+					<img
+						id="user-img"
+						class="auth__user-img"
+						src="resources/img/user-unlogged.png"
+					/>
 					<h2 class="auth__username">Leoeyeschmittk</h2>
 				</div>
-				<button class="auth__logout auth__btn btnLogout">Log out</button>
+				<button class="auth__logout auth__btn btnLogout">
+					<i class="fas fa-sign-out-alt"></i>
+				</button>
 			</div>
 		</article>
 		<header class="header">
@@ -168,11 +201,7 @@
 		<div id="screens" class="banner screens-animation">
 			<section>
 				<ul class="banner__card">
-					<img
-						class="banner__image"
-						src="bg-cinema.png"
-						src="../resources/svg/img/bg-cinema.png"
-					/>
+					<img class="banner__image" id="banner__image" src="#" />
 				</ul>
 			</section>
 		</div>
@@ -192,7 +221,7 @@
 			></mark>
 			&reg;2021
 		</footer>
-
+		<noscript>The browser does not support JavaScript</noscript>
 		<!-- script-->
 		<script
 			defer

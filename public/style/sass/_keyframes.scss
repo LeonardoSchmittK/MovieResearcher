@@ -42,3 +42,13 @@
 		visibility: hidden;
 	}
 }
+
+@keyframes bounce-login {
+	from {
+		transform: translate(30px);
+		filter: drop-shadow(0 10px 30px $primaryColor);
+	}
+	50% {
+		transform: translate(-20px);
+	}
+}
