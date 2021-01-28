@@ -23,6 +23,9 @@ const App = (function () {
 	}
 
 	function applyAPI(movie) {
+		if (movie === "") {
+			return (movieInput.value = "");
+		}
 		const apikey = "a1dd21cb";
 		fetch(`http://www.omdbapi.com/?apikey=${apikey}&t=${movie}`, {
 			method: "GET",

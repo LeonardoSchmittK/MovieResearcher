@@ -25,11 +25,39 @@ const authTitle = document.querySelector(".auth__title");
 const auth = document.querySelector(".auth");
 const header = document.querySelector(".header");
 const searchMovieButton = document.querySelector(".header__search-button");
+const authToggleUserIcon = document.querySelector(".toggle-auth__user-icon");
+const toggleAuth = document.querySelector(".toggle-auth");
+const userInfo = document.querySelector(".auth__user-info");
 const executeToggle = (authToggle.onclick = () => {
 	toggleForm(false);
 	authToggle.onclick = () => {
 		toggleForm(true);
 		authToggle.onclick = () => executeToggle();
+	};
+});
+
+const executeAuthToggle = (toggleAuth.onclick = () => {
+	toggleForm(true);
+	toggleAuth.onclick = () => {
+		toggleForm(false);
+		toggleAuth.onclick = () => executeAuthToggle();
+	};
+});
+
+authToggleUserIcon.onclick = () => {
+	auth.style.display = "block";
+};
+
+const toggleUserImg = (userImg.onclick = () => {
+	username.style.display = "none";
+	userInfo.style.border = "none";
+	auth.style.width = "80px";
+
+	userImg.onclick = () => {
+		username.style.display = "block";
+		auth.style.width = "300px";
+
+		userImg.onclick = () => toggleUserImg();
 	};
 });
 
@@ -39,9 +67,10 @@ btnRegister.onclick = (e) => {
 	firebase
 		.auth()
 		.createUserWithEmailAndPassword(emailInput.value, passwordInput.value)
-		.then(() => {
+		.then((res) => {
 			toggleForm(false);
 			printProfile(true);
+			printUsername(res);
 		})
 		.catch((err) => {
 			handleAuthError(err, true);
@@ -53,8 +82,9 @@ btnLogin.onclick = (e) => {
 	firebase
 		.auth()
 		.signInWithEmailAndPassword(emailInput.value, passwordInput.value)
-		.then(() => {
+		.then((res) => {
 			printProfile(true);
+			printUsername(res);
 		})
 		.catch((err) => {
 			handleAuthError(err, true);
@@ -91,7 +121,6 @@ function signIn(provider) {
 		.auth()
 		.signInWithPopup(provider)
 		.then((res) => {
-			console.log(res);
 			printUsername(res);
 		})
 		.catch((err) => {
@@ -108,13 +137,13 @@ firebase.auth().onAuthStateChanged(function (user) {
 		printUsername(user);
 		verifyUserPhoto(user);
 
-		inputMovie.disabled = false;
-		searchMovieButton.disabled = false;
-		auth.classList.remove("animation-to-login");
-	} else {
-		inputMovie.disabled = true;
-		searchMovieButton.disabled = true;
+		inputMovie.onclick = () => auth.classList.toggle("animation-to-login");
 		header.onclick = () => auth.classList.toggle("animation-to-login");
+	} else {
+		inputMovie.onclick = () => auth.classList.toggle("animation-to-login");
+		header.onclick = () => auth.classList.toggle("animation-to-login");
+
+		inputMovie.oninput = () => (inputMovie.value = "");
 
 		toggleForm(true);
 		handleAuthError("Error", false);
@@ -123,6 +152,9 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 function printProfile(isPrinted) {
 	perfilLogged.style.display = !isPrinted ? "none" : "flex";
+	toggleAuth.style.display = isPrinted ? "none" : "flex";
+	auth.style.width = "200px";
+	authToggle.style.display = isPrinted ? "none" : "";
 }
 
 function cleanAuthFields() {
@@ -132,10 +164,14 @@ function cleanAuthFields() {
 
 function toggleForm(isToggled) {
 	form.classList.toggle("toggleFormDown", isToggled);
+	authTitle.style.display = "block";
+	toggleAuth.style.display = isToggled ? "none" : "flex";
+	auth.style.width = isToggled ? "200px" : "120px";
 }
 
 function printUsername(res) {
-	if (res.displayName) username.textContent = res.displayName;
+	if (res.displayName)
+		username.textContent = res.displayName.split(" ").splice(0, 2).join(" ");
 	else username.textContent = res.user.email.split("@")[0];
 }
 

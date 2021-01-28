@@ -147,13 +147,13 @@ mark {
     left: 45px;
     top: 50px; }
   .header__search-movie {
-    width: 300px;
+    width: 75%;
     font-size: 2em; }
   .header__search-icon {
     font-size: 1em; }
   .header__search-button {
-    right: 100px;
-    top: 10px; } }
+    right: 150px;
+    top: 2px; } }
 
 @media only screen and (max-width: 412px) {
   .header {
@@ -494,6 +494,25 @@ mark {
     .footer mark {
       padding: 2px; } }
 
+.toggle-auth {
+  width: 100px;
+  height: 30px;
+  background-color: #ffffff;
+  color: #6c63ff;
+  cursor: pointer;
+  padding: 10px;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10%;
+  box-shadow: inset 0px 0px 3px #dddada;
+  border: 4px solid #ffffff;
+  transition: all ease-in-out 0.2s; }
+  .toggle-auth:hover {
+    border: 4px solid #6c63ff; }
+  .toggle-auth__user-icon {
+    font-size: 30px; }
+
 .auth {
   max-width: 350px;
   width: 200px;
@@ -507,11 +526,16 @@ mark {
   background-color: #ffffff;
   font-family: "Metrophobic", cursive, arial;
   overflow: hidden;
-  border: 5px solid #6c63ff; }
+  border: 5px solid #ffffff;
+  transition: all ease-in-out 0.2s; }
+  .auth:hover {
+    border: 5px solid #6c63ff; }
   .auth.animation-to-login {
     animation: bounce-login 0.4s ease-in alternate; }
   .auth__toggle {
-    float: right;
+    position: absolute;
+    top: 0;
+    right: 0;
     color: #9d9494;
     border-radius: 50%;
     background-color: #ffffff;
@@ -531,7 +555,7 @@ mark {
     right: -35px;
     font-size: 12em;
     color: #e9e6e6;
-    z-index: -9; }
+    z-index: -9999; }
   .auth__form {
     display: none;
     flex-direction: column;
@@ -545,6 +569,8 @@ mark {
     font-size: 2.8em;
     font-family: "Lalezar", cursive, arial;
     color: #6c63ff; }
+  .auth__title.removed {
+    display: none; }
   .auth__input-container {
     position: relative;
     height: 40px; }
@@ -594,14 +620,16 @@ mark {
     .auth__btn:hover {
       transform: translateY(-3px); }
   .auth__error {
-    width: 90%;
-    margin-bottom: 10px;
+    width: 110%;
+    margin-bottom: 30px;
+    margin-top: -20px;
     font-family: "Metrophobic", cursive, arial;
     font-size: 15px;
     color: #f58b28;
     display: none;
     background-color: #fde7d3;
-    padding: 10px; }
+    padding: 20px;
+    text-align: center; }
   .auth__error.printError {
     display: flex; }
   .auth__loginWithGoogle {
@@ -625,7 +653,8 @@ mark {
     width: 70px;
     position: absolute;
     top: 0;
-    right: 0; }
+    right: 0;
+    width: 30px; }
   .auth__user-img {
     width: 50px;
     height: 50px;
@@ -640,4 +669,29 @@ mark {
     font-family: "Metrophobic", cursive, arial;
     color: #4e4e4e;
     transform: translate(-10px);
-    font-size: 20px; }
+    font-size: 20px;
+    height: 50px;
+    overflow: auto; }
+
+@media only screen and (max-width: 1000px) {
+  .toggle-auth {
+    display: flex;
+    border: 2px solid #ffffff;
+    width: 100px; }
+    .toggle-auth:hover {
+      border: 2px solid #ffffff; }
+  .auth {
+    left: 10px;
+    top: 10px;
+    border: none;
+    box-shadow: none; }
+    .auth:hover {
+      border: none; }
+    .auth__form {
+      right: 0; }
+    .auth__title {
+      font-size: 2em; }
+    .auth__label {
+      font-size: 0.9em; }
+    .auth__user-icon {
+      display: none; } }
