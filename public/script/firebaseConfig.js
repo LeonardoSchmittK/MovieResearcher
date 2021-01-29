@@ -9,25 +9,6 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-const btnLogin = document.querySelector(".btnLogin");
-const btnRegister = document.querySelector(".btnRegister");
-const btnLogout = document.querySelector(".btnLogout");
-const btnGoogleAuth = document.querySelector(".btnGoogleAuth");
-const passwordInput = document.querySelector("#passwordInput");
-const emailInput = document.querySelector("#emailInput");
-const perfilLogged = document.querySelector(".auth__perfil");
-const form = document.querySelector(".auth__form");
-const username = document.querySelector(".auth__username");
-const errorMessage = document.querySelector(".auth__error");
-const userImg = document.querySelector("#user-img");
-const authToggle = document.querySelector(".auth__toggle");
-const authTitle = document.querySelector(".auth__title");
-const auth = document.querySelector(".auth");
-const header = document.querySelector(".header");
-const searchMovieButton = document.querySelector(".header__search-button");
-const authToggleUserIcon = document.querySelector(".toggle-auth__user-icon");
-const toggleAuth = document.querySelector(".toggle-auth");
-const userInfo = document.querySelector(".auth__user-info");
 const executeToggle = (authToggle.onclick = () => {
 	toggleForm(false);
 	authToggle.onclick = () => {
@@ -55,7 +36,7 @@ const toggleUserImg = (userImg.onclick = () => {
 
 	userImg.onclick = () => {
 		username.style.display = "block";
-		auth.style.width = "300px";
+		auth.style.width = "250px";
 
 		userImg.onclick = () => toggleUserImg();
 	};
@@ -68,6 +49,7 @@ btnRegister.onclick = (e) => {
 		.auth()
 		.createUserWithEmailAndPassword(emailInput.value, passwordInput.value)
 		.then((res) => {
+			checkNewUser(res);
 			toggleForm(false);
 			printProfile(true);
 			printUsername(res);
@@ -121,14 +103,13 @@ function signIn(provider) {
 		.auth()
 		.signInWithPopup(provider)
 		.then((res) => {
+			checkNewUser(res);
 			printUsername(res);
 		})
 		.catch((err) => {
 			handleAuthError(err, false);
 		});
 }
-
-const inputMovie = document.querySelector("#search-movie");
 
 firebase.auth().onAuthStateChanged(function (user) {
 	if (user) {
@@ -137,12 +118,22 @@ firebase.auth().onAuthStateChanged(function (user) {
 		printUsername(user);
 		verifyUserPhoto(user);
 
-		inputMovie.onclick = () => auth.classList.toggle("animation-to-login");
-		header.onclick = () => auth.classList.toggle("animation-to-login");
+		header.onclick = () => {
+			auth.style.animation = "";
+			showPopup(false, "", "");
+		};
+		inputMovie.oninput = () => (inputMovie.value = inputMovie.value);
 	} else {
-		inputMovie.onclick = () => auth.classList.toggle("animation-to-login");
-		header.onclick = () => auth.classList.toggle("animation-to-login");
-
+		header.onclick = () => {
+			showPopup(
+				true,
+				"Please login on the app to actually use it. Thanks!",
+				"Notice"
+			);
+			auth.style.animation = "bounce-login 0.2s linear alternate";
+		};
+		inputMovie.onclick = () =>
+			(auth.style.animation = "bounce-login 0.2s linear alternate");
 		inputMovie.oninput = () => (inputMovie.value = "");
 
 		toggleForm(true);
@@ -169,10 +160,10 @@ function toggleForm(isToggled) {
 	auth.style.width = isToggled ? "200px" : "120px";
 }
 
-function printUsername(res) {
-	if (res.displayName)
-		username.textContent = res.displayName.split(" ").splice(0, 2).join(" ");
-	else username.textContent = res.user.email.split("@")[0];
+function printUsername(user) {
+	if (user.displayName)
+		username.textContent = user.displayName.split(" ").splice(0, 2).join(" ");
+	else username.textContent = user.email.split("@")[0];
 }
 
 function verifyUserPhoto({ photoURL }) {
@@ -189,4 +180,19 @@ function handleAuthError(
 ) {
 	errorMessage.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${err.message}`;
 	errorMessage.classList.toggle("printError", isPrinted);
+}
+
+popupCloseIcon.onclick = () => {
+	showPopup(false, "", "");
+};
+
+function checkNewUser(user) {
+	if (user.additionalUserInfo.isNewUser === true) {
+		showPopup(
+			true,
+			"Welcome to Movie-Researcher, you can start your search by typing in the search box... seize!",
+			"At ease!"
+		);
+		popup.classList.toggle("salute");
+	}
 }

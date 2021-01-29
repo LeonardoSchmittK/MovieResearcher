@@ -207,17 +207,19 @@
 		border-radius: 50%;
 		border: 5px solid $primaryColor;
 		transform: translate(-10px);
+		cursor: pointer;
 	}
 
 	&__username {
-		padding: 10px;
+		height: auto;
+		padding-left: 10px;
 		width: 100%;
 		line-height: 25px;
 		@include textType("secondary-text");
 		transform: translate(-10px);
 		font-size: 20px;
-		height: 50px;
 		overflow: auto;
+		text-overflow: ellipsis;
 	}
 }
 

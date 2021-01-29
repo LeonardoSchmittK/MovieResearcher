@@ -38,18 +38,10 @@ const App = (function () {
 	}
 
 	function handleError(err = "Occured and error") {
-		var count = 0;
-		let setError = setInterval(function () {
-			movieInput.value = err;
-			count++;
-			console.log(count);
-
-			if (count === 2) {
-				clearTimeout(setError);
-				executeInputInitialBehavior();
-			}
-		}, 1000);
+		showPopup(true, err, "Error");
+		executeInputInitialBehavior();
 	}
+
 	function checkMovie(movie) {
 		if (movie.Error === "Incorrect IMDb ID.")
 			return handleError("Type in some series or movie");

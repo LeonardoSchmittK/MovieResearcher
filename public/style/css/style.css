@@ -660,9 +660,11 @@ mark {
     height: 50px;
     border-radius: 50%;
     border: 5px solid #6c63ff;
-    transform: translate(-10px); }
+    transform: translate(-10px);
+    cursor: pointer; }
   .auth__username {
-    padding: 10px;
+    height: auto;
+    padding-left: 10px;
     width: 100%;
     line-height: 25px;
     font-size: 2.3em;
@@ -670,8 +672,8 @@ mark {
     color: #4e4e4e;
     transform: translate(-10px);
     font-size: 20px;
-    height: 50px;
-    overflow: auto; }
+    overflow: auto;
+    text-overflow: ellipsis; }
 
 @media only screen and (max-width: 1000px) {
   .toggle-auth {
@@ -695,3 +697,60 @@ mark {
       font-size: 0.9em; }
     .auth__user-icon {
       display: none; } }
+
+.popup {
+  display: none;
+  background-color: #ffffff;
+  width: 25%;
+  height: auto;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  box-shadow: inset 0px 0px 3px #dddada;
+  z-index: 99999999;
+  overflow: hidden;
+  border-bottom: 5px solid #f58b28; }
+  .popup.toggle {
+    display: none; }
+  .popup.salute {
+    border-bottom: 5px solid #6c63ff; }
+  .popup__title {
+    width: 50%;
+    font-size: 2.3em;
+    font-family: "Metrophobic", cursive, arial;
+    color: #4e4e4e;
+    margin: 0 0 0 0;
+    font-size: 1.7em; }
+  .popup__description {
+    font-size: 1.2em;
+    font-family: "Poppins", cursive, Helvetica, arial;
+    color: #4e4e4e;
+    font-size: 0.8em;
+    color: #6d6363; }
+  .popup__icon {
+    position: absolute;
+    bottom: -70px;
+    left: -30px;
+    font-size: 10em;
+    color: #e9e6e6;
+    z-index: -999;
+    transform: rotate(300deg); }
+  .popup__icon-close {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #b8b1b1;
+    position: absolute;
+    top: 0px;
+    right: 15px;
+    cursor: pointer; }
+    .popup__icon-close:hover {
+      background-color: #e9e6e6; }
+
+@media only screen and (max-width: 1000px) {
+  .popup {
+    width: 95%; } }
