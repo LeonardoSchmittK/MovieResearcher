@@ -5,7 +5,13 @@ const App = (function () {
 	const imageBg = document.querySelector("#banner__image");
 
 	function sortBannerImage() {
-		const imageBgSrcs = ["bg-cinema", "bg-cinema-2", "bg-cinema-3"];
+		const imageBgSrcs = [];
+		const imgsNumber = 4;
+		let imgI = 1;
+		for (imgI; imgI <= imgsNumber; ++imgI) {
+			imageBgSrcs.push(`bg-cinema-${imgI}`);
+		}
+
 		const sortImageBg = Math.floor(Math.random() * imageBgSrcs.length);
 		imageBg.src = `resources/img/${imageBgSrcs[sortImageBg]}.png`;
 	}
@@ -38,7 +44,7 @@ const App = (function () {
 	}
 
 	function handleError(err = "Occured and error") {
-		showPopup(true, err, "Error");
+		showPopup(true, err, "Error", "Warning");
 		executeInputInitialBehavior();
 	}
 
@@ -310,9 +316,47 @@ const App = (function () {
 	const authInputEffect = [
 		...window.document.getElementsByClassName("auth__input"),
 	];
+
 	authInputEffect.map((input) => {
-		input.onclick = () => {
-			input.labels[0].classList.add("toggle");
-		};
+		input.onfocus = () => toggleInputEffect(input);
+		input.onclick = () => toggleInputEffect(input);
 	});
+
+	function toggleInputEffect(input) {
+		input.labels[0].classList.add("toggle");
+	}
+	const rating = document.querySelector(".footer__stars");
+	let stars = [...document.getElementsByClassName("footer__star")];
+	let i;
+	let p;
+	function rateApp(stars, i) {
+		let execute = stars.map((star) => {
+			star.onclick = () => {
+				if (star.className === "footer__star far fa-star") {
+					console.log(stars);
+					i = stars.indexOf(star);
+
+					stars.splice(i + 1, 10);
+					console.log(stars);
+
+					stars.map((item) => {
+						item.className = "footer__star fas fa-star";
+
+						stars = [...document.getElementsByClassName("footer__star ")];
+					});
+				} else {
+					console.log(stars);
+					i = stars.indexOf(star);
+					stars.reverse().splice(i + 1, -10);
+
+					console.log(stars);
+
+					stars.reverse().map((item) => {
+						item.className = "footer__star far fa-star";
+					});
+				}
+			};
+		});
+	}
+	rateApp(stars, i);
 })();

@@ -459,11 +459,14 @@ mark {
     margin-left: 35px; } }
 
 .footer {
-  background-color: #6c63ff;
+  display: flex;
   position: fixed;
-  width: 100%;
   bottom: 0;
-  padding: 10px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #6c63ff;
+  width: 100%;
+  padding: 5px;
   font-size: 1.2em;
   font-family: "Poppins", cursive, Helvetica, arial;
   color: #4e4e4e;
@@ -486,13 +489,52 @@ mark {
     padding: 10px;
     background-color: #ffffff49;
     color: #6c63ff; }
+  .footer__rating {
+    padding: 5px;
+    margin-right: 10px;
+    margin-bottom: -8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; }
+  .footer__star {
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: all ease-in-out 0.1s; }
+    .footer__star::selection {
+      background-color: red; }
+    .footer__star:hover {
+      transform: scale(1.1); }
+  .footer__rating-title {
+    font-size: 0.9em;
+    margin: -10px 0 -10px 0; }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 700px) {
   .footer {
     padding: 2px;
-    font-size: 10px; }
+    font-size: 12px; }
     .footer mark {
-      padding: 2px; } }
+      padding: 2px; }
+    .footer__rating-title {
+      font-size: 10px; }
+    .footer__star {
+      padding: 3px;
+      margin-top: 5px; } }
+
+@media only screen and (max-width: 420px) {
+  .footer {
+    padding: 2px;
+    font-size: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute; }
+    .footer mark {
+      padding: 2px; }
+    .footer__rating {
+      margin-top: 10px;
+      margin-bottom: 10px; }
+    .footer__star {
+      margin-top: 10px; } }
 
 .toggle-auth {
   width: 100px;
@@ -714,6 +756,26 @@ mark {
     display: none; }
   .popup.salute {
     border-bottom: 5px solid #6c63ff; }
+  .popup__eye {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; }
+    .popup__eye__outer {
+      width: 100%;
+      height: 100%;
+      background-color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.2;
+      box-shadow: inset 0 0 10px #afa9a9; }
+    .popup__eye__inner {
+      width: 35%;
+      height: 35%;
+      background-color: #201f1f;
+      border-radius: 50%;
+      transition: all linear 0.3s; }
   .popup__title {
     width: 50%;
     font-size: 2.3em;
@@ -751,6 +813,10 @@ mark {
     .popup__icon-close:hover {
       background-color: #e9e6e6; }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 800px) {
   .popup {
-    width: 95%; } }
+    width: 95%; }
+    .popup__eye {
+      height: 0; }
+      .popup__eye__outer {
+        display: none; } }

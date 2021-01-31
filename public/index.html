@@ -30,13 +30,16 @@
 	</head>
 	<body>
 		<div class="popup">
+			<div class="popup__eye">
+				<div class="popup__eye__outer">
+					<div class="popup__eye__inner"></div>
+				</div>
+			</div>
 			<div class="popup__notice">
 				<h2 class="popup__title">Popup Title</h2>
 				<p class="popup__description">
-					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora,
-					quaerat ducimus ut tenetur inventore hic illo amet illum non rerum
-					praesentium blanditiis rem, voluptate dignissimos voluptates molestiae
-					necessitatibus, voluptas perferendis?
+					Popup Description. It could contain whatever content which needs a
+					popup call.
 				</p>
 				<i class="popup__icon fas fa-video"></i>
 				<i class="popup__icon-close fas fa-times"></i>
@@ -215,21 +218,35 @@
 				</ul>
 			</section>
 		</div>
+
 		<footer class="footer">
-			Made by
-			<mark
-				>@LeonardoSchmittk
-				<a
-					class="footer_link"
-					target="_blank"
-					href="https://github.com/LeonardoSchmittK"
-				>
-					<i class="footer__icon fab fa-github-alt"></i
-				></a>
-				<a target="_blank" href="https://linkedin.com/">
-					<i class="footer__icon fab fa-linkedin-in"></i></a
-			></mark>
-			&reg;2021
+			<div class="footer__main-info">
+				Made by
+				<mark
+					>@LeonardoSchmittk
+					<a
+						class="footer_link"
+						target="_blank"
+						href="https://github.com/LeonardoSchmittK"
+					>
+						<i class="footer__icon fab fa-github-alt"></i
+					></a>
+					<a target="_blank" href="https://linkedin.com/">
+						<i class="footer__icon fab fa-linkedin-in"></i></a
+				></mark>
+				&reg;2021
+			</div>
+
+			<div class="footer__rating">
+				<h4 class="footer__rating-title">Avaliate the app!</h4>
+				<div class="footer__stars">
+					<i class="footer__star far fa-star"></i>
+					<i class="footer__star far fa-star"></i>
+					<i class="footer__star far fa-star"></i>
+					<i class="footer__star far fa-star"></i>
+					<i class="footer__star far fa-star"></i>
+				</div>
+			</div>
 		</footer>
 		<noscript>The browser does not support JavaScript</noscript>
 		<!-- script-->

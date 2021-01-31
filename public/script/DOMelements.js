@@ -26,9 +26,13 @@ const inputMovie = document.querySelector("#search-movie");
 function showPopup(
 	isToggle,
 	msg = "Occurred an error, and we are as soon as possible solving the problem...",
-	title = "Warning"
+	title = "Warning",
+	type = "warning"
 ) {
 	popup.style.display = isToggle ? "block" : "none";
 	popupTitle.innerHTML = title;
 	popupDescription.innerHTML = msg;
+	popup.style.borderBottom = `3px solid ${
+		type === "Warning" ? "orange" : "purple"
+	}`;
 }

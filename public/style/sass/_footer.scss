@@ -1,11 +1,14 @@
 .footer {
-	background-color: $primaryColor;
+	display: flex;
 	position: fixed;
-	width: 100%;
 	bottom: 0;
-	padding: 10px;
+	justify-content: space-between;
+	align-items: center;
+	background-color: $primaryColor;
+	width: 100%;
+	padding: 5px;
 	@include textType("text");
-	color: rgb(236, 231, 231);
+	color: #ece7e7;
 	z-index: 99999999999;
 	&__Link {
 		color: white;
@@ -30,15 +33,67 @@
 		background-color: #ffffff49;
 		color: $primaryColor;
 	}
+	&__rating {
+		padding: 5px;
+		margin-right: 10px;
+		margin-bottom: -8px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
+	&__star {
+		font-size: 0.8em;
+		cursor: pointer;
+
+		transition: all ease-in-out 0.1s;
+		&::selection {
+			background-color: red;
+		}
+		&:hover {
+			transform: scale(1.1);
+		}
+	}
+	&__rating-title {
+		font-size: 0.9em;
+		margin: -10px 0 -10px 0;
+	}
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 700px) {
 	.footer {
 		padding: 2px;
-		font-size: 10px;
-
+		font-size: 12px;
 		mark {
 			padding: 2px;
+		}
+		&__rating-title {
+			font-size: 10px;
+		}
+		&__star {
+			padding: 3px;
+			margin-top: 5px;
+		}
+	}
+}
+
+@media only screen and (max-width: 420px) {
+	.footer {
+		padding: 2px;
+		font-size: 14px;
+		flex-direction: column;
+		align-items: flex-start;
+		position: absolute;
+		mark {
+			padding: 2px;
+		}
+
+		&__rating {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		&__star {
+			margin-top: 10px;
 		}
 	}
 }

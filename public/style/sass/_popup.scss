@@ -17,6 +17,31 @@
 		border-bottom: 5px solid $primaryColor;
 	}
 
+	&__eye {
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+
+		&__outer {
+			width: 100%;
+			height: 100%;
+			background-color: $white;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			opacity: 0.2;
+			box-shadow: inset 0 0 10px #afa9a9;
+		}
+		&__inner {
+			width: 35%;
+			height: 35%;
+			background-color: #201f1f;
+			border-radius: 50%;
+			transition: all linear 0.3s;
+		}
+	}
+
 	&__title {
 		width: 50%;
 		@include textType("secondary-text");
@@ -56,8 +81,15 @@
 	}
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 800px) {
 	.popup {
 		width: 95%;
+		&__eye {
+			height: 0;
+
+			&__outer {
+				display: none;
+			}
+		}
 	}
 }

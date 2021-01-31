@@ -120,7 +120,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 		header.onclick = () => {
 			auth.style.animation = "";
-			showPopup(false, "", "");
+			showPopup(false);
 		};
 		inputMovie.oninput = () => (inputMovie.value = inputMovie.value);
 	} else {
@@ -128,7 +128,8 @@ firebase.auth().onAuthStateChanged(function (user) {
 			showPopup(
 				true,
 				"Please login on the app to actually use it. Thanks!",
-				"Notice"
+				"Notice",
+				"Warning"
 			);
 			auth.style.animation = "bounce-login 0.2s linear alternate";
 		};
@@ -191,8 +192,8 @@ function checkNewUser(user) {
 		showPopup(
 			true,
 			"Welcome to Movie-Researcher, you can start your search by typing in the search box... seize!",
-			"At ease!"
+			"At ease!",
+			"salute"
 		);
-		popup.classList.toggle("salute");
 	}
 }
