@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Lalezar&family=Metrophobic&family=Poppins:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lalezar&family=Metrophobic&family=Poppins:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lalezar&family=Metrophobic&family=Poppins:wght@600&display=swap");
 body,
 html {
   box-sizing: border-box;
@@ -40,18 +42,25 @@ mark {
     padding-left: 10px; } }
 
 @keyframes cross-window {
+  from {
+    transform: translateX(50px); }
   50% {
     transform: translateX(100px); }
   to {
-    transform: translateX(50px); } }
+    transform: none; } }
+
+@keyframes wink {
+  from {
+    opacity: 0; }
+  50% {
+    opacity: 1; }
+  to {
+    opacity: 0.3; } }
 
 @keyframes opacityToggle {
   to {
     opacity: 0.2;
     transform: scale(1.2); } }
-
-@keyframes hoverBounce {
-  from { } }
 
 @keyframes removePoster {
   50% {
@@ -195,18 +204,25 @@ mark {
     padding-left: 10px; } }
 
 @keyframes cross-window {
+  from {
+    transform: translateX(50px); }
   50% {
     transform: translateX(100px); }
   to {
-    transform: translateX(50px); } }
+    transform: none; } }
+
+@keyframes wink {
+  from {
+    opacity: 0; }
+  50% {
+    opacity: 1; }
+  to {
+    opacity: 0.3; } }
 
 @keyframes opacityToggle {
   to {
     opacity: 0.2;
     transform: scale(1.2); } }
-
-@keyframes hoverBounce {
-  from { } }
 
 @keyframes removePoster {
   50% {
@@ -390,7 +406,8 @@ mark {
         cursor: pointer;
         transform: translateX(55px) translateY(55px);
         border-radius: 25px;
-        transition: all ease 0.3s; }
+        transition: all ease 0.3s;
+        background-color: #ffffff; }
         .banner__card .banner__content figure:hover {
           transform: translateX(55px) translateY(40px); }
         .banner__card .banner__content figure:hover figcaption {
@@ -399,7 +416,9 @@ mark {
           width: 100%;
           height: inherit;
           border-radius: 25px;
-          border: 5px solid #6c63ff; }
+          border: 5px solid #6c63ff;
+          display: block;
+          margin: auto; }
         .banner__card .banner__content figure figcaption {
           transition: all ease 0.3s;
           font-size: 1.1em;
@@ -409,7 +428,7 @@ mark {
           z-index: -999;
           padding: 5px;
           border-radius: 10px;
-          width: 200px;
+          width: 150px;
           display: flex; }
           .banner__card .banner__content figure figcaption i {
             color: #6c63ff;
@@ -421,7 +440,7 @@ mark {
             .banner__card .banner__content figure figcaption i:hover {
               transform: scale(1.1); }
       .banner__card .banner__content .zoomed-poster {
-        width: 100%;
+        width: 90%;
         transform: none;
         top: -20px;
         left: -30px;
@@ -501,10 +520,9 @@ mark {
     font-size: 0.8em;
     cursor: pointer;
     transition: all ease-in-out 0.1s; }
-    .footer__star::selection {
-      background-color: red; }
     .footer__star:hover {
-      transform: scale(1.1); }
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 10px #ffffff); }
   .footer__rating-title {
     font-size: 0.9em;
     margin: -10px 0 -10px 0; }
@@ -616,8 +634,8 @@ mark {
   .auth__input-container {
     position: relative;
     height: 40px; }
-    .auth__input-container.beneath {
-      margin: 10px 0 20px 0; }
+  .auth__input-container + .auth__input-container {
+    margin: 15px 0 15px 0; }
   .auth__input {
     padding: 5px;
     border-top-left-radius: 8px;
@@ -628,6 +646,8 @@ mark {
     .auth__input:focus {
       border: 3px solid #6c63ff;
       border-left: 4px solid #6c63ff; }
+  .auth__beneath {
+    background-color: red; }
   .auth__label {
     position: absolute;
     top: 10px;
@@ -640,7 +660,10 @@ mark {
       top: -10px;
       left: 10px; }
   .auth__separator {
-    color: #524b4b; }
+    color: #524b4b;
+    position: relative;
+    background-color: #fff;
+    z-index: 999; }
   .auth__submits {
     width: 100%;
     margin-top: -20px;

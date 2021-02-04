@@ -98,9 +98,9 @@
 	&__input-container {
 		position: relative;
 		height: 40px;
-		&.beneath {
-			margin: 10px 0 20px 0;
-		}
+	}
+	&__input-container + &__input-container {
+		margin: 15px 0 15px 0;
 	}
 	&__input {
 		padding: 5px;
@@ -109,11 +109,13 @@
 		padding: 10px;
 		border: 3px solid lighten($primaryColor, 10%);
 		box-shadow: inset 0px 0px 3px rgb(221, 218, 218);
-
 		&:focus {
 			border: 3px solid $primaryColor;
 			border-left: 4px solid $primaryColor;
 		}
+	}
+	&__beneath {
+		background-color: red;
 	}
 	&__label {
 		position: absolute;
@@ -130,6 +132,9 @@
 	}
 	&__separator {
 		color: $grey;
+		position: relative;
+		background-color: #fff;
+		z-index: 999;
 	}
 
 	&__submits {

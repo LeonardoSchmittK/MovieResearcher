@@ -4,18 +4,27 @@
 	}
 }
 
-// @keyframes cross-window {
-// 	to {
-// 		left: 2000px;
-// 	}
-// }
-
 @keyframes cross-window {
+	from {
+		transform: translateX(50px);
+	}
 	50% {
 		transform: translateX(100px);
 	}
 	to {
-		transform: translateX(50px);
+		transform: none;
+	}
+}
+
+@keyframes wink {
+	from {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	to {
+		opacity: 0.3;
 	}
 }
 
@@ -23,12 +32,6 @@
 	to {
 		opacity: 0.2;
 		transform: scale(1.2);
-	}
-}
-
-@keyframes hoverBounce {
-	from {
-		// filter: drop-shadow(1px 1px 15px $primaryColor);
 	}
 }
 

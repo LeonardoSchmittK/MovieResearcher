@@ -18,14 +18,14 @@ const App = (function () {
 	sortBannerImage();
 
 	const [titles, cards] = [[], []];
-	searchButton.onclick = searchMovie;
+	searchButton.onclick = searchMovie(movieInput.value);
 
 	document.body.onkeypress = (event) => {
-		if (event.keyCode === 13) searchMovie();
+		if (event.keyCode === 13) searchMovie(movieInput.value);
 	};
 
-	function searchMovie() {
-		applyAPI(movieInput.value);
+	function searchMovie(movieInput) {
+		applyAPI(movieInput);
 	}
 
 	function applyAPI(movie) {
@@ -59,8 +59,8 @@ const App = (function () {
 			return printMovieCard(movie);
 		}
 	}
+
 	function printMovieCard(movie) {
-		// banner.classList.add("banner__movie-found");
 		deleteSvgImage(true);
 		printMovieInfo(movie);
 	}
@@ -75,6 +75,8 @@ const App = (function () {
 			titles.pop();
 			return handleError("You've already searched...");
 		} else {
+			executeFirebase(movie);
+
 			const markup = cardContent(movie);
 			const content = makeElement("li", "banner__content", markup);
 
@@ -90,7 +92,16 @@ const App = (function () {
 				increasePoster(item, movie);
 				printCardIconsContent(item);
 				printGenres(item);
+
 				item.childNodes[1].childNodes[0].onclick = () => {
+					db.collection("cards")
+						.where("Title", "==", item.childNodes[3].textContent)
+						.get()
+						.then((querySnapshot) => {
+							querySnapshot.forEach((doc) => {
+								doc.ref.delete();
+							});
+						});
 					item.style.display = "none";
 					let i = titles.indexOf(item);
 					console.log(i);
@@ -223,8 +234,6 @@ const App = (function () {
 	function printCardIconsContent(item) {
 		const iconsContainer = item.childNodes[17];
 		const iconsContentContainer = item.childNodes[19];
-		console.log(iconsContainer);
-		console.log(iconsContentContainer);
 
 		iconsContainer.onclick = () => {
 			iconsContentContainer.style.display = "block";
@@ -306,13 +315,6 @@ const App = (function () {
 		movieInput.focus();
 	}
 
-	function makeElement(el = "div", attrClass, content = "this is a element") {
-		const element = document.createElement(el);
-		element.setAttribute("class", attrClass);
-		element.innerHTML = content;
-		return element;
-	}
-
 	const authInputEffect = [
 		...window.document.getElementsByClassName("auth__input"),
 	];
@@ -333,11 +335,9 @@ const App = (function () {
 		let execute = stars.map((star) => {
 			star.onclick = () => {
 				if (star.className === "footer__star far fa-star") {
-					console.log(stars);
 					i = stars.indexOf(star);
 
 					stars.splice(i + 1, 10);
-					console.log(stars);
 
 					stars.map((item) => {
 						item.className = "footer__star fas fa-star";
@@ -345,11 +345,8 @@ const App = (function () {
 						stars = [...document.getElementsByClassName("footer__star ")];
 					});
 				} else {
-					console.log(stars);
 					i = stars.indexOf(star);
 					stars.reverse().splice(i + 1, -10);
-
-					console.log(stars);
 
 					stars.reverse().map((item) => {
 						item.className = "footer__star far fa-star";
@@ -359,4 +356,53 @@ const App = (function () {
 		});
 	}
 	rateApp(stars, i);
+
+	var db = firebase.firestore();
+
+	function executeFirebase({
+		Title,
+		Plot = "N/A",
+		Director = "N/A",
+		Runtime = "N/A",
+		imdbRating = "N/A",
+		Genre = "N/A",
+		Writer = "N/A",
+		Awards = "N/A",
+		Production = "N/A",
+		Actors = "N/A",
+		BoxOffice = "N/a",
+		Poster = "N/A",
+	}) {
+		db.collection("cards")
+			.add({
+				Title,
+				Director,
+				Genre,
+				Plot,
+				Runtime,
+				imdbRating,
+				Writer,
+				Awards,
+				Production,
+				Actors,
+				BoxOffice,
+				Poster,
+			})
+			.then(function (docRef) {
+				console.log(docRef.path);
+			})
+			.catch(function (error) {
+				console.error("Error adding document: ", error);
+			});
+	}
+
+	db.collection("cards")
+		.get()
+		.then((querySnapshot) => {
+			querySnapshot.forEach((doc) => {
+				searchMovie(doc.data().Title);
+
+				doc.ref.delete();
+			});
+		});
 })();

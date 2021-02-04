@@ -45,13 +45,11 @@
 	&__star {
 		font-size: 0.8em;
 		cursor: pointer;
-
 		transition: all ease-in-out 0.1s;
-		&::selection {
-			background-color: red;
-		}
+
 		&:hover {
 			transform: scale(1.1);
+			filter: drop-shadow(0 0 10px $white);
 		}
 	}
 	&__rating-title {

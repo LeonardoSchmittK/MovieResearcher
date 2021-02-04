@@ -21,7 +21,6 @@
 			position: relative;
 			background-color: $white;
 			border: 5px solid $primaryColor;
-
 			transition: all ease 0.3s;
 			animation: hoverBounce 4s linear;
 
@@ -204,6 +203,7 @@
 				transform: translateX(55px) translateY(55px);
 				border-radius: 25px;
 				transition: all ease 0.3s;
+				background-color: $white;
 				&:hover {
 					transform: translateX(55px) translateY(40px);
 					// box-shadow: 4px 50px 0 $white;
@@ -217,6 +217,8 @@
 					height: inherit;
 					border-radius: 25px;
 					border: 5px solid $primaryColor;
+					display: block;
+					margin: auto;
 				}
 				figcaption {
 					transition: all ease 0.3s;
@@ -227,7 +229,7 @@
 					z-index: -999;
 					padding: 5px;
 					border-radius: 10px;
-					width: 200px;
+					width: 150px;
 					display: flex;
 					i {
 						color: $primaryColor;
@@ -243,7 +245,7 @@
 				}
 			}
 			.zoomed-poster {
-				width: 100%;
+				width: 90%;
 				transform: none;
 				top: -20px;
 				left: -30px;

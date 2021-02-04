@@ -37,7 +37,7 @@
 	&__search-movie {
 		@include textType("secondary-text");
 		background-color: $white;
-		border: 5px solid #6c63ff;
+		border: 5px solid $primaryColor;
 		box-shadow: -2px 2px 10px #00000040, inset 1px 1px 5px #aca9a9;
 		border-radius: 60px;
 		padding: 15px;

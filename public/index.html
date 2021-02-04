@@ -12,7 +12,7 @@
 		/>
 
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<meta http-equiv="X-UA-Copatible" content="ie=edge" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<link
 			rel="stylesheet icon"
 			type="image/png"
@@ -67,8 +67,6 @@
 					/>
 				</div>
 
-				<br />
-
 				<div class="auth__input-container beneath">
 					<label class="auth__label" for="passwordInput">Password:</label>
 					<input
@@ -88,7 +86,7 @@
 					<button class="auth__login auth__btn btnLogin">Log in</button>
 					<button class="auth__register auth__btn btnRegister">Register</button>
 				</div>
-				<span class="auth__separator"><sup>____ </sup>or<sup> ____</sup></span>
+				<span class="auth__separator"><sup> </sup>or<sup> </sup></span>
 				<button class="auth__loginWithGoogle btnGoogleAuth auth__btn">
 					<i class="fab fa-google"></i> With Google
 				</button>
@@ -257,6 +255,10 @@
 		<script
 			defer
 			src="https://www.gstatic.com/firebasejs/7.23.0/firebase-auth.js"
+		></script>
+		<script
+			defer
+			src="https://www.gstatic.com/firebasejs/8.2.5/firebase-firestore.js"
 		></script>
 		<script defer src="script/DOMelements.js"></script>
 		<script defer src="script/firebaseConfig.js"></script>

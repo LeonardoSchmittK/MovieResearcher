@@ -22,17 +22,33 @@ const popupCloseIcon = document.querySelector(".popup__icon-close");
 const popupTitle = document.querySelector(".popup__title");
 const popupDescription = document.querySelector(".popup__description");
 const inputMovie = document.querySelector("#search-movie");
+const banner = document.getElementById("screens");
+const eyeInner = document.querySelector(".popup__eye__inner");
+const eyeOuter = document.querySelector(".popup__eye__outer");
 
 function showPopup(
 	isToggle,
 	msg = "Occurred an error, and we are as soon as possible solving the problem...",
 	title = "Warning",
-	type = "warning"
+	type = "Warning"
 ) {
 	popup.style.display = isToggle ? "block" : "none";
 	popupTitle.innerHTML = title;
 	popupDescription.innerHTML = msg;
 	popup.style.borderBottom = `3px solid ${
-		type === "Warning" ? "orange" : "purple"
+		type === "Warning" ? "#f58b28" : " #6c63ff"
 	}`;
+}
+
+function makeElement(
+	el = "div",
+	attrClass,
+	content = "this is a element",
+	fatherID
+) {
+	const element = document.createElement(el);
+	element.setAttribute("class", attrClass);
+	element.innerHTML = content;
+	fatherID ? document.querySelector(fatherID).appendChild(element) : "";
+	return element;
 }
