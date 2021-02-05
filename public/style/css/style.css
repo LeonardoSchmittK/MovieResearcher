@@ -175,10 +175,10 @@ mark {
         width: 260px; }
     .header__title {
       font-size: 1.5em;
-      left: 45px;
+      left: 35px;
       top: 55px; }
     .header__search-movie {
-      width: 200px;
+      width: 250px;
       padding: 5px;
       padding-left: 35px;
       font-size: 1em;
@@ -193,7 +193,7 @@ mark {
       border-radius: 50%;
       background: transparent; }
       .header__search-button svg {
-        height: 20px; }
+        height: 18px; }
       .header__search-button span {
         font-size: 0.8em;
         right: 40px;
@@ -477,6 +477,12 @@ mark {
   .banner__card .banner__content {
     margin-left: 35px; } }
 
+@media only screen and (max-width: 450px) {
+  .banner__card .banner__content {
+    margin-left: 35px; }
+  .banner__image {
+    width: 200%; } }
+
 .footer {
   display: flex;
   position: fixed;
@@ -544,8 +550,7 @@ mark {
     padding: 2px;
     font-size: 14px;
     flex-direction: column;
-    align-items: flex-start;
-    position: absolute; }
+    align-items: flex-start; }
     .footer mark {
       padding: 2px; }
     .footer__rating {

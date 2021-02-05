@@ -1,21 +1,8 @@
-const App = (function () {
+const App = (() => {
 	const searchButton = document.querySelector(".header__search-button");
 	const banner = document.querySelector(".banner__card");
 	const movieInput = document.querySelector("#search-movie");
 	const imageBg = document.querySelector("#banner__image");
-
-	function sortBannerImage() {
-		const imageBgSrcs = [];
-		const imgsNumber = 4;
-		let imgI = 1;
-		for (imgI; imgI <= imgsNumber; ++imgI) {
-			imageBgSrcs.push(`bg-cinema-${imgI}`);
-		}
-
-		const sortImageBg = Math.floor(Math.random() * imageBgSrcs.length);
-		imageBg.src = `resources/img/${imageBgSrcs[sortImageBg]}.png`;
-	}
-	sortBannerImage();
 
 	const [titles, cards] = [[], []];
 	searchButton.onclick = searchMovie(movieInput.value);
@@ -25,6 +12,11 @@ const App = (function () {
 	};
 
 	function searchMovie(movieInput) {
+		if (movieInput.indexOf("fav") != -1) {
+			const movie = movieInput.split("fav")[0];
+			applyAPI(movie, true);
+			console.log(movie);
+		}
 		applyAPI(movieInput);
 	}
 
@@ -140,6 +132,7 @@ const App = (function () {
 		Poster,
 	}) {
 		return `
+		
 			<span><i  class="remove-card-icon fas fa-times"></i> </span>
 			<h1  title='${Title}'>${Title}</h1>
 			<div class='genres-container'> 
@@ -182,7 +175,8 @@ const App = (function () {
 
 		<figure  style='display:${validatePosterSrc(Poster)};' id='movie-img'/>
 		<img   class='banner__movie-img' src='${Poster}' alt='${Title}-poster'/>
-  <figcaption><i  class='remove-poster-icon fas fa-times'></i><i class="increase-poster-icon fas fa-chart-line"></i></figcaption>
+		<figcaption><i  class='remove-poster-icon fas fa-times'></i><i class="increase-poster-icon fas fa-chart-line"></i></figcaption>
+
 </figure> 
 	
 		`;
@@ -373,36 +367,66 @@ const App = (function () {
 		BoxOffice = "N/a",
 		Poster = "N/A",
 	}) {
-		db.collection("cards")
-			.add({
-				Title,
-				Director,
-				Genre,
-				Plot,
-				Runtime,
-				imdbRating,
-				Writer,
-				Awards,
-				Production,
-				Actors,
-				BoxOffice,
-				Poster,
-			})
-			.then(function (docRef) {
-				console.log(docRef.path);
-			})
-			.catch(function (error) {
-				console.error("Error adding document: ", error);
-			});
+		firebase.auth().onAuthStateChanged((user) => {
+			let UserEmail = user.email + "";
+			db.collection("cards")
+				.add({
+					UserEmail,
+					Title,
+					Director,
+					Genre,
+					Plot,
+					Runtime,
+					imdbRating,
+					Writer,
+					Awards,
+					Production,
+					Actors,
+					BoxOffice,
+					Poster,
+				})
+				.then(function (docRef) {
+					console.log(docRef.path);
+				})
+				.catch(function (error) {
+					console.error("Error adding document: ", error);
+				});
+		});
 	}
 
-	db.collection("cards")
-		.get()
-		.then((querySnapshot) => {
-			querySnapshot.forEach((doc) => {
-				searchMovie(doc.data().Title);
+	firebase.auth().onAuthStateChanged(function (user) {
+		if (user) {
+			db.collection("cards")
+				.where("UserEmail", "==", user?.email)
+				.get()
+				.then((querySnapshot) => {
+					querySnapshot.forEach((doc) => {
+						searchMovie(doc.data().Title);
 
-				doc.ref.delete();
-			});
-		});
+						doc.ref.delete();
+					});
+				});
+		} else {
+			console.log("eee");
+		}
+	});
+
+	firebase.auth().onAuthStateChanged(function (user) {
+		if (user) {
+			db.collection("cards")
+				.where("UserEmail", "==", user?.email)
+				.get()
+				.then((snap) => {
+					size = snap.size;
+					if (size >= 6) {
+						showPopup(
+							true,
+							"You can easily label your favorite movies by adding <mark>'Fav'</mark> after the name of the movie or series...",
+							"Fav",
+							""
+						);
+					}
+				});
+		}
+	});
 })();
