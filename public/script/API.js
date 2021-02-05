@@ -5,7 +5,7 @@ const App = (() => {
 	const imageBg = document.querySelector("#banner__image");
 
 	const [titles, cards] = [[], []];
-	searchButton.onclick = searchMovie(movieInput.value);
+	searchButton.onclick = () => searchMovie(movieInput.value);
 
 	document.body.onkeypress = (event) => {
 		if (event.keyCode === 13) searchMovie(movieInput.value);
@@ -65,6 +65,7 @@ const App = (() => {
 		const newTitles = [...new Set(titles)];
 		if (JSON.stringify(newTitles) !== JSON.stringify(titles)) {
 			titles.pop();
+
 			return handleError("You've already searched...");
 		} else {
 			executeFirebase(movie);
