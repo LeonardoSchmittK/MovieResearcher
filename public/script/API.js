@@ -1,30 +1,22 @@
-const App = (function () {
+const App = (() => {
 	const searchButton = document.querySelector(".header__search-button");
 	const banner = document.querySelector(".banner__card");
 	const movieInput = document.querySelector("#search-movie");
 	const imageBg = document.querySelector("#banner__image");
 
-	function sortBannerImage() {
-		const imageBgSrcs = [];
-		const imgsNumber = 4;
-		let imgI = 1;
-		for (imgI; imgI <= imgsNumber; ++imgI) {
-			imageBgSrcs.push(`bg-cinema-${imgI}`);
-		}
-
-		const sortImageBg = Math.floor(Math.random() * imageBgSrcs.length);
-		imageBg.src = `resources/img/${imageBgSrcs[sortImageBg]}.png`;
-	}
-	sortBannerImage();
-
 	const [titles, cards] = [[], []];
-	searchButton.onclick = searchMovie(movieInput.value);
+	searchButton.onclick = () => searchMovie(movieInput.value);
 
 	document.body.onkeypress = (event) => {
 		if (event.keyCode === 13) searchMovie(movieInput.value);
 	};
 
 	function searchMovie(movieInput) {
+		if (movieInput.indexOf("fav") != -1) {
+			const movie = movieInput.split("fav")[0];
+			applyAPI(movie, true);
+			console.log(movie);
+		}
 		applyAPI(movieInput);
 	}
 
@@ -73,6 +65,7 @@ const App = (function () {
 		const newTitles = [...new Set(titles)];
 		if (JSON.stringify(newTitles) !== JSON.stringify(titles)) {
 			titles.pop();
+
 			return handleError("You've already searched...");
 		} else {
 			executeFirebase(movie);
@@ -140,6 +133,7 @@ const App = (function () {
 		Poster,
 	}) {
 		return `
+		
 			<span><i  class="remove-card-icon fas fa-times"></i> </span>
 			<h1  title='${Title}'>${Title}</h1>
 			<div class='genres-container'> 
@@ -182,7 +176,8 @@ const App = (function () {
 
 		<figure  style='display:${validatePosterSrc(Poster)};' id='movie-img'/>
 		<img   class='banner__movie-img' src='${Poster}' alt='${Title}-poster'/>
-  <figcaption><i  class='remove-poster-icon fas fa-times'></i><i class="increase-poster-icon fas fa-chart-line"></i></figcaption>
+		<figcaption><i  class='remove-poster-icon fas fa-times'></i><i class="increase-poster-icon fas fa-chart-line"></i></figcaption>
+
 </figure> 
 	
 		`;
@@ -374,37 +369,36 @@ const App = (function () {
 		Poster = "N/A",
 	}) {
 		firebase.auth().onAuthStateChanged((user) => {
-			if (user) {
-				let UserEmail = user.email;
-				db.collection("cards")
-					.add({
-						UserEmail,
-						Title,
-						Director,
-						Genre,
-						Plot,
-						Runtime,
-						imdbRating,
-						Writer,
-						Awards,
-						Production,
-						Actors,
-						BoxOffice,
-						Poster,
-					})
-					.then(function (docRef) {
-						console.log(docRef.path);
-					})
-					.catch(function (error) {
-						console.error("Error adding document: ", error);
-					});
-			}
+			let UserEmail = user.email + "";
+			db.collection("cards")
+				.add({
+					UserEmail,
+					Title,
+					Director,
+					Genre,
+					Plot,
+					Runtime,
+					imdbRating,
+					Writer,
+					Awards,
+					Production,
+					Actors,
+					BoxOffice,
+					Poster,
+				})
+				.then(function (docRef) {
+					console.log(docRef.path);
+				})
+				.catch(function (error) {
+					console.error("Error adding document: ", error);
+				});
 		});
 	}
-	firebase.auth().onAuthStateChanged((user) => {
+
+	firebase.auth().onAuthStateChanged(function (user) {
 		if (user) {
 			db.collection("cards")
-				.where("UserEmail", "==", user.email)
+				.where("UserEmail", "==", user?.email)
 				.get()
 				.then((querySnapshot) => {
 					querySnapshot.forEach((doc) => {
@@ -412,6 +406,27 @@ const App = (function () {
 
 						doc.ref.delete();
 					});
+				});
+		} else {
+			console.log("eee");
+		}
+	});
+
+	firebase.auth().onAuthStateChanged(function (user) {
+		if (user) {
+			db.collection("cards")
+				.where("UserEmail", "==", user?.email)
+				.get()
+				.then((snap) => {
+					size = snap.size;
+					if (size >= 6) {
+						showPopup(
+							true,
+							"You can easily label your favorite movies by adding <mark>'Fav'</mark> after the name of the movie or series...",
+							"Fav",
+							""
+						);
+					}
 				});
 		}
 	});
