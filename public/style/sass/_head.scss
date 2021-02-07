@@ -48,14 +48,17 @@
 		}
 	}
 	&__search-button {
-		// background-color: lighten($success, 80%);
-		border-radius: 20px;
-		// box-shadow: inset 1px 1px 6px rgba(128, 128, 128, 0.377);
-		background-color: transparent;
+		background-color: lighten($success, 30%);
+		width: 130px;
+		border-radius: 4px;
 		float: right;
 		margin-top: -20px;
 		position: relative;
 		z-index: 999;
+		transition: all ease-in-out 0.25s;
+		&:hover {
+			filter: drop-shadow(1px 1px 10px lighten($success, 40%));
+		}
 		&:hover span {
 			color: $success;
 		}
@@ -65,15 +68,11 @@
 		i:hover {
 			animation-play-state: paused;
 		}
-		span {
-			top: 4px;
-			left: 40px;
-			position: absolute;
-			@include textType("text");
-			color: darken($success, 10%);
-			i {
-				padding-left: 5px;
-			}
+
+		@include textType("text");
+		color: darken($success, 10%);
+		i {
+			padding-left: 5px;
 		}
 	}
 }

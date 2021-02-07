@@ -373,36 +373,46 @@ const App = (function () {
 		BoxOffice = "N/a",
 		Poster = "N/A",
 	}) {
-		db.collection("cards")
-			.add({
-				Title,
-				Director,
-				Genre,
-				Plot,
-				Runtime,
-				imdbRating,
-				Writer,
-				Awards,
-				Production,
-				Actors,
-				BoxOffice,
-				Poster,
-			})
-			.then(function (docRef) {
-				console.log(docRef.path);
-			})
-			.catch(function (error) {
-				console.error("Error adding document: ", error);
-			});
-	}
-
-	db.collection("cards")
-		.get()
-		.then((querySnapshot) => {
-			querySnapshot.forEach((doc) => {
-				searchMovie(doc.data().Title);
-
-				doc.ref.delete();
-			});
+		firebase.auth().onAuthStateChanged((user) => {
+			if (user) {
+				let UserEmail = user.email;
+				db.collection("cards")
+					.add({
+						UserEmail,
+						Title,
+						Director,
+						Genre,
+						Plot,
+						Runtime,
+						imdbRating,
+						Writer,
+						Awards,
+						Production,
+						Actors,
+						BoxOffice,
+						Poster,
+					})
+					.then(function (docRef) {
+						console.log(docRef.path);
+					})
+					.catch(function (error) {
+						console.error("Error adding document: ", error);
+					});
+			}
 		});
+	}
+	firebase.auth().onAuthStateChanged((user) => {
+		if (user) {
+			db.collection("cards")
+				.where("UserEmail", "==", user.email)
+				.get()
+				.then((querySnapshot) => {
+					querySnapshot.forEach((doc) => {
+						searchMovie(doc.data().Title);
+
+						doc.ref.delete();
+					});
+				});
+		}
+	});
 })();

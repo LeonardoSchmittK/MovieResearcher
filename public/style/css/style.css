@@ -123,28 +123,28 @@ mark {
     .header__search-movie::placeholder {
       opacity: 0.1; }
   .header__search-button {
-    border-radius: 20px;
-    background-color: transparent;
+    background-color: #5be95b;
+    width: 130px;
+    border-radius: 4px;
     float: right;
     margin-top: -20px;
     position: relative;
-    z-index: 999; }
+    z-index: 999;
+    transition: all ease-in-out 0.25s;
+    font-size: 1.2em;
+    font-family: "Poppins", cursive, Helvetica, arial;
+    color: #4e4e4e;
+    color: #0e6a0e; }
+    .header__search-button:hover {
+      filter: drop-shadow(1px 1px 10px #88ef88); }
     .header__search-button:hover span {
       color: #149714; }
     .header__search-button:hover i {
       animation: bounce linear 0.5s alternate infinite; }
     .header__search-button i:hover {
       animation-play-state: paused; }
-    .header__search-button span {
-      top: 4px;
-      left: 40px;
-      position: absolute;
-      font-size: 1.2em;
-      font-family: "Poppins", cursive, Helvetica, arial;
-      color: #4e4e4e;
-      color: #0e6a0e; }
-      .header__search-button span i {
-        padding-left: 5px; }
+    .header__search-button i {
+      padding-left: 5px; }
 
 @media only screen and (max-width: 650px) {
   .header__ornament {
