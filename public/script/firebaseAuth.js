@@ -1,18 +1,26 @@
-const executeToggle = (authToggle.onclick = () => {
-	toggleForm(false);
-	authToggle.onclick = () => {
-		toggleForm(true);
-		authToggle.onclick = () => executeToggle();
-	};
-});
+toggleAuth.onclick = () => myFunction();
+authToggle.onclick = () => myFunction();
 
-const executeAuthToggle = (toggleAuth.onclick = () => {
+function myFunction() {
+	toggleForm(false);
+
+	toggleAuth.onclick = () => {
+		test();
+	};
+	authToggle.onclick = () => {
+		test();
+	};
+}
+
+function test() {
 	toggleForm(true);
 	toggleAuth.onclick = () => {
-		toggleForm(false);
-		toggleAuth.onclick = () => executeAuthToggle();
+		myFunction();
 	};
-});
+	authToggle.onclick = () => {
+		myFunction();
+	};
+}
 
 authToggleUserIcon.onclick = () => {
 	auth.style.display = "block";
@@ -29,6 +37,16 @@ const toggleUserImg = (userImg.onclick = () => {
 
 		userImg.onclick = () => toggleUserImg();
 	};
+});
+
+firebase.auth().onAuthStateChanged((user) => {
+	if (user) {
+		auth.style.height = "30px";
+		auth.style.overflow = "visible";
+	} else {
+		auth.style.height = "auto";
+		auth.style.overflow = "hidden";
+	}
 });
 
 btnRegister.onclick = (e) => {
@@ -56,9 +74,7 @@ btnLogin.onclick = (e) => {
 		.then((res) => {
 			printProfile(true);
 			printUsername(res);
-			// [...document.getElementsByClassName("banner__content")].map(
-			// 	(item) => (item.style.display = "flex")
-			// );
+			auth.height = "10px";
 		})
 		.catch((err) => {
 			handleAuthError(err, true);
@@ -88,6 +104,7 @@ function logout() {
 
 btnGoogleAuth.onclick = () => {
 	const provider = new firebase.auth.GoogleAuthProvider();
+	// inputs.map((input) => (input.required = false));
 	signIn(provider);
 };
 
@@ -113,7 +130,6 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 		header.onclick = () => {
 			auth.style.animation = "";
-			showPopup(false);
 		};
 		inputMovie.oninput = () => (inputMovie.value = inputMovie.value);
 	} else {
@@ -143,8 +159,7 @@ function printProfile(isPrinted) {
 }
 
 function cleanAuthFields() {
-	emailInput.value = "";
-	passwordInput.value = "";
+	inputs.map((input) => (input.value = ""));
 }
 
 function toggleForm(isToggled) {

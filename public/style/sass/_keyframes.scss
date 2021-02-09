@@ -24,13 +24,13 @@
 		opacity: 1;
 	}
 	to {
-		opacity: 0.3;
+		opacity: 0.1;
 	}
 }
 
 @keyframes opacityToggle {
 	to {
-		opacity: 0.2;
+		opacity: 0.1;
 		transform: scale(1.2);
 	}
 }

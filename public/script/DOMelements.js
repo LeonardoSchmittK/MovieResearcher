@@ -25,7 +25,11 @@ const inputMovie = document.querySelector("#search-movie");
 const banner = document.getElementById("screens");
 const eyeInner = document.querySelector(".popup__eye__inner");
 const eyeOuter = document.querySelector(".popup__eye__outer");
-
+const inputs = [...document.getElementsByClassName("auth__input")];
+const btnDarkMode = document.querySelector(".btn-darkMode");
+const btnChangeView = document.querySelector(".btn-changeView");
+const btnNotice = document.querySelector(".btn-notice");
+const btnFavorites = document.querySelector(".btn-favorites");
 function showPopup(
 	isToggle,
 	msg = "Occurred an error, and we are as soon as possible solving the problem...",

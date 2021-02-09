@@ -6,17 +6,16 @@
 
 	&__card {
 		margin: auto;
-		width: 20%;
-		height: auto;
+		margin-bottom: 100px;
+		width: 100%;
 		list-style: none;
 		display: flex;
 		flex-wrap: wrap;
+		align-items: center;
 		justify-content: center;
-		margin-bottom: 100px;
 		.banner__content {
 			position: relative;
 			width: 300px;
-			padding: 20px;
 			border-radius: 35px;
 			margin: 50px;
 			position: relative;
@@ -24,7 +23,8 @@
 			border: 5px solid $primaryColor;
 			transition: all ease 0.3s;
 			animation: hoverBounce 4s linear;
-
+			flex-shrink: 0;
+			padding: 20px;
 			&:hover {
 				border: 5px solid lighten($primaryColor, 10%);
 			}
@@ -170,7 +170,7 @@
 				}
 			}
 			.icons-content-container {
-				width: 300px;
+				width: 270px;
 				height: auto;
 				background-color: rgba(221, 221, 221, 0.515);
 				border-radius: 15px;
@@ -178,9 +178,10 @@
 				margin-top: 10px;
 
 				p {
-					width: 50%;
+					width: 45%;
+
 					padding: 10px 10px 10px 20px;
-					transition: all ease 1s;
+					transition: all linear 0.5s;
 				}
 				&::before {
 					content: "";
@@ -265,7 +266,7 @@
 	&__image {
 		display: block;
 		margin: 50px auto;
-		width: 125%;
+		width: 30%;
 		height: auto;
 		position: relative;
 		z-index: -99999;
@@ -284,23 +285,46 @@
 	}
 }
 
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1100px) {
 	.banner {
 		&__card {
-			width: 50%;
+			width: 100%;
 		}
 		.screen {
 			display: none;
 		}
+		&__image {
+			width: 70%;
+		}
 	}
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 700px) {
 	.banner {
+		// display: flex;
+		margin: auto;
 		&__card {
+			width: 100%;
+			list-style: none;
+			display: flex;
+			flex-wrap: nowrap;
+			margin-bottom: 100px;
+			justify-content: unset;
+			overflow: auto;
+			height: 700px;
+
 			.banner__content {
+				width: 260px;
 				margin-left: 35px;
+				margin-right: 35px;
+				flex-shrink: 0;
+				font-size: 0.9em;
 			}
+		}
+		&__image {
+			width: 90%;
+			margin-top: -300px;
+			margin-left: -25px;
 		}
 	}
 }
@@ -308,12 +332,16 @@
 @media only screen and (max-width: 450px) {
 	.banner {
 		&__card {
+			width: 100%;
+
 			.banner__content {
 				margin-left: 35px;
 			}
 		}
 		&__image {
-			width: 200%;
+			margin-top: -450px;
+			margin-left: -40px;
+			width: 100%;
 		}
 	}
 }

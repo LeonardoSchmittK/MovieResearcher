@@ -43,7 +43,7 @@ function animateByMouse() {
 function styleScreen(screen, coordX) {
 	screen.style.animation = "wink 2s linear forwards";
 	screen.style.transition = "all linear 10s ";
-	screen.style.opacity = "0.2";
+	screen.style.opacity = "1";
 	screen.style.transform = `translateX(${Math.floor(coordX) / 3}px)`;
 }
 

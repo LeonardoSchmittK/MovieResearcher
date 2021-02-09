@@ -29,6 +29,7 @@
 		<link rel="stylesheet" href="style/css/style.css" type="text/css" />
 	</head>
 	<body>
+		<div class="overlay"></div>
 		<div class="popup">
 			<div class="popup__eye">
 				<div class="popup__eye__outer">
@@ -120,38 +121,44 @@
 							fill="#F8F8F8"
 						/>
 						<path
-							d="M1.08985 130.5L48.415 75.5H490.834L438.528 130.5H1.08985Z"
+							d="M4.35939 129L49.1031 77H487.338L437.884 129H4.35939Z"
 							stroke="#6C63FF"
+							stroke-width="4"
 						/>
 					</g>
 					<path
-						d="M443.049 74.3422L253.628 36.5976L264.463 1.47103L487.855 74.3422L443.049 74.3422Z"
+						d="M442.705 72.8422L255.059 35.4514L264.955 3.36982L477.927 72.8422L442.705 72.8422Z"
 						fill="white"
-						stroke="black"
+						stroke="#6C63FF"
+						stroke-width="4"
 					/>
 					<path
-						d="M278 6.31454L287.501 9.4344L278 40.098L271.5 40.098L267 38.098L278 6.31454Z"
-						fill="#6C63FF"
+						d="M410 53L419 55.5L417.5 65.7271L411.916 64.7143L407 63.7018L410 53Z"
+						fill="#958EFD"
 					/>
 					<path
-						d="M303.23 13.9841L312.731 17.1039L304.1 45.1178L297.655 44.9504L293.141 42.9913L303.23 13.9841Z"
-						fill="#6C63FF"
+						d="M432.425 60.0573L439.221 61.9478L437.988 70.043L433.766 69.2954L430.051 68.5417L432.425 60.0573Z"
+						fill="#958EFD"
 					/>
 					<path
-						d="M325.943 22.0854L335.444 25.2053L328.023 49.5335L321.655 49.1332L317.123 47.2311L325.943 22.0854Z"
-						fill="#6C63FF"
+						d="M381.918 43.2271L391.386 46.3451L387.559 59.9099L381.939 59.0311L377 58.1039L381.918 43.2271Z"
+						fill="#958EFD"
 					/>
 					<path
-						d="M352.769 30.7429L362.27 33.8627L355.954 54.8274L349.655 54.2147L345.106 52.3646L352.769 30.7429Z"
-						fill="#6C63FF"
+						d="M357.477 35.1575L366.915 38.3886L362.295 54.8886L356.64 54.1382L352 52.5L357.477 35.1575Z"
+						fill="#958EFD"
 					/>
 					<path
-						d="M378.896 38.8236L388.397 41.9435L383.337 59.0838L377.118 58.2293L372.549 56.4384L378.896 38.8236Z"
-						fill="#6C63FF"
+						d="M329 26L339 29L333.373 48.7751L327.817 47.6795L322.816 46.8598L329 26Z"
+						fill="#958EFD"
 					/>
 					<path
-						d="M406.694 48.7191L416.195 51.839L411.513 67.8289L405.317 66.9018L400.743 65.1287L406.694 48.7191Z"
-						fill="#6C63FF"
+						d="M303 18L312.5 21L305.505 43.3776L300.863 42.4947L295.5 41.5L303 18Z"
+						fill="#958EFD"
+					/>
+					<path
+						d="M279.713 9.31137L289.287 12.5868L281.525 38.9105L277.013 38.1465L271 37.0033L279.713 9.31137Z"
+						fill="#958EFD"
 					/>
 					<defs>
 						<filter
@@ -196,18 +203,19 @@
 				<input id="search-movie" class="header__search-movie" type="search" />
 			</div>
 			<button class="header__search-button" type="button">
-				<!-- <svg
-					width="140"
-					height="32"
-					viewBox="0 0 140 32"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-					class="search-button"
-				>
-					<path d="M23.2472 0H140L117.269 32H0L23.2472 0Z" fill="#49FF90" />
-				</svg> -->
 				<span> Search<i class="fas fa-arrow-right"></i></span>
 			</button>
+			<header class="header__buttons">
+				<button class="header__button btn-changeView">
+					<i class="fas fa-desktop"></i>
+				</button>
+				<button class="header__button btn-notice">
+					<i class="fas fa-exclamation"></i>
+				</button>
+				<button class="header__button btn-favorites">
+					<i class="fas fa-star"></i>
+				</button>
+			</header>
 		</header>
 		<div id="screens" class="banner screens-animation">
 			<section>
@@ -267,10 +275,8 @@
 		<script defer src="script/DOMelements.js"></script>
 		<script defer src="script/firebaseConfig.js"></script>
 		<script defer src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-		<<<<<<< HEAD
 		<script defer src="script/firebaseAuth.js"></script>
 		<script defer src="script/index.js"></script>
-		======= >>>>>>> b69ba6a0a05a410fbc43ba0f9ed42806a68e01ad
 		<script defer src="script/typed.js"></script>
 		<script defer src="script/API.js"></script>
 		<script defer src="script/index.js"></script>

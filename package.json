@@ -4,7 +4,8 @@
 	"description": "A app to search for movies or series using an API",
 	"main": "index.js",
 	"scripts": {
-		"sass": "node-sass --watch public/style/sass -o public/style/css"
+		"sass": "node-sass --watch public/style/sass -o public/style/css",
+		"dev": "concurrently --kill-others \"npm run sass\" \"nodemon app\""
 	},
 	"keywords": [],
 	"author": "Leonardo Schmitt",

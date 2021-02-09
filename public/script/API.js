@@ -1,3 +1,4 @@
+"use strict";
 const App = (() => {
 	const searchButton = document.querySelector(".header__search-button");
 	const banner = document.querySelector(".banner__card");
@@ -100,8 +101,9 @@ const App = (() => {
 					console.log(i);
 					removeIndex(i);
 					if (titles.length === 0) {
+						btnChangeView.style.display = "none";
 						deleteSvgImage(false);
-						banner.style.cssText = "width:20%;";
+						banner.style.cssText = "width:100%;";
 					}
 				};
 			});
@@ -185,6 +187,8 @@ const App = (() => {
 
 	function increasePoster(item) {
 		const poster = item.childNodes[item.childNodes.length - 2];
+		console.log(item.childNodes[19].childNodes[2]);
+		const testa = item.childNodes[19].childNodes[2];
 		const increasePosterIcon =
 			item.childNodes[item.childNodes.length - 2].childNodes[3].childNodes[1];
 
@@ -192,11 +196,8 @@ const App = (() => {
 			poster.classList.add("zoomed-poster");
 			increasePosterIcon.style.transform = "rotate(180deg)";
 			poster.style.height = item.style.height;
-
 			increasePosterIcon.onclick = () => {
 				poster.classList.remove("zoomed-poster");
-				poster.style.height = "230px";
-
 				increasePosterIcon.style.transform = "rotate(0deg)";
 
 				increasePosterIcon.onclick = () => x();
@@ -218,7 +219,8 @@ const App = (() => {
 			item.childNodes[item.childNodes.length - 2].childNodes[3].childNodes[0];
 		removePosterIcon.onclick = () => {
 			poster.classList.remove("zoomed-poster");
-			item.childNodes[19].childNodes[1].style.width = "80%";
+			poster.childNodes[3].style.display = "none";
+			item.childNodes[19].childNodes[1].style.width = "90%";
 			poster.style.animation = "removePoster 1s ease-in-out forwards";
 			setTimeout(function () {
 				poster.style.display = "none";
@@ -229,27 +231,17 @@ const App = (() => {
 	function printCardIconsContent(item) {
 		const iconsContainer = item.childNodes[17];
 		const iconsContentContainer = item.childNodes[19];
-
 		iconsContainer.onclick = () => {
 			iconsContentContainer.style.display = "block";
 		};
-		iconsContainer.childNodes[1].onclick = () => {
-			iconsContentContainer.childNodes[1].innerHTML =
-				iconsContainer.childNodes[1].title;
-		};
-		iconsContainer.childNodes[3].onclick = () => {
-			iconsContentContainer.childNodes[1].innerHTML =
-				iconsContainer.childNodes[3].title;
-		};
-
-		iconsContainer.childNodes[5].onclick = () => {
-			iconsContentContainer.childNodes[1].innerHTML =
-				iconsContainer.childNodes[5].title;
-		};
-		iconsContainer.childNodes[7].onclick = () => {
-			iconsContentContainer.childNodes[1].innerHTML =
-				iconsContainer.childNodes[7].title;
-		};
+		for (let i = 1; i <= 7; ++i) {
+			if (i % 2 !== 0) {
+				iconsContainer.childNodes[i].onclick = () => {
+					iconsContentContainer.childNodes[1].innerHTML =
+						iconsContainer.childNodes[i].title;
+				};
+			}
+		}
 	}
 
 	function printGenresLabels(genre) {
@@ -316,12 +308,24 @@ const App = (() => {
 
 	authInputEffect.map((input) => {
 		input.onfocus = () => toggleInputEffect(input);
-		input.onclick = () => toggleInputEffect(input);
+		// input.onclick = () => toggleInputEffect(input);
 	});
 
 	function toggleInputEffect(input) {
 		input.labels[0].classList.add("toggle");
+		document.querySelector(".overlay").style.display = "block";
+		auth.style.zIndex = "999999999999999999999";
+		document.body.style.overflow = "hidden";
+		window.scrollTo(0, 0);
+		input.onblur = () => {
+			document.querySelector(".overlay").style.display = "none";
+			auth.style.zIndex = "999999999999999999999";
+			document.body.style.overflow = "auto";
+		};
 	}
+
+	document.querySelector(".auth__input").onblur = () =>
+		console.log("deu certo");
 	const rating = document.querySelector(".footer__stars");
 	let stars = [...document.getElementsByClassName("footer__star")];
 	let i;
@@ -411,23 +415,54 @@ const App = (() => {
 			console.log("eee");
 		}
 	});
+	var size;
+	// firebase.auth().onAuthStateChanged(function (user) {
+	// 	if (user) {
+	// 		db.collection("cards")
+	// 			.where("UserEmail", "==", user?.email)
+	// 			.get()
+	// 			.then((snap) => {
+	// 				size = snap.size;
+	// 				if (size >= 6) {
+	// 					showPopup(
+	// 						true,
+	// 						"You can easily label your favorite movies by adding <mark>Fav</mark> after the name of the movie or series...",
+	// 						"Fav",
+	// 						""
+	// 					);
+	// 				}
+	// 			});
+	// 	}
+	// });
 
-	firebase.auth().onAuthStateChanged(function (user) {
-		if (user) {
-			db.collection("cards")
-				.where("UserEmail", "==", user?.email)
-				.get()
-				.then((snap) => {
-					size = snap.size;
-					if (size >= 6) {
-						showPopup(
-							true,
-							"You can easily label your favorite movies by adding <mark>'Fav'</mark> after the name of the movie or series...",
-							"Fav",
-							""
-						);
-					}
-				});
-		}
+	const cardsHero = document.querySelector(".banner__card");
+	const toggleView = (btnChangeView.onclick = () => {
+		cardsHero.style.cssText =
+			"display: flex;flex-wrap: nowrap;	margin-bottom: 100px;	justify-content: unset;	overflow: auto;		height: 700px;";
+
+		btnChangeView.onclick = () => {
+			cardsHero.style.cssText =
+				"display: flex;flex-wrap: wrap;	margin-bottom: 100px;	justify-content: center;	overflow: hidden;		";
+
+			btnChangeView.onclick = () => toggleView();
+		};
 	});
+
+	const notices = [
+		"You can add your favorite movies by appling the title plus <mark>fav</mark>, press enter, and  Vuoi la!!",
+		"For search only your favorite movies, just press the exclamation button on the search bar...",
+		"For search only your favorite movies, just press the star button on the search bar...",
+		"You can easily check out the <mark>genre</mark> of the movie by clicking on the title in the card.",
+	];
+
+	btnNotice.onclick = () => {
+		showPopup(
+			true,
+			notices[Math.floor(Math.random() * notices.length)],
+			"Hey, you!",
+			""
+		);
+		// const sortedPopupDescription = notices.sort(() => Math.random() - 0.5);
+		// console.log(sortedPopupDescription);
+	};
 })();

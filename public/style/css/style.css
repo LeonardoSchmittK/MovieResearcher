@@ -55,11 +55,11 @@ mark {
   50% {
     opacity: 1; }
   to {
-    opacity: 0.3; } }
+    opacity: 0.1; } }
 
 @keyframes opacityToggle {
   to {
-    opacity: 0.2;
+    opacity: 0.1;
     transform: scale(1.2); } }
 
 @keyframes removePoster {
@@ -81,7 +81,7 @@ mark {
   width: 540px;
   margin: auto;
   padding: 20px;
-  background-color: #ffffff; }
+  position: relative; }
   .header__ornament {
     background-color: #ffffff;
     position: relative;
@@ -91,11 +91,13 @@ mark {
     font-size: 2.8em;
     font-family: "Lalezar", cursive, arial;
     color: #6c63ff;
+    color: #766dff;
     position: absolute;
     top: 43px;
     left: 50px; }
   .header__search-bar {
-    position: relative; }
+    position: relative;
+    width: 520px; }
   .header__search-icon {
     position: absolute;
     top: 22px;
@@ -119,7 +121,8 @@ mark {
     border-radius: 60px;
     padding: 15px;
     padding-left: 75px;
-    text-overflow: ellipsis; }
+    text-overflow: ellipsis;
+    width: inherit; }
     .header__search-movie::placeholder {
       opacity: 0.1; }
   .header__search-button {
@@ -146,24 +149,67 @@ mark {
       animation-play-state: paused; }
     .header__search-button i {
       padding-left: 5px; }
+  .header__buttons {
+    display: none;
+    margin-top: -20px;
+    margin-right: 20px;
+    float: right;
+    background-color: #dcd9d9;
+    border-radius: 3px;
+    position: relative;
+    z-index: 999;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    transition: all ease 0.3s; }
+    .header__buttons:hover {
+      filter: drop-shadow(1px 1px 10px #d0cccc); }
+    .header__buttons button {
+      font-size: 1.2em;
+      font-family: "Poppins", cursive, Helvetica, arial;
+      color: #4e4e4e;
+      font-size: 0.9em;
+      color: grey;
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
 
 @media only screen and (max-width: 650px) {
-  .header__ornament {
-    top: 25px; }
-    .header__ornament svg {
-      width: 390px; }
-  .header__title {
-    font-size: 2.2em;
-    left: 45px;
-    top: 50px; }
-  .header__search-movie {
-    width: 75%;
-    font-size: 2em; }
-  .header__search-icon {
-    font-size: 1em; }
-  .header__search-button {
-    right: 150px;
-    top: 2px; } }
+  .header {
+    width: 400px;
+    position: relative; }
+    .header__ornament {
+      top: 25px;
+      width: 400px; }
+      .header__ornament svg {
+        width: 390px; }
+    .header__search-bar {
+      width: 400px; }
+    .header__title {
+      font-size: 2.2em;
+      left: 45px;
+      top: 50px; }
+    .header__search-movie {
+      border: 4px solid #6c63ff;
+      height: 70px;
+      padding-left: 40px; }
+    .header__search-icon {
+      top: 25px;
+      left: -15px; }
+    .header__search-button {
+      right: -10px;
+      top: 5px;
+      font-size: 17px; }
+    .header__buttons {
+      right: -10px;
+      top: 5px;
+      font-size: 13px;
+      height: 27px; } }
 
 @media only screen and (max-width: 412px) {
   .header {
@@ -179,8 +225,9 @@ mark {
       left: 35px;
       top: 55px; }
     .header__search-movie {
-      width: 250px;
       padding: 5px;
+      width: 250px;
+      height: 35px;
       padding-left: 35px;
       font-size: 1em;
       border: 2px solid #6c63ff; }
@@ -190,15 +237,24 @@ mark {
       left: -10px; }
     .header__search-button {
       left: 20px;
-      top: 20px;
-      border-radius: 50%;
-      background: transparent; }
+      top: 10px;
+      font-size: 0.8em;
+      width: 80px; }
       .header__search-button svg {
         height: 18px; }
       .header__search-button span {
         font-size: 0.8em;
         right: 40px;
-        top: 1px; } }
+        top: 1px; }
+    .header__buttons {
+      width: 70px;
+      height: 19px;
+      top: 10px;
+      left: -50px; }
+      .header__buttons button {
+        font-size: 0.8em;
+        width: 15px;
+        height: 15px; } }
 
 @keyframes bounce {
   to {
@@ -218,11 +274,11 @@ mark {
   50% {
     opacity: 1; }
   to {
-    opacity: 0.3; } }
+    opacity: 0.1; } }
 
 @keyframes opacityToggle {
   to {
-    opacity: 0.2;
+    opacity: 0.1;
     transform: scale(1.2); } }
 
 @keyframes removePoster {
@@ -246,24 +302,25 @@ mark {
   position: relative; }
   .banner__card {
     margin: auto;
-    width: 20%;
-    height: auto;
+    margin-bottom: 100px;
+    width: 100%;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 100px; }
+    align-items: center;
+    justify-content: center; }
     .banner__card .banner__content {
       position: relative;
       width: 300px;
-      padding: 20px;
       border-radius: 35px;
       margin: 50px;
       position: relative;
       background-color: #ffffff;
       border: 5px solid #6c63ff;
       transition: all ease 0.3s;
-      animation: hoverBounce 4s linear; }
+      animation: hoverBounce 4s linear;
+      flex-shrink: 0;
+      padding: 20px; }
       .banner__card .banner__content:hover {
         border: 5px solid #9c96ff; }
       .banner__card .banner__content .remove-card-icon {
@@ -378,16 +435,16 @@ mark {
           .banner__card .banner__content .banner__card-icons .card-icon:hover {
             transform: scale(1.1); }
       .banner__card .banner__content .icons-content-container {
-        width: 300px;
+        width: 270px;
         height: auto;
         background-color: rgba(221, 221, 221, 0.515);
         border-radius: 15px;
         position: relative;
         margin-top: 10px; }
         .banner__card .banner__content .icons-content-container p {
-          width: 50%;
+          width: 45%;
           padding: 10px 10px 10px 20px;
-          transition: all ease 1s; }
+          transition: all linear 0.5s; }
         .banner__card .banner__content .icons-content-container::before {
           content: "";
           position: absolute;
@@ -454,7 +511,7 @@ mark {
   .banner__image {
     display: block;
     margin: 50px auto;
-    width: 125%;
+    width: 30%;
     height: auto;
     position: relative;
     z-index: -99999; }
@@ -468,23 +525,49 @@ mark {
     background-color: #524b4b;
     z-index: -9999; }
 
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1100px) {
   .banner__card {
-    width: 50%; }
+    width: 100%; }
   .banner .screen {
-    display: none; } }
+    display: none; }
+  .banner__image {
+    width: 70%; } }
 
-@media only screen and (max-width: 650px) {
-  .banner__card .banner__content {
-    margin-left: 35px; } }
+@media only screen and (max-width: 700px) {
+  .banner {
+    margin: auto; }
+    .banner__card {
+      width: 100%;
+      list-style: none;
+      display: flex;
+      flex-wrap: nowrap;
+      margin-bottom: 100px;
+      justify-content: unset;
+      overflow: auto;
+      height: 700px; }
+      .banner__card .banner__content {
+        width: 260px;
+        margin-left: 35px;
+        margin-right: 35px;
+        flex-shrink: 0;
+        font-size: 0.9em; }
+    .banner__image {
+      width: 90%;
+      margin-top: -300px;
+      margin-left: -25px; } }
 
 @media only screen and (max-width: 450px) {
-  .banner__card .banner__content {
-    margin-left: 35px; }
+  .banner__card {
+    width: 100%; }
+    .banner__card .banner__content {
+      margin-left: 35px; }
   .banner__image {
-    width: 200%; } }
+    margin-top: -450px;
+    margin-left: -40px;
+    width: 100%; } }
 
 .footer {
+  height: 33px;
   display: flex;
   position: fixed;
   bottom: 0;
@@ -497,7 +580,7 @@ mark {
   font-family: "Poppins", cursive, Helvetica, arial;
   color: #4e4e4e;
   color: #ece7e7;
-  z-index: 99999999999; }
+  z-index: 9999999; }
   .footer__Link {
     color: white; }
     .footer__Link:visited {
@@ -534,10 +617,12 @@ mark {
     font-size: 0.9em;
     margin: -10px 0 -10px 0; }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 750px) {
   .footer {
+    height: auto;
     padding: 2px;
-    font-size: 12px; }
+    font-size: 12px;
+    position: relative; }
     .footer mark {
       padding: 2px; }
     .footer__rating-title {
@@ -572,10 +657,10 @@ mark {
   align-items: center;
   border-radius: 10%;
   box-shadow: inset 0px 0px 3px #dddada;
-  border: 4px solid #ffffff;
+  border: 1px solid #ffffff;
   transition: all ease-in-out 0.2s; }
   .toggle-auth:hover {
-    border: 4px solid #6c63ff; }
+    border: 1px solid #6c63ff; }
   .toggle-auth__user-icon {
     font-size: 30px; }
 
@@ -586,13 +671,12 @@ mark {
   right: 30px;
   top: 30px;
   padding: 15px;
-  box-shadow: inset 0px 0px 3px #dddada;
   border-radius: 20px;
   z-index: 99999;
   background-color: #ffffff;
   font-family: "Metrophobic", cursive, arial;
-  overflow: hidden;
   border: 5px solid #ffffff;
+  box-shadow: inset 0px 0px 3px #dddada;
   transition: all ease-in-out 0.2s; }
   .auth:hover {
     border: 5px solid #6c63ff; }
@@ -606,7 +690,7 @@ mark {
     border-radius: 50%;
     background-color: #ffffff;
     width: 30px;
-    height: 30px;
+    height: 34px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -616,10 +700,11 @@ mark {
     .auth__toggle .toggle.up {
       transform: rotate(180deg); }
   .auth__user-icon {
+    display: none;
     position: absolute;
     bottom: -20px;
     right: -35px;
-    font-size: 12em;
+    font-size: 2em;
     color: #e9e6e6;
     z-index: -9999; }
   .auth__form {
@@ -718,14 +803,16 @@ mark {
     align-items: center;
     border: 3px solid #6c63ff;
     height: 50px;
-    border-radius: 20px; }
+    border-radius: 20px;
+    box-shadow: inset 0px 0px 3px #dddada;
+    margin-top: -15px;
+    background-color: #ffffff; }
   .auth__logout {
     align-self: flex-end;
-    width: 70px;
+    width: 30px;
     position: absolute;
     top: 0;
-    right: 0;
-    width: 30px; }
+    right: 0; }
   .auth__user-img {
     width: 50px;
     height: 50px;
@@ -754,16 +841,22 @@ mark {
     .toggle-auth:hover {
       border: 2px solid #ffffff; }
   .auth {
+    height: 30px;
     left: 10px;
     top: 10px;
-    border: none;
-    box-shadow: none; }
+    border: 5px solid #ffffff;
+    box-shadow: inset 0px 0px 3px #dddada; }
     .auth:hover {
-      border: none; }
+      border: 5px solid #ffffff; }
     .auth__form {
       right: 0; }
     .auth__title {
       font-size: 2em; }
+    .auth__user-info {
+      background-color: white;
+      box-shadow: inset 0px 0px 3px #dddada; }
+    .auth__username {
+      background-color: white; }
     .auth__label {
       font-size: 0.9em; }
     .auth__user-icon {
@@ -849,3 +942,12 @@ mark {
       height: 0; }
       .popup__eye__outer {
         display: none; } }
+
+.overlay {
+  display: none;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: 9999999999999999999999999;
+  background-color: #ffffff;
+  opacity: 0.9; }
