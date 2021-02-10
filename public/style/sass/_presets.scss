@@ -6,6 +6,9 @@ html {
 	margin: 0;
 }
 
+html {
+	scroll-behavior: smooth;
+}
 body {
 	background-color: $white;
 	overflow-x: hidden;
@@ -34,7 +37,10 @@ mark {
 	background-color: $primaryColor;
 	@include textType("secondary-text");
 	font-size: 1em;
-	padding: 5px;
+	padding: 7px;
 	margin-right: 10px;
 	color: #fff;
+	transition: all ease 0.2s;
+	border-radius: 3px;
+	box-shadow: 1px 5px 10px lighten($grey, 55%);
 }

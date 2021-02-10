@@ -30,6 +30,8 @@ const btnDarkMode = document.querySelector(".btn-darkMode");
 const btnChangeView = document.querySelector(".btn-changeView");
 const btnNotice = document.querySelector(".btn-notice");
 const btnFavorites = document.querySelector(".btn-favorites");
+const btnToggleFooter = document.querySelector(".toggle-footer__btn");
+const footer = document.querySelector(".footer");
 function showPopup(
 	isToggle,
 	msg = "Occurred an error, and we are as soon as possible solving the problem...",

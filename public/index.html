@@ -84,11 +84,13 @@
 					<i class="auth__user-icon fas fa-exclamation-triangle"></i>
 				</span>
 				<div class="auth__submits">
-					<button class="auth__login auth__btn btnLogin">Log in</button>
-					<button class="auth__register auth__btn btnRegister">Register</button>
+					<button class="auth__login auth__btn btnLogin btn">Log in</button>
+					<button class="auth__register auth__btn btnRegister btn">
+						Register
+					</button>
 				</div>
 				<span class="auth__separator"><sup> </sup>or<sup> </sup></span>
-				<button class="auth__loginWithGoogle btnGoogleAuth auth__btn">
+				<button class="auth__loginWithGoogle btnGoogleAuth auth__btn btn">
 					<i class="fab fa-google"></i> With Google
 				</button>
 			</form>
@@ -101,7 +103,7 @@
 					/>
 					<h2 class="auth__username">Leoeyeschmittk</h2>
 				</div>
-				<button class="auth__logout auth__btn btnLogout">
+				<button class="auth__logout auth__btn btnLogout btn">
 					<i class="fas fa-sign-out-alt"></i>
 				</button>
 			</div>
@@ -202,17 +204,24 @@
 
 				<input id="search-movie" class="header__search-movie" type="search" />
 			</div>
-			<button class="header__search-button" type="button">
+			<button class="header__search-button btn" type="button">
 				<span> Search<i class="fas fa-arrow-right"></i></span>
 			</button>
 			<header class="header__buttons">
-				<button class="header__button btn-changeView">
+				<button
+					class="header__button btn-changeView btn"
+					title="Change the view way of cards"
+				>
 					<i class="fas fa-desktop"></i>
 				</button>
-				<button class="header__button btn-notice">
+				<button class="header__button btn-notice btn" title="Show a curiosity">
 					<i class="fas fa-exclamation"></i>
 				</button>
-				<button class="header__button btn-favorites">
+
+				<button
+					class="header__button btn-favorites btn"
+					title="Show your favorite movies"
+				>
 					<i class="fas fa-star"></i>
 				</button>
 			</header>
@@ -228,7 +237,11 @@
 				</ul>
 			</section>
 		</div>
-
+		<!-- <div class="toggle-footer">
+			<button class="toggle-footer__btn btn">
+				<i class="fas fa-info-circle"></i>
+			</button>
+		</div> -->
 		<footer class="footer">
 			<div class="footer__main-info">
 				Made by

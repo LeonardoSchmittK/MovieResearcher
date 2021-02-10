@@ -5,15 +5,21 @@
 	position: relative;
 
 	&__card {
+		// margin:  0 80px 0;
 		margin: auto;
-		margin-bottom: 100px;
-		width: 100%;
-		list-style: none;
+		width: 93%;
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
 		justify-content: center;
+		position: relative;
+		margin-bottom: 100px;
+		padding: 0;
+		list-style-type: none;
+
 		.banner__content {
+			box-shadow: 1px 5px 10px lighten($grey, 55%);
+
 			position: relative;
 			width: 300px;
 			border-radius: 35px;
@@ -133,7 +139,7 @@
 				@include textType("important-text");
 				cursor: pointer;
 				color: $grey;
-				text-shadow: 1px 5px 1px lighten($grey, 50%);
+				text-shadow: 1px 5px 1px lighten($grey, 60%);
 				margin-top: 10px;
 				margin-bottom: -5px;
 				width: 100%;
@@ -143,11 +149,22 @@
 				position: relative;
 				z-index: 999;
 			}
+
 			p {
-				line-height: 20px;
+				line-height: 21px;
 				font-family: $thirdFont;
 				font-size: 0.8em;
 				color: $grey;
+				text-align: justify;
+				transition: all ease 0.3s;
+				margin-bottom: 19px;
+				filter: blur(0px);
+				&:hover {
+					box-shadow: 0px 10px 10px lighten($grey, 65%);
+				}
+				mark:hover {
+					background: lighten($primaryColor, 5%);
+				}
 			}
 			.banner__card-icons {
 				display: flex;
@@ -156,13 +173,15 @@
 					cursor: pointer;
 					background-color: $primaryColor;
 					color: $white;
-					border-radius: 30px;
-					font-size: 1.5em;
+					font-size: 1em;
 					width: 30px;
 					text-align: center;
 					padding: 5px;
 					margin-right: 5px;
-					filter: drop-shadow(2px 1px 3px $primaryColor);
+					border-radius: 3px;
+					box-shadow: 1px 5px 10px lighten($grey, 55%);
+
+					// filter: drop-shadow(2px 1px 3px $primaryColor);
 					transition: all ease 0.2s;
 					&:hover {
 						transform: scale(1.1);
@@ -172,14 +191,13 @@
 			.icons-content-container {
 				width: 270px;
 				height: auto;
-				background-color: rgba(221, 221, 221, 0.515);
+				background-color: rgba(221, 221, 221, 0.288);
 				border-radius: 15px;
 				position: relative;
 				margin-top: 10px;
 
 				p {
 					width: 45%;
-
 					padding: 10px 10px 10px 20px;
 					transition: all linear 0.5s;
 				}
@@ -264,7 +282,7 @@
 	}
 
 	&__image {
-		display: block;
+		display: none;
 		margin: 50px auto;
 		width: 30%;
 		height: auto;
@@ -304,25 +322,20 @@
 		// display: flex;
 		margin: auto;
 		&__card {
-			width: 100%;
-			list-style: none;
-			display: flex;
-			flex-wrap: nowrap;
-			margin-bottom: 100px;
-			justify-content: unset;
-			overflow: auto;
-			height: 700px;
-
+			width: 88%;
+			// display: flex;
+			// flex-wrap: nowrap;
+			// justify-content: unset;
+			// overflow: auto;
+			// height: 700px;
+			position: relative;
 			.banner__content {
-				width: 260px;
-				margin-left: 35px;
-				margin-right: 35px;
-				flex-shrink: 0;
-				font-size: 0.9em;
+				// width: 260px;
+				// font-size: 0.9em;
 			}
 		}
 		&__image {
-			width: 90%;
+			width: 100%;
 			margin-top: -300px;
 			margin-left: -25px;
 		}
@@ -332,7 +345,7 @@
 @media only screen and (max-width: 450px) {
 	.banner {
 		&__card {
-			width: 100%;
+			width: 80%;
 
 			.banner__content {
 				margin-left: 35px;

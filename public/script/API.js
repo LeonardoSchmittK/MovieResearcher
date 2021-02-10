@@ -75,7 +75,7 @@ const App = (() => {
 			const content = makeElement("li", "banner__content", markup);
 
 			content.style.height = calcCardHeight(movie);
-			banner.style.cssText = "width:100%;margin-left:-30px;";
+			// banner.style.cssText = "width:100%;margin-left:-30px;";
 			cards.push(content);
 			cards.reverse();
 
@@ -101,7 +101,6 @@ const App = (() => {
 					console.log(i);
 					removeIndex(i);
 					if (titles.length === 0) {
-						btnChangeView.style.display = "none";
 						deleteSvgImage(false);
 						banner.style.cssText = "width:100%;";
 					}
@@ -199,6 +198,7 @@ const App = (() => {
 			increasePosterIcon.onclick = () => {
 				poster.classList.remove("zoomed-poster");
 				increasePosterIcon.style.transform = "rotate(0deg)";
+				poster.style.height = "250px";
 
 				increasePosterIcon.onclick = () => x();
 			};
@@ -275,7 +275,7 @@ const App = (() => {
 	function rankRating(rating) {
 		if (rating < 6.0) return "#FF0000";
 		else if (rating > 8.7) return "#b29600";
-		else if (rating > 6.0 && rating < 8.7) return "#008000";
+		else if (rating > 6.0 && rating <= 8.7) return "#008000";
 		else return "#A9A9A9";
 	}
 
@@ -308,23 +308,26 @@ const App = (() => {
 
 	authInputEffect.map((input) => {
 		input.onfocus = () => toggleInputEffect(input);
-		// input.onclick = () => toggleInputEffect(input);
 	});
 
 	function toggleInputEffect(input) {
 		input.labels[0].classList.add("toggle");
-		document.querySelector(".overlay").style.display = "block";
-		auth.style.zIndex = "999999999999999999999";
-		document.body.style.overflow = "hidden";
-		window.scrollTo(0, 0);
-		input.onblur = () => {
-			document.querySelector(".overlay").style.display = "none";
+		if (window.screen.availWidth <= 500) {
+			document.querySelector(".overlay").style.display = "block";
 			auth.style.zIndex = "999999999999999999999";
-			document.body.style.overflow = "auto";
-		};
+			document.body.style.overflowX = "hidden";
+			document.body.style.overflowY = "hidden";
+			window.scrollTo(0, 0);
+			input.onblur = () => {
+				document.querySelector(".overlay").style.display = "none";
+				auth.style.zIndex = "999";
+				document.body.style.overflowX = "hidden";
+				document.body.style.overflowY = "auto";
+			};
+		}
 	}
 
-	document.querySelector(".auth__input").onblur = () =>
+	window.document.querySelector(".auth__input").onblur = () =>
 		console.log("deu certo");
 	const rating = document.querySelector(".footer__stars");
 	let stars = [...document.getElementsByClassName("footer__star")];
@@ -357,7 +360,7 @@ const App = (() => {
 	rateApp(stars, i);
 
 	var db = firebase.firestore();
-
+	let paths = [];
 	function executeFirebase({
 		Title,
 		Plot = "N/A",
@@ -392,6 +395,7 @@ const App = (() => {
 				})
 				.then(function (docRef) {
 					console.log(docRef.path);
+					paths.push(docRef.path);
 				})
 				.catch(function (error) {
 					console.error("Error adding document: ", error);
@@ -438,11 +442,11 @@ const App = (() => {
 	const cardsHero = document.querySelector(".banner__card");
 	const toggleView = (btnChangeView.onclick = () => {
 		cardsHero.style.cssText =
-			"display: flex;flex-wrap: nowrap;	margin-bottom: 100px;	justify-content: unset;	overflow: auto;		height: 700px;";
+			"display: flex;flex-wrap: nowrap;position:relative;left:-31px;top:-25px;	margin-bottom: 100px;	justify-content: unset;	overflow: auto;		height: 730px;padding-left:none;";
 
 		btnChangeView.onclick = () => {
 			cardsHero.style.cssText =
-				"display: flex;flex-wrap: wrap;	margin-bottom: 100px;	justify-content: center;	overflow: hidden;		";
+				"display: flex;flex-wrap: wrap;	margin-bottom: 200px;left:-25px;	justify-content: center;	overflow: hidden;		height:auto;";
 
 			btnChangeView.onclick = () => toggleView();
 		};
@@ -462,7 +466,17 @@ const App = (() => {
 			"Hey, you!",
 			""
 		);
-		// const sortedPopupDescription = notices.sort(() => Math.random() - 0.5);
-		// console.log(sortedPopupDescription);
 	};
+	const cardss = [...document.getElementsByClassName("banner__content")];
+	firebase.auth().onAuthStateChanged(function (user) {
+		if (user === null) {
+			[...document.getElementsByClassName("header__button")].map(
+				(btn) => (btn.disabled = true)
+			);
+		} else {
+			[...document.getElementsByClassName("header__button")].map(
+				(btn) => (btn.disabled = false)
+			);
+		}
+	});
 })();

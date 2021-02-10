@@ -1,16 +1,34 @@
+.toggle-footer {
+	background-color: transparent;
+	width: 40px;
+	height: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-left: 10px;
+	&__btn {
+		width: 50px;
+		background-color: transparent;
+		color: $primaryColor;
+		font-size: 2em;
+	}
+}
+
 .footer {
 	height: 33px;
-	display: flex;
+	width: 100%;
+	margin-top: -100px;
 	position: fixed;
+	display: flex;
 	bottom: 0;
 	justify-content: space-between;
 	align-items: center;
-	background-color: $primaryColor;
-	width: 100%;
+	background-color: $white;
 	padding: 5px;
 	@include textType("text");
-	color: #ece7e7;
+	color: #dad6d6;
 	z-index: 9999999;
+	transition: all ease 0.3s;
 
 	&__Link {
 		color: white;
@@ -21,7 +39,6 @@
 
 	&__icon {
 		padding-right: 5px;
-		background-color: #ffffff49;
 		text-align: center;
 		padding: 5px;
 		border-radius: 50%;
@@ -48,7 +65,7 @@
 		font-size: 0.8em;
 		cursor: pointer;
 		transition: all ease-in-out 0.1s;
-
+		color: goldenrod;
 		&:hover {
 			transform: scale(1.1);
 			filter: drop-shadow(0 0 10px $white);
@@ -65,7 +82,6 @@
 		height: auto;
 		padding: 2px;
 		font-size: 12px;
-		position: relative;
 		mark {
 			padding: 2px;
 		}
