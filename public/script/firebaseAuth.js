@@ -94,6 +94,9 @@ function logout() {
 				toggleForm(true);
 				printProfile(false);
 				cleanAuthFields();
+				[...document.getElementsByClassName("banner__content")].map(
+					(i) => (i.style.display = "none")
+				);
 				location.reload();
 			},
 			(err) => {

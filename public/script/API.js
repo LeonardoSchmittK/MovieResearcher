@@ -491,7 +491,6 @@ const App = (() => {
 						});
 					});
 			} else {
-				handleError();
 			}
 		});
 	}
