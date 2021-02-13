@@ -15,9 +15,8 @@
 		position: relative;
 		margin-bottom: 100px;
 		padding: 0;
-		padding-bottom: 10px;
+		padding-bottom: 30px;
 		list-style-type: none;
-
 		.banner__content {
 			box-shadow: 1px 5px 10px lighten($grey, 55%);
 
@@ -366,8 +365,7 @@
 			}
 		}
 		&__image {
-			margin-top: -450px;
-			margin-left: -40px;
+			// margin-left: -40px;
 			width: 100%;
 		}
 	}

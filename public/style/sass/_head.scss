@@ -144,15 +144,15 @@
 			top: 25px;
 			left: -15px;
 		}
-		&__search-button {
-			font-size: 17px;
-		}
+		// &__search-button {
+		// 	font-size: 17px;
+		// }
 		&__buttons {
-			right: -30px;
+			// right: -30px;
 
-			top: -10px;
-			font-size: 13px;
-			height: 27px;
+			// top: -10px;
+			// font-size: 13px;
+			// height: 27px;
 		}
 	}
 }
@@ -188,8 +188,6 @@
 			left: -10px;
 		}
 		&__search-button {
-			left: 20px;
-			top: 10px;
 			font-size: 0.8em;
 			width: 80px;
 			svg {
@@ -202,15 +200,12 @@
 			}
 		}
 		&__buttons {
-			width: 70px;
-			height: 19px;
-			top: 10px;
-			left: -50px;
-			button {
-				font-size: 0.8em;
-
-				width: 15px;
-				height: 15px;
+			width: 230px;
+			height: 20px;
+			top: -3px;
+			left: 5px;
+			&__btn {
+				font-size: 0.6em;
 			}
 		}
 	}

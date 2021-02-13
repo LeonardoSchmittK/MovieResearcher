@@ -208,14 +208,7 @@ img {
       padding-left: 40px; }
     .header__search-icon {
       top: 25px;
-      left: -15px; }
-    .header__search-button {
-      font-size: 17px; }
-    .header__buttons {
-      right: -30px;
-      top: -10px;
-      font-size: 13px;
-      height: 27px; } }
+      left: -15px; } }
 
 @media only screen and (max-width: 412px) {
   .header {
@@ -242,8 +235,6 @@ img {
       top: 10px;
       left: -10px; }
     .header__search-button {
-      left: 20px;
-      top: 10px;
       font-size: 0.8em;
       width: 80px; }
       .header__search-button svg {
@@ -253,14 +244,12 @@ img {
         right: 40px;
         top: 1px; }
     .header__buttons {
-      width: 70px;
-      height: 19px;
-      top: 10px;
-      left: -50px; }
-      .header__buttons button {
-        font-size: 0.8em;
-        width: 15px;
-        height: 15px; } }
+      width: 230px;
+      height: 20px;
+      top: -3px;
+      left: 5px; }
+      .header__buttons__btn {
+        font-size: 0.6em; } }
 
 @keyframes bounce {
   to {
@@ -316,7 +305,7 @@ img {
     position: relative;
     margin-bottom: 100px;
     padding: 0;
-    padding-bottom: 10px;
+    padding-bottom: 30px;
     list-style-type: none; }
     .banner__card .banner__content {
       box-shadow: 1px 5px 10px #dcd9d9;
@@ -583,8 +572,6 @@ img {
     .banner__card .banner__content {
       margin-left: 35px; }
   .banner__image {
-    margin-top: -450px;
-    margin-left: -40px;
     width: 100%; } }
 
 .toggle-footer {
