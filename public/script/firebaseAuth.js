@@ -33,7 +33,7 @@ const toggleUserImg = (userImg.onclick = () => {
 
 	userImg.onclick = () => {
 		username.style.display = "block";
-		auth.style.width = "250px";
+		auth.style.width = username.style.width;
 
 		userImg.onclick = () => toggleUserImg();
 	};
@@ -154,7 +154,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 function printProfile(isPrinted) {
 	perfilLogged.style.display = !isPrinted ? "none" : "flex";
 	toggleAuth.style.display = isPrinted ? "none" : "flex";
-	auth.style.width = "200px";
+	auth.style.width = username.style.width;
 	authToggle.style.display = isPrinted ? "none" : "";
 }
 

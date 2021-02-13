@@ -44,3 +44,7 @@ mark {
 	border-radius: 3px;
 	box-shadow: 1px 5px 10px lighten($grey, 55%);
 }
+
+img {
+	user-select: none;
+}

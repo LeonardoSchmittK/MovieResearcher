@@ -18,6 +18,14 @@
 			type="image/png"
 			href="resources/img/favicon.png"
 		/>
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/tippy.js@6/themes/light.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/tippy.js@6/animations/scale-extreme.css"
+		/>
 		<!-- Icons  -->
 		<link
 			rel="stylesheet"
@@ -204,28 +212,48 @@
 
 				<input id="search-movie" class="header__search-movie" type="search" />
 			</div>
-			<button class="header__search-button btn" type="button">
-				<span> Search<i class="fas fa-arrow-right"></i></span>
-			</button>
-			<header class="header__buttons">
-				<button
-					class="header__button btn-changeView btn"
-					title="Change the view way of cards"
-				>
-					<i class="fas fa-desktop"></i>
-				</button>
-				<button class="header__button btn-notice btn" title="Show a curiosity">
-					<i class="fas fa-exclamation"></i>
-				</button>
 
-				<button
-					class="header__button btn-favorites btn"
-					title="Show your favorite movies"
-				>
-					<i class="fas fa-star"></i>
+			<header class="header__buttons">
+				<div class="header__buttons__secondary-container">
+					<button
+						data-text="Change the view way of cards"
+						class="header__buttons__btn btn-changeView btn tooltip"
+					>
+						<i class="fas fa-desktop"></i>
+					</button>
+					<button
+						data-text="Show a curiosity"
+						class="header__buttons__btn btn-notice btn tooltip"
+					>
+						<i class="fas fa-question"></i>
+					</button>
+					<button
+						data-text="Remove all cards"
+						class="header__buttons__btn btn-remove-cards btn tooltip"
+					>
+						<i class="fas fa-times"></i>
+					</button>
+					<button
+						data-text="Show your favorite movies"
+						class="header__buttons__btn btn-favorites btn tooltip"
+					>
+						<i class="fas fa-star"></i>
+					</button>
+					<button
+						data-text="Show your searched movies"
+						class="header__buttons__btn btn-searched btn tooltip"
+					>
+						<i class="fas fa-history"></i>
+					</button>
+				</div>
+
+				<button class="header__search-button btn" type="button">
+					Search<i class="fas fa-arrow-right"></i>
 				</button>
 			</header>
 		</header>
+		<div class="blur-bar blur-bar-left"></div>
+		<div class="blur-bar blur-bar-right"></div>
 		<div id="screens" class="banner screens-animation">
 			<section>
 				<ul class="banner__card">
@@ -237,11 +265,6 @@
 				</ul>
 			</section>
 		</div>
-		<!-- <div class="toggle-footer">
-			<button class="toggle-footer__btn btn">
-				<i class="fas fa-info-circle"></i>
-			</button>
-		</div> -->
 		<footer class="footer">
 			<div class="footer__main-info">
 				Made by
@@ -255,11 +278,19 @@
 						<i class="footer__icon fab fa-github-alt"></i
 					></a>
 					<a target="_blank" href="https://linkedin.com/">
-						<i class="footer__icon fab fa-linkedin-in"></i></a
+						<i
+							data-text="Go to the top"
+							class="footer__icon fab fa-linkedin-in"
+						></i></a
 				></mark>
 				&reg;2021
+				<button
+					data-text="Go to the top"
+					class="footer__icon-go-to-top btn tooltip"
+				>
+					<i class="fas fa-arrow-up"></i>
+				</button>
 			</div>
-
 			<div class="footer__rating">
 				<h4 class="footer__rating-title">Avaliate the app!</h4>
 				<div class="footer__stars">
@@ -273,6 +304,7 @@
 		</footer>
 		<noscript>The browser does not support JavaScript</noscript>
 		<!-- script-->
+
 		<script
 			defer
 			src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"
@@ -285,7 +317,10 @@
 			defer
 			src="https://www.gstatic.com/firebasejs/8.2.5/firebase-firestore.js"
 		></script>
+		<script defer src="https://unpkg.com/@popperjs/core@2"></script>
+		<script defer src="https://unpkg.com/tippy.js@6"></script>
 		<script defer src="script/DOMelements.js"></script>
+		<script defer src="script/tippy.js"></script>
 		<script defer src="script/firebaseConfig.js"></script>
 		<script defer src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
 		<script defer src="script/firebaseAuth.js"></script>

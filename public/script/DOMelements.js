@@ -30,8 +30,13 @@ const btnDarkMode = document.querySelector(".btn-darkMode");
 const btnChangeView = document.querySelector(".btn-changeView");
 const btnNotice = document.querySelector(".btn-notice");
 const btnFavorites = document.querySelector(".btn-favorites");
+const btnSearched = document.querySelector(".btn-searched");
+const btnRemoveCards = document.querySelector(".btn-remove-cards");
 const btnToggleFooter = document.querySelector(".toggle-footer__btn");
 const footer = document.querySelector(".footer");
+const bannerMovieImg = [document.getElementsByName("banner__movie-img")];
+const cardsHero = document.querySelector(".banner__card");
+const iconGoToTop = document.querySelector(".footer__icon-go-to-top");
 function showPopup(
 	isToggle,
 	msg = "Occurred an error, and we are as soon as possible solving the problem...",
@@ -57,4 +62,12 @@ function makeElement(
 	element.innerHTML = content;
 	fatherID ? document.querySelector(fatherID).appendChild(element) : "";
 	return element;
+}
+
+function toggleElement(element, toggleClass) {
+	element.classList.toggle(toggleClass);
+}
+
+function setCssProperties(el, styles) {
+	for (var property in styles) el.style[property] = styles[property];
 }

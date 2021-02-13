@@ -15,6 +15,7 @@
 		position: relative;
 		margin-bottom: 100px;
 		padding: 0;
+		padding-bottom: 10px;
 		list-style-type: none;
 
 		.banner__content {
@@ -34,32 +35,42 @@
 			&:hover {
 				border: 5px solid lighten($primaryColor, 10%);
 			}
+			&--favorite {
+				border: 5px solid gold;
+			}
 			.remove-card-icon {
 				position: absolute;
 				right: 20px;
 				top: 20px;
-				color: black;
+				color: rgb(49, 46, 46);
 				z-index: 999;
 				cursor: pointer;
 				&::after {
 					content: "";
 					position: absolute;
 					top: 0;
-					left: -30px;
+					left: -32px;
 					background-color: lighten($grey, 67%);
 					width: 60px;
 					height: 20px;
 					transform: rotate(40deg);
+					box-shadow: 0px 10px 10px lighten($grey, 65%);
 				}
 				&::before {
 					content: "";
 					position: absolute;
-					top: -3px;
-					left: -30px;
+					top: -5px;
+					left: -32px;
 					background-color: lighten($grey, 63%);
 					width: 70px;
 					height: 20px;
 					transform: rotate(140deg);
+					box-shadow: 0px 10px 10px lighten($grey, 65%);
+					transition: all ease 1s;
+					pointer-events: none;
+				}
+				&:hover:before {
+					width: 10px;
 				}
 			}
 			.genres-container {
@@ -139,7 +150,7 @@
 				@include textType("important-text");
 				cursor: pointer;
 				color: $grey;
-				text-shadow: 1px 5px 1px lighten($grey, 60%);
+				text-shadow: 1px 5px 4px lighten($grey, 56%);
 				margin-top: 10px;
 				margin-bottom: -5px;
 				width: 100%;
@@ -158,7 +169,7 @@
 				text-align: justify;
 				transition: all ease 0.3s;
 				margin-bottom: 19px;
-				filter: blur(0px);
+				position: relative;
 				&:hover {
 					box-shadow: 0px 10px 10px lighten($grey, 65%);
 				}
@@ -189,9 +200,9 @@
 				}
 			}
 			.icons-content-container {
-				width: 270px;
+				width: 300px;
 				height: auto;
-				background-color: rgba(221, 221, 221, 0.288);
+				background-color: rgb(245, 245, 245);
 				border-radius: 15px;
 				position: relative;
 				margin-top: 10px;
@@ -224,6 +235,7 @@
 				border-radius: 25px;
 				transition: all ease 0.3s;
 				background-color: $white;
+
 				&:hover {
 					transform: translateX(55px) translateY(40px);
 					// box-shadow: 4px 50px 0 $white;
@@ -239,6 +251,9 @@
 					border: 5px solid $primaryColor;
 					display: block;
 					margin: auto;
+					&--favorite {
+						border: 5px solid gold;
+					}
 				}
 				figcaption {
 					transition: all ease 0.3s;
@@ -254,10 +269,16 @@
 					i {
 						color: $primaryColor;
 						background-color: $white;
-						font-size: 1.4em;
+						width: 10px;
+						height: 10px;
+						font-size: 1.2em;
 						padding: 10px;
 						border-radius: 20px;
 						margin-right: 10px;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						box-shadow: 1px 5px 10px lighten($grey, 55%);
 						&:hover {
 							transform: scale(1.1);
 						}
@@ -266,6 +287,7 @@
 			}
 			.zoomed-poster {
 				width: 90%;
+				height: inherit;
 				transform: none;
 				top: -20px;
 				left: -30px;
@@ -282,7 +304,7 @@
 	}
 
 	&__image {
-		display: none;
+		display: block;
 		margin: 50px auto;
 		width: 30%;
 		height: auto;
@@ -312,7 +334,7 @@
 			display: none;
 		}
 		&__image {
-			width: 70%;
+			width: 40%;
 		}
 	}
 }
@@ -323,21 +345,13 @@
 		margin: auto;
 		&__card {
 			width: 88%;
-			// display: flex;
-			// flex-wrap: nowrap;
-			// justify-content: unset;
-			// overflow: auto;
-			// height: 700px;
+
 			position: relative;
 			.banner__content {
-				// width: 260px;
-				// font-size: 0.9em;
 			}
 		}
 		&__image {
 			width: 100%;
-			margin-top: -300px;
-			margin-left: -25px;
 		}
 	}
 }

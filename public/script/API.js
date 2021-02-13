@@ -4,24 +4,26 @@ const App = (() => {
 	const banner = document.querySelector(".banner__card");
 	const movieInput = document.querySelector("#search-movie");
 	const imageBg = document.querySelector("#banner__image");
-
+	const cardss = [...document.getElementsByClassName("banner__content")];
+	const movieUserStats = {};
 	const [titles, cards] = [[], []];
+
 	searchButton.onclick = () => searchMovie(movieInput.value);
 
 	document.body.onkeypress = (event) => {
 		if (event.keyCode === 13) searchMovie(movieInput.value);
 	};
-
 	function searchMovie(movieInput) {
 		if (movieInput.indexOf("fav") != -1) {
 			const movie = movieInput.split("fav")[0];
-			applyAPI(movie, true);
 			console.log(movie);
+			let isFavorite = true;
+			return applyAPI(movie, isFavorite);
 		}
-		applyAPI(movieInput);
+		return applyAPI(movieInput);
 	}
 
-	function applyAPI(movie) {
+	function applyAPI(movie, isFavorite) {
 		if (movie === "") {
 			return (movieInput.value = "");
 		}
@@ -31,7 +33,7 @@ const App = (() => {
 		})
 			.then((data) => data.json())
 			.then((data) => {
-				checkMovie(data);
+				checkMovie(data, isFavorite);
 			})
 			.catch((err) => handleError(err));
 	}
@@ -41,7 +43,7 @@ const App = (() => {
 		executeInputInitialBehavior();
 	}
 
-	function checkMovie(movie) {
+	function checkMovie(movie, isFavorite) {
 		if (movie.Error === "Incorrect IMDb ID.")
 			return handleError("Type in some series or movie");
 
@@ -49,33 +51,32 @@ const App = (() => {
 			return handleError("Movie not found!");
 		else {
 			titles.push(movie.Title);
-			return printMovieCard(movie);
+			return printMovieCard(movie, isFavorite);
 		}
 	}
 
-	function printMovieCard(movie) {
+	function printMovieCard(movie, isFavorite) {
 		deleteSvgImage(true);
-		printMovieInfo(movie);
+		printMovieInfo(movie, isFavorite);
 	}
 
 	function deleteSvgImage(isPresent) {
 		if (!isPresent) imageBg.classList.remove("banner__disableImgRender");
 		else imageBg.classList.add("banner__disableImgRender");
 	}
-	function printMovieInfo(movie) {
+	function printMovieInfo(movie, isFavorite) {
 		const newTitles = [...new Set(titles)];
 		if (JSON.stringify(newTitles) !== JSON.stringify(titles)) {
 			titles.pop();
 
 			return handleError("You've already searched...");
 		} else {
-			executeFirebase(movie);
+			executeFirebase(movie, isFavorite);
 
-			const markup = cardContent(movie);
+			const markup = cardContent(movie, isFavorite);
 			const content = makeElement("li", "banner__content", markup);
 
 			content.style.height = calcCardHeight(movie);
-			// banner.style.cssText = "width:100%;margin-left:-30px;";
 			cards.push(content);
 			cards.reverse();
 
@@ -86,6 +87,7 @@ const App = (() => {
 				increasePoster(item, movie);
 				printCardIconsContent(item);
 				printGenres(item);
+				checkFavoriteCard(item);
 
 				item.childNodes[1].childNodes[0].onclick = () => {
 					db.collection("cards")
@@ -96,18 +98,44 @@ const App = (() => {
 								doc.ref.delete();
 							});
 						});
-					item.style.display = "none";
+					setCssProperties(item, { display: "none" });
 					let i = titles.indexOf(item);
 					console.log(i);
 					removeIndex(i);
 					if (titles.length === 0) {
+						btnFavorites.disabled = true;
+						btnSearched.disabled = true;
 						deleteSvgImage(false);
-						banner.style.cssText = "width:100%;";
+						setCssProperties(banner, { width: "100%" });
 					}
 				};
 			});
 			executeInputInitialBehavior();
 		}
+	}
+
+	function checkFavoriteCard(item) {
+		const movieTitle = item.childNodes[3].title;
+		if (movieTitle.indexOf("favorite") !== -1) styleFavoriteCard(item);
+	}
+
+	function styleFavoriteCard(item) {
+		const favoriteCardColor = "#ebc334";
+		const poster = item.childNodes[21].childNodes[1];
+		const marks = [
+			...document.getElementsByClassName("card__content__subtitle"),
+		];
+		marks.map((mark) => {
+			if (item.contains(mark)) {
+				setCssProperties(mark, {
+					background: favoriteCardColor,
+					color: "#fff",
+				});
+			}
+		});
+
+		setCssProperties(item, { border: `4px solid ${favoriteCardColor}` });
+		setCssProperties(poster, { border: `4px solid ${favoriteCardColor}` });
 	}
 
 	function validatePosterSrc(src) {
@@ -118,91 +146,104 @@ const App = (() => {
 		titles.splice(i, 1);
 	}
 
-	function cardContent({
-		Title,
-		Plot,
-		Director,
-		Year,
-		Runtime,
-		imdbRating,
-		Genre,
-		Writer,
-		Awards,
-		Production,
-		Actors,
-		BoxOffice,
-		Poster,
-	}) {
+	function cardContent(
+		{
+			Title,
+			Plot,
+			Director,
+			Year,
+			Runtime,
+			imdbRating,
+			Genre,
+			Writer,
+			Awards,
+			Production,
+			Actors,
+			BoxOffice,
+			Poster,
+		},
+		isFavorite
+	) {
+		const res =
+			Title.length <= 35
+				? Title
+				: Title.split("").splice(0, 32).join("") + "...";
 		return `
 		
 			<span><i  class="remove-card-icon fas fa-times"></i> </span>
-			<h1  title='${Title}'>${Title}</h1>
+			<h1  title='${Title}${isFavorite ? " | favorite" : " "}'>${res}</h1>
 			<div class='genres-container'> 
       ${printGenresLabels(Genre)}
 			</div>
-	<p style='color:${checkExistence(Plot)};' ><mark>About:</mark>${Plot}</p>
-	<p style='color:${checkExistence(
+	<p class='card__content__p' style='color:${checkExistence(
+		Plot
+	)};' ><mark class='card__content__subtitle'>About:</mark>${Plot}</p>
+	<p class='card__content__p' style='color:${checkExistence(
 		Director,
 		Writer
-	)};'><mark>${checkDirectorLabel(Director)}
+	)};'><mark class='card__content__subtitle'>${checkDirectorLabel(Director)}
 	</mark>${checkDirectorExistence(Director, Writer)}</p>
-	<p style='color:${checkExistence(Year)};'><mark>Release:</mark>${Year}</p>
-	<p style='color:${rankRating(imdbRating)};'><mark>IMDb:</mark>${imdbRating}</p>
-	<p  style='color:${checkExistence(
+	<p class='card__content__p' style='color:${checkExistence(
+		Year
+	)};'><mark class='card__content__subtitle'>Release:</mark>${Year}</p>
+	<p class='card__content__p' style='color:${rankRating(
+		imdbRating
+	)};'><mark class='card__content__subtitle'>IMDb:</mark>${imdbRating}</p>
+	<p class='card__content__p'  style='color:${checkExistence(
 		Runtime
-	)};'><mark>Runtime:</mark>${Runtime}</p>
+	)};'><mark class='card__content__subtitle'>Runtime:</mark>${Runtime}</p>
 	<div class='banner__card-icons'>
 
-			   <i  title='${Awards}'  style='display:${checkCardIconVisibility(
+			   <i   title='${Awards}'  style='display:${checkCardIconVisibility(
 			Awards
-		)};' class="card-icon fas fa-trophy"></i>
+		)};' class="card__content__subtitle card__content__subtitle card-icon fas fa-trophy"></i>
 
 		<i   title='${Production}'	style='display:${checkCardIconVisibility(
 			Production
-		)};'  class="card-icon fas fa-film"></i> 
+		)};'  class="card__content__subtitle card-icon fas fa-film"></i> 
 
 	  	<i   title='${Actors}' style='display:${checkCardIconVisibility(
 			Actors
-		)};'  class=" card-icon fas fa-users"></i>  
+		)};'  class="card__content__subtitle card-icon fas fa-users"></i>  
 
 
 				  	<i   title='${BoxOffice}' style='display:${checkCardIconVisibility(
 			BoxOffice
-		)};'  class="card-icon fas fa-dollar-sign"></i>  
+		)};'  class="card__content__subtitle  card-icon fas fa-dollar-sign"></i>  
 
 	</div>
 <div style='display:none;' class='icons-content-container'>
 						<p class='icons-content'></p>
 	</div>
 
-		<figure  style='display:${validatePosterSrc(Poster)};' id='movie-img'/>
+		<figure class='banner__poster' style='display:${validatePosterSrc(
+			Poster
+		)};' id='movie-img'/>
 		<img   class='banner__movie-img' src='${Poster}' alt='${Title}-poster'/>
-		<figcaption><i  class='remove-poster-icon fas fa-times'></i><i class="increase-poster-icon fas fa-chart-line"></i></figcaption>
+		<figcaption><i  class='card__content__subtitle remove-poster-icon fas fa-times'></i><i class="card__content__subtitle increase-poster-icon fas fa-chart-line"></i></figcaption>
 
 </figure> 
 	
 		`;
 	}
-
 	function increasePoster(item) {
 		const poster = item.childNodes[item.childNodes.length - 2];
-		console.log(item.childNodes[19].childNodes[2]);
 		const testa = item.childNodes[19].childNodes[2];
 		const increasePosterIcon =
 			item.childNodes[item.childNodes.length - 2].childNodes[3].childNodes[1];
 
-		let x = (increasePosterIcon.onclick = () => {
-			poster.classList.add("zoomed-poster");
-			increasePosterIcon.style.transform = "rotate(180deg)";
-			poster.style.height = item.style.height;
-			increasePosterIcon.onclick = () => {
-				poster.classList.remove("zoomed-poster");
-				increasePosterIcon.style.transform = "rotate(0deg)";
-				poster.style.height = "250px";
+		increasePosterIcon.onclick = () => {
+			toggleElement(poster, "zoomed-poster");
+		};
 
-				increasePosterIcon.onclick = () => x();
-			};
-		});
+		const posters = [...document.getElementsByClassName("banner__poster")];
+		document.body.onkeyup = (e) => {
+			if (e.keyCode === 66 && e.ctrlKey === true) {
+				posters.map((poster) => {
+					toggleElement(poster, "zoomed-poster");
+				});
+			}
+		};
 	}
 
 	function checkExistence(info, complement) {
@@ -288,9 +329,12 @@ const App = (() => {
 	}
 
 	function calcCardHeight({ Title }) {
-		if (Title.length > 43) return "750px";
-		else if (Title.length > 26) return "580px";
-		else return "480px";
+		// if (Title.length > 43) {
+		// 	return "750px";
+		// } else if (Title.length > 26) return "580px";
+		// else return "480px";
+		if (Title.length > 26) return "580px";
+		return "480px";
 	}
 
 	function checkCardIconVisibility(value) {
@@ -361,20 +405,23 @@ const App = (() => {
 
 	var db = firebase.firestore();
 	let paths = [];
-	function executeFirebase({
-		Title,
-		Plot = "N/A",
-		Director = "N/A",
-		Runtime = "N/A",
-		imdbRating = "N/A",
-		Genre = "N/A",
-		Writer = "N/A",
-		Awards = "N/A",
-		Production = "N/A",
-		Actors = "N/A",
-		BoxOffice = "N/a",
-		Poster = "N/A",
-	}) {
+	function executeFirebase(
+		{
+			Title,
+			Plot = "N/A",
+			Director = "N/A",
+			Runtime = "N/A",
+			imdbRating = "N/A",
+			Genre = "N/A",
+			Writer = "N/A",
+			Awards = "N/A",
+			Production = "N/A",
+			Actors = "N/A",
+			BoxOffice = "N/a",
+			Poster = "N/A",
+		},
+		isFavorite = false
+	) {
 		firebase.auth().onAuthStateChanged((user) => {
 			let UserEmail = user.email + "";
 			db.collection("cards")
@@ -392,34 +439,63 @@ const App = (() => {
 					Actors,
 					BoxOffice,
 					Poster,
+					isFavorite,
 				})
 				.then(function (docRef) {
-					console.log(docRef.path);
 					paths.push(docRef.path);
 				})
 				.catch(function (error) {
-					console.error("Error adding document: ", error);
+					handleError(error);
 				});
 		});
 	}
 
-	firebase.auth().onAuthStateChanged(function (user) {
-		if (user) {
-			db.collection("cards")
-				.where("UserEmail", "==", user?.email)
-				.get()
-				.then((querySnapshot) => {
-					querySnapshot.forEach((doc) => {
-						searchMovie(doc.data().Title);
+	document.addEventListener("DOMContentLoaded", printCardWhenDOMStart);
 
-						doc.ref.delete();
+	// 	btnFavorites.onclick = () => {
+	// 		document.removeEventListener("DOMContentLoaded", printCardWhenDOMStart);
+	// 		document.location.reload();
+	// 		firebase.auth().onAuthStateChanged(function (user) {
+	// 			if (user) {
+	// 				db.collection("cards")
+	// 					.where("UserEmail", "==", user?.email)
+	// 					.where("isFavorite", "==", true)
+	// 					.get()
+	// 					.then((querySnapshot) => {
+	// 						querySnapshot.forEach((doc) => {
+	// 							const movieTitle = doc.data().Title;
+	// 							searchMovie(movieTitle);
+	// 							doc.ref.delete();
+	// 						});
+	// 					});
+	// 			} else {
+	// 				handleError();
+	// 			}
+	// 		});
+	// 	};
+	// });
+	function printCardWhenDOMStart() {
+		firebase.auth().onAuthStateChanged(function (user) {
+			if (user) {
+				db.collection("cards")
+					.where("UserEmail", "==", user?.email)
+					.get()
+					.then((querySnapshot) => {
+						querySnapshot.forEach((doc) => {
+							const movieTitle = doc.data().isFavorite
+								? doc.data().Title + " fav"
+								: doc.data().Title;
+							searchMovie(movieTitle);
+							console.log(doc.data().Title + " fav");
+							doc.ref.delete();
+						});
 					});
-				});
-		} else {
-			console.log("eee");
-		}
-	});
-	var size;
+			} else {
+				handleError();
+			}
+		});
+	}
+
 	// firebase.auth().onAuthStateChanged(function (user) {
 	// 	if (user) {
 	// 		db.collection("cards")
@@ -439,14 +515,60 @@ const App = (() => {
 	// 	}
 	// });
 
-	const cardsHero = document.querySelector(".banner__card");
-	const toggleView = (btnChangeView.onclick = () => {
-		cardsHero.style.cssText =
-			"display: flex;flex-wrap: nowrap;position:relative;left:-31px;top:-25px;	margin-bottom: 100px;	justify-content: unset;	overflow: auto;		height: 730px;padding-left:none;";
+	btnFavorites.onclick = () => {
+		[...document.getElementsByClassName("banner__content")].map((i) => {
+			if (i.style.border !== "4px solid rgb(235, 195, 52)") {
+				i.style.display = "none";
+				// setCssProperties(btnSearched, { display: "block" });
+				// setCssProperties(btnFavorites, { display: "none" });
+			} else {
+				i.style.display = "block";
+			}
+		});
+	};
 
+	btnSearched.onclick = () => {
+		[...document.getElementsByClassName("banner__content")].map((i) => {
+			if (i.style.border !== "4px solid rgb(235, 195, 52)") {
+				setCssProperties(i, { display: "block" });
+			} else {
+				setCssProperties(i, { display: "none" });
+			}
+		});
+	};
+
+	const blurBars = [...document.getElementsByClassName("blur-bar")];
+
+	const toggleView = (btnChangeView.onclick = () => {
+		[...document.getElementsByClassName("banner__content")].map((i) => {
+			i.style.marginTop = "-50px";
+		});
+		setCssProperties(cardsHero, {
+			display: "flex",
+			"flex-wrap": "nowrap",
+			position: "relative",
+			top: "-14px",
+			"margin-bottom": "100px",
+			"justify-content": "unset",
+			overflow: "auto",
+			height: "730px",
+			"padding-left": "none",
+		});
+
+		blurBars.map((bar) => (bar.style.display = "block"));
 		btnChangeView.onclick = () => {
-			cardsHero.style.cssText =
-				"display: flex;flex-wrap: wrap;	margin-bottom: 200px;left:-25px;	justify-content: center;	overflow: hidden;		height:auto;";
+			[...document.getElementsByClassName("banner__content")].map((i) => {
+				i.style.marginTop = "50px";
+			});
+			setCssProperties(cardsHero, {
+				display: "flex",
+				"flex-wrap": "wrap",
+				"margin-bottom": "100px",
+				"justify-content": "center",
+				overflow: "hidden",
+				height: "auto",
+			});
+			blurBars.map((bar) => (bar.style.display = "none"));
 
 			btnChangeView.onclick = () => toggleView();
 		};
@@ -454,9 +576,10 @@ const App = (() => {
 
 	const notices = [
 		"You can add your favorite movies by appling the title plus <mark>fav</mark>, press enter, and  Vuoi la!!",
-		"For search only your favorite movies, just press the exclamation button on the search bar...",
 		"For search only your favorite movies, just press the star button on the search bar...",
+		"For search only your searched movies, just press the clock button on the search bar...",
 		"You can easily check out the <mark>genre</mark> of the movie by clicking on the title in the card.",
+		"If you are using a computer, just hold <mark>ctrl</mark> + <mark style='margin-left:7px;'>b</mark>",
 	];
 
 	btnNotice.onclick = () => {
@@ -467,7 +590,6 @@ const App = (() => {
 			""
 		);
 	};
-	const cardss = [...document.getElementsByClassName("banner__content")];
 	firebase.auth().onAuthStateChanged(function (user) {
 		if (user === null) {
 			[...document.getElementsByClassName("header__button")].map(
@@ -479,4 +601,25 @@ const App = (() => {
 			);
 		}
 	});
+
+	iconGoToTop.onclick = () => window.scrollTo(0, 0);
+	btnRemoveCards.onclick = () => removeAllCards();
+
+	function removeAllCards() {
+		firebase.auth().onAuthStateChanged(function (user) {
+			if (user) {
+				db.collection("cards")
+					.where("UserEmail", "==", user?.email)
+					.get()
+					.then((querySnapshot) => {
+						querySnapshot.forEach((doc) => {
+							doc.ref.delete();
+							location.reload();
+						});
+					});
+			} else {
+				handleError();
+			}
+		});
+	}
 })();

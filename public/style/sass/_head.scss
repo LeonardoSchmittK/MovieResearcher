@@ -52,13 +52,9 @@
 	}
 	&__search-button {
 		width: 120px;
-		height: auto;
 		background-color: lighten($success, 40%);
-		float: right;
 		border-radius: 4px;
-		margin-top: -20px;
 		position: relative;
-		z-index: 999;
 		transition: all ease-in-out 0.25s;
 		&:hover {
 			filter: drop-shadow(1px 1px 10px lighten($success, 40%));
@@ -81,24 +77,19 @@
 		}
 	}
 	&__buttons {
-		display: none;
-		margin-top: -20px;
-		margin-right: 20px;
-		float: right;
-		background-color: lighten($grey, 55%);
-		border-radius: 3px;
-		position: relative;
-		z-index: 999;
-		display: flex;
-		justify-content: space-around;
-		align-items: center;
-		width: 100px;
+		background-color: transparent;
+		width: 285px;
 		height: 30px;
-		transition: all ease 0.3s;
-		&:hover {
-			filter: drop-shadow(1px 1px 10px lighten($grey, 50%));
-		}
-		button {
+		float: right;
+		top: -20px;
+		right: -20px;
+		position: relative;
+		display: flex;
+		justify-content: space-evenly;
+		// .btn-searched {
+		// 	display: none;
+		// }
+		&__btn {
 			@include textType("");
 			font-size: 0.9em;
 			color: grey;
@@ -108,6 +99,18 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
+		}
+	}
+	&__buttons__secondary-container {
+		background-color: lighten($grey, 55%);
+		width: 150px;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		transition: all ease 0.3s;
+		border-radius: 4px;
+		&:hover {
+			filter: drop-shadow(1px 1px 10px lighten($grey, 50%));
 		}
 	}
 }
@@ -142,14 +145,12 @@
 			left: -15px;
 		}
 		&__search-button {
-			right: -10px;
-			top: 5px;
 			font-size: 17px;
 		}
 		&__buttons {
-			right: -10px;
+			right: -30px;
 
-			top: 5px;
+			top: -10px;
 			font-size: 13px;
 			height: 27px;
 		}
