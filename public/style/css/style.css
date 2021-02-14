@@ -358,7 +358,8 @@ img {
       .banner__card .banner__content .genres-container {
         margin-top: 10px;
         width: 100%;
-        display: none; }
+        display: none;
+        overflow: hidden; }
       .banner__card .banner__content .genres-container.toggle-genres {
         display: flex;
         flex-wrap: nowrap; }
@@ -452,11 +453,12 @@ img {
       .banner__card .banner__content .icons-content-container {
         width: 100%;
         height: auto;
-        background-color: whitesmoke;
+        background-color: #f3f3f3;
         border-radius: 15px;
         position: relative;
         margin-top: 10px; }
         .banner__card .banner__content .icons-content-container p {
+          margin-top: 20px;
           width: 45%;
           font-size: 0.75em;
           padding: 10px 10px 10px 20px;
@@ -565,7 +567,10 @@ img {
       width: 88%;
       position: relative; }
       .banner__card .banner__content {
-        width: 265px; }
+        width: 275px; }
+      .banner__card .icons-content-container p {
+        font-size: 0.7em !important;
+        line-height: 15px; }
     .banner__image {
       width: 100%; } }
 

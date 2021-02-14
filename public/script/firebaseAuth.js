@@ -134,7 +134,8 @@ firebase.auth().onAuthStateChanged(function (user) {
 		header.onclick = () => {
 			auth.style.animation = "";
 		};
-		movieInput.oninput = () => (inputMovie.value = inputMovie.value);
+		searchMovieButton.oninput = () =>
+			(searchMovieButton.value = searchMovieButton.value);
 	} else {
 		header.onclick = () => {
 			showPopup(
@@ -145,9 +146,9 @@ firebase.auth().onAuthStateChanged(function (user) {
 			);
 			auth.style.animation = "bounce-login 0.2s linear alternate";
 		};
-		inputMovie.onclick = () =>
+		searchMovieButton.onclick = () =>
 			(auth.style.animation = "bounce-login 0.2s linear alternate");
-		inputMovie.oninput = () => (inputMovie.value = "");
+		searchMovieButton.oninput = () => (searchMovieButton.value = "");
 
 		toggleForm(true);
 		handleAuthError("Error", false);

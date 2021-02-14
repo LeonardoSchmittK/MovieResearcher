@@ -73,6 +73,7 @@
 				margin-top: 10px;
 				width: 100%;
 				display: none;
+				overflow: hidden;
 			}
 
 			.genres-container.toggle-genres {
@@ -199,12 +200,13 @@
 			.icons-content-container {
 				width: 100%;
 				height: auto;
-				background-color: rgb(245, 245, 245);
+				background-color: rgb(243, 243, 243);
 				border-radius: 15px;
 				position: relative;
 				margin-top: 10px;
 
 				p {
+					margin-top: 20px;
 					width: 45%;
 					font-size: 0.75em;
 					padding: 10px 10px 10px 20px;
@@ -346,9 +348,24 @@
 
 			position: relative;
 			.banner__content {
-				width: 265px;
+				width: 275px;
+
+				// h1 {
+				// 	font-size: 2.2em;
+				// 	line-height: 27px;
+				// }
+				// p {
+				// 	font-size: 0.7em;
+				// }
+			}
+			.icons-content-container {
+				p {
+					font-size: 0.7em !important;
+					line-height: 15px;
+				}
 			}
 		}
+
 		&__image {
 			width: 100%;
 		}
