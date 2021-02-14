@@ -296,7 +296,8 @@ img {
 .banner {
   width: 100%;
   height: auto;
-  position: relative; }
+  position: relative;
+  background-color: #a86363; }
   .banner__card {
     margin: auto;
     width: 93%;
