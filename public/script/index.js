@@ -332,13 +332,12 @@ const App = (function () {
 	}
 
 	function calcCardHeight({ Title }) {
-		if (window.screen.availHeight >= 500) {
-			if (Title.length > 26) return "580px";
-			return "480px";
-		} else {
-			if (Title.length > 26) return "500px";
-			return "400px";
-		}
+		// if (window.screen.availHeight >= 500) {
+		// 	if (Title.length > 26) return "580px";
+		// 	return "480px";
+		// } else {
+		if (Title.length > 26) return "500px";
+		return "400px";
 	}
 
 	function checkCardIconVisibility(value) {
