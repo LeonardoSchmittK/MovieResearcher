@@ -1,4 +1,4 @@
-let App = (function () {
+const App = (function () {
 	const [titles, cards] = [[], []];
 
 	searchMovieButton.onclick = () => searchMovie(movieInput.value);
@@ -332,8 +332,13 @@ let App = (function () {
 	}
 
 	function calcCardHeight({ Title }) {
-		if (Title.length > 26) return "580px";
-		return "480px";
+		if (window.screen.availHeight >= 500) {
+			if (Title.length > 26) return "580px";
+			return "480px";
+		} else {
+			if (Title.length > 26) return "500px";
+			return "400px";
+		}
 	}
 
 	function checkCardIconVisibility(value) {
@@ -448,28 +453,6 @@ let App = (function () {
 
 	document.addEventListener("DOMContentLoaded", printCardWhenDOMStart);
 
-	// 	btnFavorites.onclick = () => {
-	// 		document.removeEventListener("DOMContentLoaded", printCardWhenDOMStart);
-	// 		document.location.reload();
-	// 		firebase.auth().onAuthStateChanged(function (user) {
-	// 			if (user) {
-	// 				db.collection("cards")
-	// 					.where("UserEmail", "==", user?.email)
-	// 					.where("isFavorite", "==", true)
-	// 					.get()
-	// 					.then((querySnapshot) => {
-	// 						querySnapshot.forEach((doc) => {
-	// 							const movieTitle = doc.data().Title;
-	// 							searchMovie(movieTitle);
-	// 							doc.ref.delete();
-	// 						});
-	// 					});
-	// 			} else {
-	// 				handleError();
-	// 			}
-	// 		});
-	// 	};
-	// });
 	function printCardWhenDOMStart() {
 		firebase.auth().onAuthStateChanged(function (user) {
 			if (user) {
@@ -482,7 +465,6 @@ let App = (function () {
 								? doc.data().Title + " fav"
 								: doc.data().Title;
 							searchMovie(movieTitle);
-							console.log(doc.data().Title + " fav");
 							doc.ref.delete();
 						});
 					});
@@ -490,25 +472,6 @@ let App = (function () {
 			}
 		});
 	}
-
-	// firebase.auth().onAuthStateChanged(function (user) {
-	// 	if (user) {
-	// 		db.collection("cards")
-	// 			.where("UserEmail", "==", user?.email)
-	// 			.get()
-	// 			.then((snap) => {
-	// 				size = snap.size;
-	// 				if (size >= 6) {
-	// 					showPopup(
-	// 						true,
-	// 						"You can easily label your favorite movies by adding <mark>Fav</mark> after the name of the movie or series...",
-	// 						"Fav",
-	// 						""
-	// 					);
-	// 				}
-	// 			});
-	// 	}
-	// });
 
 	btnFavorites.onclick = () => {
 		[...document.getElementsByClassName("banner__content")].map((i) => {
