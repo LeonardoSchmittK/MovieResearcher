@@ -547,7 +547,7 @@ let App = (function () {
 			"justify-content": "unset",
 			"align-items": "flex-start",
 			overflow: "auto",
-			height: "735px",
+			// height: "735px",
 			"padding-left": "none",
 		});
 
@@ -561,6 +561,7 @@ let App = (function () {
 				"flex-wrap": "wrap",
 				"margin-bottom": "100px",
 				"justify-content": "center",
+				"align-items": "center",
 				overflow: "hidden",
 				height: "auto",
 			});
