@@ -337,7 +337,7 @@ const App = (function () {
 		// 	return "480px";
 		// } else {
 		if (Title.length > 26) return "500px";
-		return "400px";
+		return "480px";
 	}
 
 	function checkCardIconVisibility(value) {
@@ -521,6 +521,8 @@ const App = (function () {
 			setCssProperties(cardsHero, {
 				display: "flex",
 				"flex-wrap": "wrap",
+				position: "relative",
+				top: "-14px",
 				"margin-bottom": "100px",
 				"justify-content": "center",
 				"align-items": "center",

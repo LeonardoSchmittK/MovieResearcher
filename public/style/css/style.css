@@ -296,8 +296,7 @@ img {
 .banner {
   width: 100%;
   height: auto;
-  position: relative;
-  background-color: #a86363; }
+  position: relative; }
   .banner__card {
     margin: auto;
     width: 93%;
@@ -565,7 +564,7 @@ img {
   .banner {
     margin: auto; }
     .banner__card {
-      width: 88%;
+      width: 100%;
       position: relative; }
       .banner__card .banner__content {
         width: 275px; }
@@ -574,14 +573,6 @@ img {
         line-height: 15px; }
     .banner__image {
       width: 100%; } }
-
-@media only screen and (max-width: 450px) {
-  .banner__card {
-    width: 80%; }
-    .banner__card .banner__content {
-      margin-left: 35px; }
-  .banner__image {
-    width: 100%; } }
 
 .toggle-footer {
   background-color: transparent;

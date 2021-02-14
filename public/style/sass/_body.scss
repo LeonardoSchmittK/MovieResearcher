@@ -3,7 +3,6 @@
 	width: 100%;
 	height: auto;
 	position: relative;
-	background-color: rgb(168, 99, 99);
 	&__card {
 		margin: auto;
 		width: 93%;
@@ -344,7 +343,7 @@
 		// display: flex;
 		margin: auto;
 		&__card {
-			width: 88%;
+			width: 100%;
 
 			position: relative;
 			.banner__content {
@@ -367,22 +366,6 @@
 		}
 
 		&__image {
-			width: 100%;
-		}
-	}
-}
-
-@media only screen and (max-width: 450px) {
-	.banner {
-		&__card {
-			width: 80%;
-
-			.banner__content {
-				margin-left: 35px;
-			}
-		}
-		&__image {
-			// margin-left: -40px;
 			width: 100%;
 		}
 	}
