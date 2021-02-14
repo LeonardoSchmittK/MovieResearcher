@@ -134,7 +134,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 		header.onclick = () => {
 			auth.style.animation = "";
 		};
-		inputMovie.oninput = () => (inputMovie.value = inputMovie.value);
+		movieInput.oninput = () => (inputMovie.value = inputMovie.value);
 	} else {
 		header.onclick = () => {
 			showPopup(

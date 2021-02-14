@@ -35,7 +35,7 @@ const eyeOuter = document.querySelector(".popup__eye__outer");
 
 const header = document.querySelector(".header");
 const searchMovieButton = document.querySelector(".header__search-button");
-const inputMovie = document.querySelector("#search-movie");
+const movieInput = document.querySelector("#search-movie");
 const btnDarkMode = document.querySelector(".btn-darkMode");
 const btnChangeView = document.querySelector(".btn-changeView");
 const btnNotice = document.querySelector(".btn-notice");
@@ -48,6 +48,7 @@ const btnRemoveCards = document.querySelector(".btn-remove-cards");
 const banner = document.getElementById("screens");
 const bannerMovieImg = [document.getElementsByName("banner__movie-img")];
 const cardsHero = document.querySelector(".banner__card");
+const bannerSvg = document.querySelector("#banner__image");
 
 const footer = document.querySelector(".footer");
 const iconGoToTop = document.querySelector(".footer__icon-go-to-top");

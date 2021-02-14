@@ -202,11 +202,14 @@
 		&__buttons {
 			width: 230px;
 			height: 20px;
-			top: -3px;
+			top: -10px;
 			left: 5px;
 			&__btn {
 				font-size: 0.6em;
 			}
+		}
+		&__buttons__secondary-container {
+			background-color: transparent;
 		}
 	}
 }

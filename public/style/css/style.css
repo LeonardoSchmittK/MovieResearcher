@@ -246,10 +246,12 @@ img {
     .header__buttons {
       width: 230px;
       height: 20px;
-      top: -3px;
+      top: -10px;
       left: 5px; }
       .header__buttons__btn {
-        font-size: 0.6em; } }
+        font-size: 0.6em; }
+    .header__buttons__secondary-container {
+      background-color: transparent; } }
 
 @keyframes bounce {
   to {

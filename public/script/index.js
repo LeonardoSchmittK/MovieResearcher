@@ -1,13 +1,7 @@
-"use strict";
-const App = (() => {
-	const searchButton = document.querySelector(".header__search-button");
-	const banner = document.querySelector(".banner__card");
-	const movieInput = document.querySelector("#search-movie");
-	const imageBg = document.querySelector("#banner__image");
-	const movieUserStats = {};
+let App = (function () {
 	const [titles, cards] = [[], []];
 
-	searchButton.onclick = () => searchMovie(movieInput.value);
+	searchMovieButton.onclick = () => searchMovie(movieInput.value);
 
 	document.body.onkeypress = (event) => {
 		if (event.keyCode === 13) searchMovie(movieInput.value);
@@ -60,8 +54,8 @@ const App = (() => {
 	}
 
 	function deleteSvgImage(isPresent) {
-		if (!isPresent) imageBg.classList.remove("banner__disableImgRender");
-		else imageBg.classList.add("banner__disableImgRender");
+		if (!isPresent) bannerSvg.classList.remove("banner__disableImgRender");
+		else bannerSvg.classList.add("banner__disableImgRender");
 	}
 	function printMovieInfo(movie, isFavorite) {
 		const newTitles = [...new Set(titles)];
@@ -80,7 +74,7 @@ const App = (() => {
 			cards.reverse();
 
 			cards.map((item) => {
-				banner.appendChild(item);
+				cardsHero.appendChild(item);
 
 				removePoster(item);
 				increasePoster(item, movie);
@@ -105,7 +99,7 @@ const App = (() => {
 						btnFavorites.disabled = true;
 						btnSearched.disabled = true;
 						deleteSvgImage(false);
-						setCssProperties(banner, { width: "100%" });
+						setCssProperties(cardsHero, { width: "100%" });
 					}
 				};
 			});
