@@ -1,6 +1,6 @@
-const word =
-	"Borat: Cultural Learnings of America for Make Benefit Glorious Nation of Kazakhstan";
-
-const res =
-	word.length <= 40 ? word : word.split("").splice(0, 37).join("") + "...";
-console.log(res);
+const directors = "Greg Daniels, Ricky Gervais, Stephen Merchant";
+const newDir = directors.split(",");
+if (newDir.length >= 3) {
+	newDir.splice(-1, 1);
+}
+console.log(newDir.join(","));

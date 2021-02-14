@@ -108,6 +108,7 @@
 		padding: 10px;
 		border: 3px solid lighten($primaryColor, 10%);
 		box-shadow: inset 0px 0px 3px rgb(221, 218, 218);
+
 		&:focus {
 			border: 3px solid $primaryColor;
 			border-left: 4px solid $primaryColor;
@@ -138,11 +139,10 @@
 
 	&__submits {
 		width: 100%;
-		margin-top: -20px;
-		margin-bottom: 10px;
 		display: flex;
 		align-items: center;
 		justify-content: space-evenly;
+		margin-top: -10px;
 	}
 	&__btn {
 		padding: 10px;

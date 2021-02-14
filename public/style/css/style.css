@@ -322,8 +322,6 @@ img {
       padding: 20px; }
       .banner__card .banner__content:hover {
         border: 5px solid #9c96ff; }
-      .banner__card .banner__content--favorite {
-        border: 5px solid gold; }
       .banner__card .banner__content .remove-card-icon {
         position: absolute;
         right: 20px;
@@ -358,16 +356,15 @@ img {
       .banner__card .banner__content .genres-container {
         margin-top: 10px;
         width: 100%;
-        overflow: auto;
         display: none; }
       .banner__card .banner__content .genres-container.toggle-genres {
         display: flex;
-        flex-wrap: nowrap;
-        overflow: auto; }
+        flex-wrap: nowrap; }
       .banner__card .banner__content .genres {
         padding: 5px;
         font-family: "Metrophobic", cursive, arial;
-        font-size: 10px; }
+        font-size: 10px;
+        flex-shrink: 0; }
       .banner__card .banner__content .genres[data-genre="#Animation"] {
         background-color: #00800056; }
       .banner__card .banner__content .genres[data-genre="#Adventure"] {
@@ -420,6 +417,7 @@ img {
         position: relative;
         z-index: 999; }
       .banner__card .banner__content p {
+        width: inherit;
         line-height: 21px;
         font-family: "Poppins", cursive, Helvetica, arial;
         font-size: 0.8em;
@@ -450,7 +448,7 @@ img {
           .banner__card .banner__content .banner__card-icons .card-icon:hover {
             transform: scale(1.1); }
       .banner__card .banner__content .icons-content-container {
-        width: 300px;
+        width: 100%;
         height: auto;
         background-color: whitesmoke;
         border-radius: 15px;
@@ -458,6 +456,7 @@ img {
         margin-top: 10px; }
         .banner__card .banner__content .icons-content-container p {
           width: 45%;
+          font-size: 0.75em;
           padding: 10px 10px 10px 20px;
           transition: all linear 0.5s; }
         .banner__card .banner__content .icons-content-container::before {
@@ -563,6 +562,8 @@ img {
     .banner__card {
       width: 88%;
       position: relative; }
+      .banner__card .banner__content {
+        width: 265px; }
     .banner__image {
       width: 100%; } }
 
@@ -796,11 +797,10 @@ img {
     z-index: 999; }
   .auth__submits {
     width: 100%;
-    margin-top: -20px;
-    margin-bottom: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-evenly; }
+    justify-content: space-evenly;
+    margin-top: -10px; }
   .auth__btn {
     padding: 10px;
     display: flex;
