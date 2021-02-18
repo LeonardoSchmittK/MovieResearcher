@@ -586,10 +586,15 @@ const App = (function () {
 		});
 	};
 
+	if (window.webkitSpeechRecognition === undefined) {
+		setCssProperties(btnMicrophone, { display: "none" });
+	}
 	btnMicrophone.onclick = () => startRecognition();
 	function startRecognition() {
 		btnMicrophone.classList.add("mic-on");
-		const recognition = new webkitSpeechRecognition();
+		let SpeechRecognition =
+			window.SpeechRecognition || window.webkitSpeechRecognition;
+		const recognition = new SpeechRecognition();
 		recognition.interimResults = true;
 		recognition.lang = "en-US";
 		recognition.continuous = true;
