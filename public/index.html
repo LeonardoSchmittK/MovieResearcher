@@ -26,6 +26,9 @@
 			rel="stylesheet"
 			href="https://unpkg.com/tippy.js@6/animations/scale-extreme.css"
 		/>
+		<link
+			href="https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css"
+		/>
 		<!-- Icons  -->
 		<link
 			rel="stylesheet"
@@ -37,6 +40,7 @@
 		<link rel="stylesheet" href="style/css/style.css" type="text/css" />
 	</head>
 	<body>
+		<div class="loading"></div>
 		<div class="overlay"></div>
 		<div class="popup">
 			<div class="popup__eye">
@@ -231,7 +235,7 @@
 						data-text="Remove all cards"
 						class="header__buttons__btn btn-remove-cards btn tooltip"
 					>
-						<i class="fas fa-times"></i>
+						<i class="fas fa-trash-alt"></i>
 					</button>
 					<button
 						data-text="Show your favorite movies"
@@ -246,7 +250,12 @@
 						<i class="fas fa-history"></i>
 					</button>
 				</div>
-
+				<button
+					data-text="Speak a movie!"
+					class="header__buttons__btn micro-btn btn tooltip"
+				>
+					<i class="fas fa-microphone"></i>
+				</button>
 				<button class="header__search-button btn" type="button">
 					Search<i class="fas fa-arrow-right"></i>
 				</button>
@@ -266,31 +275,47 @@
 			</section>
 		</div>
 		<footer class="footer">
-			<div class="footer__main-info">
-				Made by
-				<mark
-					>@LeonardoSchmittk
-					<a
-						class="footer_link"
-						target="_blank"
-						href="https://github.com/LeonardoSchmittK"
+			<div class="footer__info">
+				<div class="footer__main-info">
+					Made by
+					<mark
+						>@LeonardoSchmittk
+						<a
+							class="footer_link"
+							target="_blank"
+							href="https://github.com/LeonardoSchmittK"
+						>
+							<i class="footer__icon fab fa-github-alt"></i
+						></a>
+						<a target="_blank" href="https://linkedin.com/">
+							<i
+								data-text="Go to the top"
+								class="footer__icon fab fa-linkedin-in"
+							></i></a
+					></mark>
+					&reg;2021
+				</div>
+
+				<div class="footer__buttons">
+					<button
+						data-text="Go to the top"
+						class="footer__icon-go-to-top btn tooltip"
 					>
-						<i class="footer__icon fab fa-github-alt"></i
-					></a>
-					<a target="_blank" href="https://linkedin.com/">
-						<i
-							data-text="Go to the top"
-							class="footer__icon fab fa-linkedin-in"
-						></i></a
-				></mark>
-				&reg;2021
-				<button
-					data-text="Go to the top"
-					class="footer__icon-go-to-top btn tooltip"
-				>
-					<i class="fas fa-arrow-up"></i>
-				</button>
+						<i class="fas fa-arrow-up"></i>
+					</button>
+					<button
+						data-text="Contact me: Leoeyeschmittk@gmail.com"
+						class="footer__icon-contact btn tooltip"
+					>
+						<a
+							target="_blank"
+							href="https://mail.google.com/mail/u/0/#inbox?compose=new"
+							><i class="fas fa-envelope"></i
+						></a>
+					</button>
+				</div>
 			</div>
+
 			<div class="footer__rating">
 				<h4 class="footer__rating-title">Avaliate the app!</h4>
 				<div class="footer__stars">
@@ -315,12 +340,13 @@
 			defer
 			src="https://www.gstatic.com/firebasejs/8.2.5/firebase-firestore.js"
 		></script>
+		<script defer src="script/firebaseConfig.js"></script>
 		<script defer src="https://unpkg.com/@popperjs/core@2"></script>
 		<script defer src="https://unpkg.com/tippy.js@6"></script>
 		<script defer src="script/DOMelements.js"></script>
 		<script defer src="script/globalFunctions.js"></script>
+		<script defer src="script/globalFunctionsFirebase.js"></script>
 		<script defer src="script/tippy.js"></script>
-		<script defer src="script/firebaseConfig.js"></script>
 		<script defer src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
 		<script defer src="script/firebaseAuth.js"></script>
 		<script defer src="script/index.js"></script>

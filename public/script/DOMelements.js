@@ -42,6 +42,9 @@ const btnNotice = document.querySelector(".btn-notice");
 const btnFavorites = document.querySelector(".btn-favorites");
 const btnSearched = document.querySelector(".btn-searched");
 const btnRemoveCards = document.querySelector(".btn-remove-cards");
+const headSecondaryBtns = document.querySelector(
+	".header__buttons__secondary-container"
+);
 
 // Body elements
 
@@ -49,6 +52,18 @@ const banner = document.getElementById("screens");
 const bannerMovieImg = [document.getElementsByName("banner__movie-img")];
 const cardsHero = document.querySelector(".banner__card");
 const bannerSvg = document.querySelector("#banner__image");
-
+const movieCards = [];
 const footer = document.querySelector(".footer");
 const iconGoToTop = document.querySelector(".footer__icon-go-to-top");
+
+// loading
+
+const loading = window.document.querySelector(".loading");
+
+// Overlay
+
+const overlay = document.querySelector(".overlay");
+
+// features
+
+const btnMicrophone = document.querySelector(".micro-btn");

@@ -2,7 +2,7 @@
 	width: 100px;
 	height: 700px;
 	position: absolute;
-	filter: blur(35px);
+	filter: blur(34px);
 	z-index: 99999999;
 	background-color: $white;
 	display: none;
@@ -12,11 +12,11 @@
 }
 
 .blur-bar-right {
-	right: 0;
+	right: -10px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1000px) {
 	.blur-bar {
-		width: 60px;
+		width: 50px;
 	}
 }

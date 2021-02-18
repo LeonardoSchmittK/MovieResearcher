@@ -56,3 +56,11 @@ function styleScreen(screen, coordX) {
 		}px)`;
 	};
 })();
+
+loading.addEventListener("DOMContentLoaded", animateLoading());
+
+function animateLoading() {
+	setCssProperties(loading, {
+		animation: "loading-complete 1.1672363s linear alternate ",
+	});
+}

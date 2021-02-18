@@ -25,7 +25,6 @@
 		top: 22px;
 		left: 20px;
 		font-size: 1.6em;
-		color: $grey;
 		transition: ease all 0.5s;
 		border-radius: 50%;
 		background-color: $primaryColor;
@@ -52,12 +51,20 @@
 	}
 	&__search-button {
 		width: 120px;
+		height: 30px;
 		background-color: lighten($success, 40%);
 		border-radius: 4px;
 		position: relative;
 		transition: all ease-in-out 0.25s;
+		color: #0e6a0e;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
 		&:hover {
+			color: #0e6a0e;
 			filter: drop-shadow(1px 1px 10px lighten($success, 40%));
+			background-color: lighten($success, 40%);
 		}
 		&:hover span {
 			color: $success;
@@ -78,7 +85,7 @@
 	}
 	&__buttons {
 		background-color: transparent;
-		width: 285px;
+		width: 330px;
 		height: 30px;
 		float: right;
 		top: -20px;
@@ -86,6 +93,8 @@
 		position: relative;
 		display: flex;
 		justify-content: space-evenly;
+		align-items: center;
+		transition: all ease 0.3s;
 		// .btn-searched {
 		// 	display: none;
 		// }
@@ -99,16 +108,37 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			background-color: #ffffffc4;
+			&:hover {
+				color: grey;
+			}
+		}
+		.micro-btn {
+			font-size: 1em;
+			width: 30px;
+			height: 30px;
+			background: $primaryColor;
+			border-radius: 3px;
+			color: white;
+			transition: all ease 0.3s;
+			&:hover {
+				filter: drop-shadow(1px 1px 4px lighten($primaryColor, 5%));
+			}
+		}
+		.mic-on {
+			background: lighten($primaryColor, 10%);
 		}
 	}
 	&__buttons__secondary-container {
 		background-color: lighten($grey, 55%);
 		width: 150px;
+		height: 30px;
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
 		transition: all ease 0.3s;
 		border-radius: 4px;
+
 		&:hover {
 			filter: drop-shadow(1px 1px 10px lighten($grey, 50%));
 		}
@@ -143,16 +173,6 @@
 		&__search-icon {
 			top: 25px;
 			left: -15px;
-		}
-		// &__search-button {
-		// 	font-size: 17px;
-		// }
-		&__buttons {
-			// right: -30px;
-
-			// top: -10px;
-			// font-size: 13px;
-			// height: 27px;
 		}
 	}
 }

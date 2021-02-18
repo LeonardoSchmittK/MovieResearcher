@@ -32,3 +32,13 @@ function toggleElement(element, toggleClass) {
 function setCssProperties(el, styles) {
 	for (var property in styles) el.style[property] = styles[property];
 }
+
+function handleError(err = "Fixing it...") {
+	showPopup(true, err, "Oops", "Warning");
+	executeInputInitialBehavior();
+}
+
+function executeInputInitialBehavior() {
+	movieInput.value = "";
+	movieInput.focus();
+}

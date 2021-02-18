@@ -27,7 +27,7 @@
 	padding: 5px;
 	@include textType("text");
 	color: #dad6d6;
-	z-index: 99999999999999;
+	z-index: 999;
 	transition: all ease 0.3s;
 	box-shadow: 10px -10px 10px #ecececea;
 	i {
@@ -42,7 +42,11 @@
 			color: lighten($primaryColor, 10%);
 		}
 	}
-	&__icon-go-to-top {
+	&__info {
+		display: flex;
+		align-items: center;
+	}
+	.btn {
 		font-size: 1em;
 		color: lighten($grey, 40%);
 		border-radius: 50%;
@@ -50,11 +54,21 @@
 		height: 30px;
 		transition: all ease 0.3s;
 		margin-left: 10px;
+		background-color: rgb(235, 235, 235);
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		&:hover {
 			color: lighten($grey, 20%);
-
-			transform: scale(1.1) translateY(-3px);
+			transform: translateY(-3px);
 		}
+		a {
+			color: inherit;
+		}
+	}
+	&__buttons {
+		display: flex;
+		justify-self: flex-start;
 	}
 	&__icon {
 		padding-right: 5px;
@@ -101,7 +115,10 @@
 		height: auto;
 		padding: 2px;
 		font-size: 12px;
-
+		position: relative;
+		&__main-info {
+			flex-direction: column;
+		}
 		mark {
 			padding: 2px;
 		}

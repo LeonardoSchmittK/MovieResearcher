@@ -1,0 +1,6 @@
+.loading {
+	width: 0;
+	height: 1px;
+	background-color: $primaryColor;
+	box-shadow: 1px 5px 10px lighten($grey, 55%);
+}

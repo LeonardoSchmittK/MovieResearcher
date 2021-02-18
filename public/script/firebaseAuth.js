@@ -43,9 +43,12 @@ firebase.auth().onAuthStateChanged((user) => {
 	if (user) {
 		auth.style.height = "30px";
 		auth.style.overflow = "visible";
+		searchMovieButton.disabled = false;
+		userEmail = user.email;
 	} else {
 		auth.style.height = "auto";
 		auth.style.overflow = "hidden";
+		searchMovieButton.disabled = true;
 	}
 });
 
@@ -107,7 +110,6 @@ function logout() {
 
 btnGoogleAuth.onclick = () => {
 	const provider = new firebase.auth.GoogleAuthProvider();
-	// inputs.map((input) => (input.required = false));
 	signIn(provider);
 };
 
@@ -134,8 +136,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 		header.onclick = () => {
 			auth.style.animation = "";
 		};
-		searchMovieButton.oninput = () =>
-			(searchMovieButton.value = searchMovieButton.value);
+		movieInput.oninput = () => movieInput.value;
 	} else {
 		header.onclick = () => {
 			showPopup(
@@ -144,11 +145,13 @@ firebase.auth().onAuthStateChanged(function (user) {
 				"Notice",
 				"Warning"
 			);
-			auth.style.animation = "bounce-login 0.2s linear alternate";
+			// auth.style.animation = "bounce-login 0.2s linear alternate";
+			toggleElement(auth, "auth__unlogged");
 		};
-		searchMovieButton.onclick = () =>
-			(auth.style.animation = "bounce-login 0.2s linear alternate");
-		searchMovieButton.oninput = () => (searchMovieButton.value = "");
+
+		movieInput.oninput = () => {
+			movieInput.value = "";
+		};
 
 		toggleForm(true);
 		handleAuthError("Error", false);

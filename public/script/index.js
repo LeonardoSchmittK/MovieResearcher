@@ -1,25 +1,33 @@
 const App = (function () {
 	const [titles, cards] = [[], []];
 
-	searchMovieButton.onclick = () => searchMovie(movieInput.value);
+	searchMovieButton.onclick = () => validateMovie(movieInput.value);
 
 	document.body.onkeypress = (event) => {
-		if (event.keyCode === 13) searchMovie(movieInput.value);
+		if (
+			event.which === 13 ||
+			event.keyCode === 13 ||
+			event.charCode === 13 ||
+			event.code === "Enter"
+		)
+			validateMovie(movieInput.value);
 	};
-	function searchMovie(movieInput) {
-		if (movieInput.indexOf("fav") != -1) {
-			const movie = movieInput.split("fav")[0];
-			console.log(movie);
-			let isFavorite = true;
-			return applyAPI(movie, isFavorite);
+
+	function validateMovie(movieInput) {
+		let [title, isFavorite] = [movieInput, false];
+		({ title, isFavorite } = checkIsFavorite(movieInput, title, isFavorite));
+		return applyAPI(title, isFavorite);
+	}
+
+	function checkIsFavorite(movieInput, title, isFavorite) {
+		if (movieInput.indexOf("fav") !== -1) {
+			title = movieInput.replace("fav", "");
+			isFavorite = true;
 		}
-		return applyAPI(movieInput);
+		return { title, isFavorite };
 	}
 
 	function applyAPI(movie, isFavorite) {
-		if (movie === "") {
-			return (movieInput.value = "");
-		}
 		const apikey = "a1dd21cb";
 		fetch(`http://www.omdbapi.com/?apikey=${apikey}&t=${movie}`, {
 			method: "GET",
@@ -31,80 +39,86 @@ const App = (function () {
 			.catch((err) => handleError(err));
 	}
 
-	function handleError(err = "Occured and error") {
-		showPopup(true, err, "Error", "Warning");
-		executeInputInitialBehavior();
-	}
-
 	function checkMovie(movie, isFavorite) {
-		if (movie.Error === "Incorrect IMDb ID.")
-			return handleError("Type in some series or movie");
-
-		if (movie.Error === "Movie not found!")
-			return handleError("Movie not found!");
-		else {
-			titles.push(movie.Title);
-			return printMovieCard(movie, isFavorite);
-		}
+		const errors = ["Incorrect IMDb ID.", "Movie not found!"];
+		const { Error } = movie;
+		return errors.includes(Error)
+			? handleError(Error === "Incorrect IMDb ID." ? "Type in a movie!" : Error)
+			: prepareCards(movie, isFavorite);
 	}
 
-	function printMovieCard(movie, isFavorite) {
+	function prepareCards(movie, isFavorite) {
+		saveTitle(movie);
 		deleteSvgImage(true);
-		printMovieInfo(movie, isFavorite);
+		preventDuplicateMovies(movie, isFavorite);
 	}
+
+	const saveTitle = (movie) => titles.push(movie.Title);
 
 	function deleteSvgImage(isPresent) {
-		if (!isPresent) bannerSvg.classList.remove("banner__disableImgRender");
-		else bannerSvg.classList.add("banner__disableImgRender");
+		if (isPresent) bannerSvg.classList.add("banner__disableImgRender");
+		else bannerSvg.classList.remove("banner__disableImgRender");
 	}
-	function printMovieInfo(movie, isFavorite) {
-		const newTitles = [...new Set(titles)];
-		if (JSON.stringify(newTitles) !== JSON.stringify(titles)) {
-			titles.pop();
 
+	function preventDuplicateMovies(movie, isFavorite) {
+		const nonDuplicateTitles = [...new Set(titles)];
+		if (JSON.stringify(nonDuplicateTitles) !== JSON.stringify(titles)) {
+			removeLastItem(titles);
 			return handleError("You've already searched...");
-		} else {
-			executeFirebase(movie, isFavorite);
-
-			const markup = cardContent(movie, isFavorite);
-			const content = makeElement("li", "banner__content", markup);
-
-			content.style.height = calcCardHeight(movie);
-			cards.push(content);
-			cards.reverse();
-
-			cards.map((item) => {
-				cardsHero.appendChild(item);
-
-				removePoster(item);
-				increasePoster(item, movie);
-				printCardIconsContent(item);
-				printGenres(item);
-				checkFavoriteCard(item);
-
-				item.childNodes[1].childNodes[0].onclick = () => {
-					db.collection("cards")
-						.where("Title", "==", item.childNodes[3].textContent)
-						.get()
-						.then((querySnapshot) => {
-							querySnapshot.forEach((doc) => {
-								doc.ref.delete();
-							});
-						});
-					setCssProperties(item, { display: "none" });
-					let i = titles.indexOf(item);
-					console.log(i);
-					removeIndex(i);
-					if (titles.length === 0) {
-						btnFavorites.disabled = true;
-						btnSearched.disabled = true;
-						deleteSvgImage(false);
-						setCssProperties(cardsHero, { width: "100%" });
-					}
-				};
-			});
-			executeInputInitialBehavior();
 		}
+		return printCard(movie, isFavorite);
+	}
+
+	const removeLastItem = (arr) => arr.pop();
+
+	function printCard(movie, isFavorite) {
+		executeFirebase(movie, isFavorite);
+
+		let [markup, content] = ["", ""];
+		({ markup, content } = generateCard(markup, content, movie, isFavorite));
+
+		cards.push(content);
+		cards.reverse();
+
+		cards.map((item) => {
+			cardsHero.appendChild(item);
+			calcCardHeight(movie, content);
+			removePoster(item);
+			increasePoster(item, movie);
+			printCardIconsContent(item);
+			printGenres(item);
+			checkFavoriteCard(item);
+			removeCard(item);
+			executeInputInitialBehavior();
+		});
+	}
+
+	function generateCard(markup, content, movie, isFavorite) {
+		markup = cardContent(movie, isFavorite);
+		content = makeElement("li", "banner__content", markup);
+		return { markup, content };
+	}
+
+	function removeCard(card) {
+		const closeCardIcon = card.childNodes[1].childNodes[0];
+		const cardTitle = card.childNodes[3].textContent;
+		closeCardIcon.onclick = () => {
+			removeCardFromFirestore(cardTitle);
+			setCssProperties(card, { display: "none" });
+			removeIndex(titles.indexOf(card));
+			if (titles.length === 0) deleteSvgImage(false);
+		};
+	}
+
+	function removeCardFromFirestore(query) {
+		db.collection("cards")
+			.where("Title", "==", query)
+			.get()
+			.then((querySnapshot) => {
+				querySnapshot.forEach((doc) => {
+					doc.ref.delete();
+				});
+			});
 	}
 
 	function checkFavoriteCard(item) {
@@ -119,12 +133,11 @@ const App = (function () {
 			...document.getElementsByClassName("card__content__subtitle"),
 		];
 		marks.map((mark) => {
-			if (item.contains(mark)) {
+			if (item.contains(mark))
 				setCssProperties(mark, {
 					background: favoriteCardColor,
 					color: "#fff",
 				});
-			}
 		});
 
 		setCssProperties(item, { border: `4px solid ${favoriteCardColor}` });
@@ -137,6 +150,12 @@ const App = (function () {
 
 	function removeIndex(i) {
 		titles.splice(i, 1);
+	}
+
+	function formatTitle(title) {
+		return title.length <= 35
+			? title
+			: `${title.split("").splice(0, 32).join("")}...`;
 	}
 
 	function cardContent(
@@ -157,14 +176,12 @@ const App = (function () {
 		},
 		isFavorite
 	) {
-		const res =
-			Title.length <= 35
-				? Title
-				: Title.split("").splice(0, 32).join("") + "...";
 		return `
 		
 			<span><i  class="remove-card-icon fas fa-times"></i> </span>
-			<h1  title='${Title}${isFavorite ? " | favorite" : " "}'>${res}</h1>
+			<h1  title='${formatTitle(Title)}${
+			isFavorite ? " | favorite" : " "
+		}'>${formatTitle(Title)}</h1>
 			<div class='genres-container'> 
       ${printGenresLabels(Genre)}
 			</div>
@@ -221,7 +238,6 @@ const App = (function () {
 	}
 	function increasePoster(item) {
 		const poster = item.childNodes[item.childNodes.length - 2];
-		const testa = item.childNodes[19].childNodes[2];
 		const increasePosterIcon =
 			item.childNodes[item.childNodes.length - 2].childNodes[3].childNodes[1];
 
@@ -229,14 +245,18 @@ const App = (function () {
 			toggleElement(poster, "zoomed-poster");
 		};
 
-		const posters = [...document.getElementsByClassName("banner__poster")];
 		document.body.onkeyup = (e) => {
 			if (e.keyCode === 66 && e.ctrlKey === true) {
-				posters.map((poster) => {
-					toggleElement(poster, "zoomed-poster");
-				});
+				const posters = [...document.getElementsByClassName("banner__poster")];
+				zoomAllPosters(posters);
 			}
 		};
+	}
+
+	function zoomAllPosters(posters) {
+		posters.map((poster) => {
+			toggleElement(poster, "zoomed-poster");
+		});
 	}
 
 	function checkExistence(info, complement) {
@@ -251,14 +271,21 @@ const App = (function () {
 		const poster = item.childNodes[item.childNodes.length - 2];
 		const removePosterIcon =
 			item.childNodes[item.childNodes.length - 2].childNodes[3].childNodes[0];
+		const cardIconsContainerContent = item.childNodes[19].childNodes[1];
+		const cardFigcaption = poster.childNodes[3];
+
 		removePosterIcon.onclick = () => {
 			poster.classList.remove("zoomed-poster");
-			poster.childNodes[3].style.display = "none";
-			item.childNodes[19].childNodes[1].style.width = "90%";
-			poster.style.animation = "removePoster 1s ease-in-out forwards";
-			setTimeout(function () {
-				poster.style.display = "none";
-			}, 1200);
+			setCssProperties(poster, {
+				animation: "removePoster 1s ease forwards",
+			});
+			setCssProperties(cardIconsContainerContent, { width: "90%" });
+			setCssProperties(removePosterIcon, { color: "red" });
+			setCssProperties(cardFigcaption, { display: "none" });
+
+			setTimeout(() => {
+				setCssProperties(poster, { display: "none" });
+			}, 1000);
 		};
 	}
 
@@ -266,7 +293,7 @@ const App = (function () {
 		const iconsContainer = item.childNodes[17];
 		const iconsContentContainer = item.childNodes[19];
 		iconsContainer.onclick = () => {
-			iconsContentContainer.style.display = "block";
+			setCssProperties(iconsContentContainer, { display: "block" });
 		};
 		for (let i = 1; i <= 7; ++i) {
 			if (i % 2 !== 0) {
@@ -293,90 +320,68 @@ const App = (function () {
 
 	function printGenres(item) {
 		const genresContainer = item.childNodes[5];
-		let toggleGenres = (item.childNodes[3].onclick = () => {
-			genresContainer.classList.add("toggle-genres");
 
-			item.childNodes[3].onclick = () => {
-				genresContainer.classList.remove("toggle-genres");
-
-				item.childNodes[3].onclick = () => {
-					toggleGenres();
-				};
-			};
-		});
+		item.childNodes[3].onclick = () => {
+			toggleElement(genresContainer, "toggle-genres");
+		};
 	}
 
 	function rankRating(rating) {
-		if (rating < 6.0) return "#FF0000";
-		else if (rating > 8.7) return "#b29600";
-		else if (rating > 6.0 && rating <= 8.7) return "#008000";
-		else return "#A9A9A9";
+		if (rating < 6.0) return "#FF0014";
+		else if (rating >= 6.0 && rating <= 7.3) return "#4CA64C";
+		else if (rating > 7.3 && rating <= 8.7) return "#008000";
+		else if (rating >= 8.8) return "#b29600";
+		return "#A9A9A9";
 	}
 
-	function checkDirectorExistence(director, writer) {
-		return director === "N/A" ? abridge(writer) : abridge(director);
-	}
+	const checkDirectorExistence = (director, writer) =>
+		director === "N/A" ? abridge(writer) : abridge(director);
 
 	function abridge(director) {
 		const dir = director.split(",");
 		if (dir.length >= 3) {
 			dir.splice(-1, 1);
 			return dir.join(",") + "...";
-		} else {
-			return dir;
 		}
+		return dir;
 	}
 
 	function checkDirectorLabel(director) {
 		return director === "N/A" ? "Writers:" : "Director:";
 	}
 
-	function calcCardHeight({ Title }) {
-		// if (window.screen.availHeight >= 500) {
-		// 	if (Title.length > 26) return "580px";
-		// 	return "480px";
-		// } else {
-		if (Title.length > 26) return "500px";
-		return "480px";
+	function calcCardHeight({ Title }, content) {
+		return Title.length > 26
+			? (content.style.height = "580px")
+			: (content.style.height = "480px");
 	}
 
-	function checkCardIconVisibility(value) {
-		return value === undefined || value === "N/A" ? "none" : "block";
-	}
-
-	function executeInputInitialBehavior() {
-		movieInput.value = "";
-		movieInput.focus();
-	}
+	const checkCardIconVisibility = (value) =>
+		value === undefined || value === "N/A" ? "none" : "block";
 
 	authInputEffect.map((input) => {
+		input.onblur = () => toggleInputEffect(input);
 		input.onfocus = () => toggleInputEffect(input);
-		// if (input.value !== 0) toggleInputEffect(input);
 	});
 
 	function toggleInputEffect(input) {
 		input.labels[0].classList.add("toggle");
-		if (window.screen.availWidth <= 500) {
-			document.querySelector(".overlay").style.display = "block";
-			auth.style.zIndex = "999999999999999999999";
-			document.body.style.overflowX = "hidden";
-			document.body.style.overflowY = "hidden";
+		if (window.screen.availWidth <= 2800) {
+			setCssProperties(overlay, { display: "block" });
+			setCssProperties(document.body, { overflow: "hidden" });
 			window.scrollTo(0, 0);
 			input.onblur = () => {
-				document.querySelector(".overlay").style.display = "none";
-				auth.style.zIndex = "999";
-				document.body.style.overflowX = "hidden";
-				document.body.style.overflowY = "auto";
+				setCssProperties(overlay, { display: "none" });
+				setCssProperties(document.body, {
+					overfloX: "hidden",
+					overflowY: "auto",
+				});
 			};
 		}
 	}
 
-	window.document.querySelector(".auth__input").onblur = () =>
-		console.log("deu certo");
-	const rating = document.querySelector(".footer__stars");
 	let stars = [...document.getElementsByClassName("footer__star")];
 	let i;
-	let p;
 	function rateApp(stars, i) {
 		let execute = stars.map((star) => {
 			star.onclick = () => {
@@ -417,36 +422,38 @@ const App = (function () {
 			Awards = "N/A",
 			Production = "N/A",
 			Actors = "N/A",
-			BoxOffice = "N/a",
+			BoxOffice = "N/A",
 			Poster = "N/A",
 		},
 		isFavorite = false
 	) {
 		firebase.auth().onAuthStateChanged((user) => {
 			let UserEmail = user.email + "";
-			db.collection("cards")
-				.add({
-					UserEmail,
-					Title,
-					Director,
-					Genre,
-					Plot,
-					Runtime,
-					imdbRating,
-					Writer,
-					Awards,
-					Production,
-					Actors,
-					BoxOffice,
-					Poster,
-					isFavorite,
-				})
-				.then(function (docRef) {
-					paths.push(docRef.path);
-				})
-				.catch(function (error) {
-					handleError(error);
-				});
+			if (user) {
+				db.collection("cards")
+					.add({
+						UserEmail,
+						Title,
+						Director,
+						Genre,
+						Plot,
+						Runtime,
+						imdbRating,
+						Writer,
+						Awards,
+						Production,
+						Actors,
+						BoxOffice,
+						Poster,
+						isFavorite,
+					})
+					.then(function (docRef) {
+						paths.push(docRef.path);
+					})
+					.catch(function (error) {
+						handleError(error);
+					});
+			}
 		});
 	}
 
@@ -463,7 +470,7 @@ const App = (function () {
 							const movieTitle = doc.data().isFavorite
 								? doc.data().Title + " fav"
 								: doc.data().Title;
-							searchMovie(movieTitle);
+							validateMovie(movieTitle);
 							doc.ref.delete();
 						});
 					});
@@ -473,23 +480,35 @@ const App = (function () {
 	}
 
 	btnFavorites.onclick = () => {
-		[...document.getElementsByClassName("banner__content")].map((i) => {
-			if (i.style.border !== "4px solid rgb(235, 195, 52)") {
-				i.style.display = "none";
-				// setCssProperties(btnSearched, { display: "block" });
-				// setCssProperties(btnFavorites, { display: "none" });
-			} else {
+		headSecondaryBtns.style.width = "120px";
+		const cardss = [...document.getElementsByClassName("banner__content")];
+		const newCardss = [...new Set(cardss)];
+		newCardss.map((i) => {
+			if (i.style.border === "4px solid rgb(235, 195, 52)") {
 				i.style.display = "block";
+				setCssProperties(btnSearched, { display: "block" });
+				setCssProperties(btnFavorites, { display: "none" });
+			} else {
+				i.style.display = "none";
+				setCssProperties(btnSearched, { display: "flex" });
+				setCssProperties(btnFavorites, { display: "none" });
 			}
 		});
 	};
 
 	btnSearched.onclick = () => {
-		[...document.getElementsByClassName("banner__content")].map((i) => {
+		headSecondaryBtns.style.width = "120px";
+		const cardss = [...document.getElementsByClassName("banner__content")];
+		const newCardss = [...new Set(cardss)];
+		newCardss.map((i) => {
 			if (i.style.border !== "4px solid rgb(235, 195, 52)") {
 				setCssProperties(i, { display: "block" });
+				setCssProperties(btnSearched, { display: "none" });
+				setCssProperties(btnFavorites, { display: "flex" });
 			} else {
 				setCssProperties(i, { display: "none" });
+				setCssProperties(btnSearched, { display: "none" });
+				setCssProperties(btnFavorites, { display: "flex" });
 			}
 		});
 	};
@@ -509,7 +528,6 @@ const App = (function () {
 			"justify-content": "unset",
 			"align-items": "flex-start",
 			overflow: "auto",
-			// height: "735px",
 			"padding-left": "none",
 		});
 
@@ -551,36 +569,43 @@ const App = (function () {
 			""
 		);
 	};
-	firebase.auth().onAuthStateChanged(function (user) {
-		if (user === null) {
-			[...document.getElementsByClassName("header__button")].map(
-				(btn) => (btn.disabled = true)
-			);
-		} else {
-			[...document.getElementsByClassName("header__button")].map(
-				(btn) => (btn.disabled = false)
-			);
-		}
-	});
 
-	iconGoToTop.onclick = () => window.scrollTo(0, 0);
-	btnRemoveCards.onclick = () => removeAllCards();
+	iconGoToTop.onclick = () => scrollTo(0, 0);
 
-	function removeAllCards() {
+	btnRemoveCards.onclick = () => {
 		firebase.auth().onAuthStateChanged(function (user) {
-			if (user) {
-				db.collection("cards")
-					.where("UserEmail", "==", user?.email)
-					.get()
-					.then((querySnapshot) => {
-						querySnapshot.forEach((doc) => {
-							doc.ref.delete();
-							location.reload();
-						});
+			db.collection("cards")
+				.where("UserEmail", "==", user.email)
+				.get()
+				.then((querySnapshot) => {
+					querySnapshot.forEach((doc) => {
+						doc.ref.delete();
+						location.reload();
 					});
-			} else {
-				handleError();
-			}
+				});
 		});
+	};
+
+	btnMicrophone.onclick = () => startRecognition();
+	function startRecognition() {
+		btnMicrophone.classList.add("mic-on");
+		const recognition = new webkitSpeechRecognition();
+		recognition.interimResults = true;
+		recognition.lang = "en-US";
+		recognition.continuous = true;
+		recognition.start();
+		recognition.onresult = () => getContent(event);
+		function getContent(event) {
+			for (let i = event.resultIndex; i < event.results.length; i++) {
+				if (event.results[i].isFinal) {
+					const content = event.results[i][0].transcript.trim();
+					// movieInput.value = content;
+					validateMovie(content);
+					console.log(content);
+					btnMicrophone.classList.remove("mic-on");
+					recognition.stop();
+				}
+			}
+		}
 	}
 })();

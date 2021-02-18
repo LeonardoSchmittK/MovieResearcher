@@ -9,32 +9,5 @@
 @import "./_popup";
 @import "./overlay";
 @import "./blur-bars";
-
-// body {
-// 	position: relative;
-// 	&:after {
-// 		content: "";
-// 		background: rgb(255, 255, 255);
-// 		filter: blur(30px);
-// 		width: 130px;
-// 		height: 100vh;
-// 		position: absolute;
-// 		top: 0;
-// 		right: -50px;
-// 	}
-// 	&:before {
-// 		content: "";
-// 		background: rgb(255, 255, 255);
-// 		filter: blur(40px);
-// 		width: 100px;
-// 		height: 100vh;
-// 		position: absolute;
-// 		top: 0;
-// 		left: 0px;
-// 		z-index: 9999999;
-// 	}
-// }
-.tippy-box[data-theme~="light"] {
-	@include textType(" ");
-	font-size: 0.8em;
-}
+@import "./loading";
+@import "./tippy";
