@@ -1,18 +1,35 @@
 @import "./fonts";
 
+// Fonts
+
 $primaryFont: "Lalezar", cursive, arial;
 $secondaryFont: "Metrophobic", cursive, arial;
 $thirdFont: "Poppins", cursive, Helvetica, arial;
+
+// Colors
 
 $primaryColor: #6c63ff;
 $secondaryColor: #4e4e4e;
 $thirdColor: #f8f8f8;
 $grey: #524b4b;
+$fifthColor: lighten($grey, 20%);
 $white: #ffffff;
 $success: #149714;
 $red: #e97255;
 $warning: #f58b28;
 $overlay: #a1a1a1;
+$searchButtonColor: #0e6a0e;
+$ratingStarColor: #e6bd58;
+$favoriteCardColor: #ffd700;
+
+// Media query
+
+$small: "412px";
+$intermediate-size: "650px";
+$medium: "800px";
+$large: "1700px";
+
+// Movies genres colors
 
 $adventureColor: #0000ff69;
 $horrorColor: #2d2d3172;
@@ -32,3 +49,5 @@ $crimeColor: #5c000085;
 $shortColor: #dc8adc85;
 $musicColor: #4f069785;
 $musicalColor: #27c77785;
+$sportColor: #315c31;
+$documentaryColor: #314407;

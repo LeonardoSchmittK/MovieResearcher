@@ -1,67 +1,73 @@
 @import "./mixins";
+
 body,
 html {
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
 }
 
 html {
-	scroll-behavior: smooth;
+   scroll-behavior: smooth;
 }
+
 body {
-	background-color: $white;
-	overflow-x: hidden;
+   background-color: $white;
+   overflow-x: hidden;
+   @include setAnimation(gradient-race, 0.25s, linear);
 }
 
 button {
-	border: none;
-	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+   @include setFlexDefault();
+   border: none;
+   cursor: pointer;
 }
 
 input,
 button {
-	outline: none;
-	filter: none;
+   outline: none;
+   filter: none;
 }
 
 input:invalid {
-	box-shadow: none;
+   box-shadow: none;
 }
+
 ::selection {
-	background-color: $secondaryColor;
-	color: $white;
+   background-color: $secondaryColor;
+   color: $white;
 }
 
 mark {
-	background-color: $primaryColor;
-	@include textType("secondary-text");
-	font-size: 1em;
-	padding: 7px;
-	margin-right: 10px;
-	color: #fff;
-	transition: all ease 0.2s;
-	border-radius: 3px;
-	box-shadow: 1px 5px 10px lighten($grey, 55%);
+   @include setTextType("secondary-text");
+   background-color: $primaryColor;
+   font-size: 1em;
+   padding: 7px;
+   margin-right: 10px;
+   color: $white;
+   @include setDefaultTransition();
+   border-radius: 3px;
+   box-shadow: 1px 5px 10px lighten($grey, 55%);
 }
 
 img {
-	user-select: none;
-}
-
-::-webkit-scrollbar {
-	width: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-	background: rgb(233, 233, 233);
-	border-radius: 20px;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
 }
 
 a {
-	text-decoration: none;
-	text-transform: none;
+   text-decoration: none;
+   text-transform: none;
+}
+
+// Scrollbar
+
+::-webkit-scrollbar {
+   width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+   background: lighten($secondaryColor, 50%);
+   border-radius: 20px;
 }

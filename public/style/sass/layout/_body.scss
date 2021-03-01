@@ -1,0 +1,307 @@
+@import "../keyframes";
+
+.banner {
+   @include setSize(100%, auto);
+   position: relative;
+
+   &__card {
+      @include setFlexDefault();
+      margin: auto;
+      width: 93%;
+      flex-wrap: wrap;
+      padding: 0;
+      padding-bottom: 120px;
+      list-style-type: none;
+
+      .banner__content {
+         @include setDefaultTransition();
+         @include setAnimation(hoverBounce, 4s, linear, false);
+         @include setSize(300px);
+
+         background-color: $white;
+         border: 5px solid $primaryColor;
+         box-shadow: 1px 5px 10px lighten($grey, 55%);
+
+         position: relative;
+         margin: 50px;
+         flex-shrink: 0;
+         border-radius: 35px;
+         padding: 20px;
+
+         &:hover {
+            border: 5px solid lighten($primaryColor, 10%);
+         }
+
+         .remove-card-icon {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+
+            color: #312e2e;
+            @include setZIndex(2);
+            cursor: pointer;
+
+            &::after {
+               @include setPseudoElementDefault(60px, 20px);
+               @include setPosition(0, 0, -32px, 0, absolute);
+
+               box-shadow: 0px 10px 10px lighten($grey, 65%);
+               background-color: lighten($grey, 67%);
+
+               transform: rotate(40deg);
+            }
+
+            &::before {
+               @include setPseudoElementDefault(70px, 20px);
+               @include setPosition(-5px, 0, -32px, 0, absolute);
+
+               background-color: lighten($grey, 63%);
+               box-shadow: 0px 10px 10px lighten($grey, 65%);
+
+               transform: rotate(140deg);
+               transition: all ease 1s;
+               pointer-events: none;
+            }
+
+            &:hover:before {
+               width: 10px;
+            }
+         }
+
+         .genres-container {
+            margin-top: 10px;
+            width: 100%;
+            display: none;
+            overflow: hidden;
+         }
+
+         .genres-container.toggle-genres {
+            display: flex;
+            flex-wrap: nowrap;
+         }
+
+         .genres {
+            font-family: $secondaryFont;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+            padding: 5px;
+         }
+
+         @import "./genres";
+
+         h1 {
+            @include setTextType("important-text");
+            @include setMargin(10px, -5px);
+            text-shadow: 1px 5px 4px lighten($grey, 56%);
+            color: $grey;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-bottom: -5px;
+            width: 100%;
+            line-height: 40px;
+            overflow: hidden;
+            position: relative;
+         }
+
+         p {
+            @include setDefaultTransition();
+            width: inherit;
+            line-height: 21px;
+            font-family: $thirdFont;
+            font-size: 0.8em;
+            color: lighten($grey, 10%);
+            text-align: justify;
+            margin-bottom: 19px;
+
+            &:hover {
+               box-shadow: 0px 10px 10px lighten($grey, 65%);
+            }
+
+            mark:hover {
+               background: lighten($primaryColor, 5%);
+            }
+         }
+
+         .banner__card-icons {
+            display: flex;
+            width: 50%;
+
+            .card-icon {
+               @include setDefaultTransition();
+               cursor: pointer;
+               background-color: $primaryColor;
+               color: $white;
+               font-size: 1em;
+               width: 30px;
+               text-align: center;
+               padding: 5px;
+               margin-right: 5px;
+               border-radius: 3px;
+               box-shadow: 1px 5px 10px lighten($grey, 55%);
+
+               &:hover {
+                  transform: scale(1.1);
+               }
+            }
+         }
+
+         .icons-content-container {
+            width: 100%;
+            height: auto;
+            background-color: rgb(243, 243, 243);
+            border-radius: 15px;
+            position: relative;
+            margin-top: 10px;
+
+            p {
+               margin-top: 20px;
+               width: 45%;
+               font-size: 0.75em;
+               @include setPadding(10px, 10px, 10px, 20px);
+               transition: all linear 0.55s;
+            }
+
+            &::before {
+               @include setPseudoElementDefault(20px, 20px);
+               top: -16px;
+               left: 0;
+               background-color: inherit;
+               clip-path: polygon(20% 100%, 0 0, 100% 100%, 0% 100%);
+               border-radius: 20px;
+            }
+         }
+
+         figure {
+            @include setSize(46%, 230px);
+            @include setPosition(auto, 0, auto, 0, absolute);
+            @include setDefaultTransition();
+            cursor: pointer;
+            transform: translateX(55px) translateY(55px);
+            border-radius: 25px;
+            background-color: $white;
+
+            &:hover {
+               transform: translateX(55px) translateY(40px);
+            }
+
+            &:hover figcaption {
+               bottom: -55px;
+            }
+
+            .banner__movie-img {
+               @include setSize(100%, inherit);
+               border-radius: 25px;
+               border: 5px solid $primaryColor;
+               display: block;
+               margin: auto;
+
+               &--favorite {
+                  border: 5px solid $favoriteCardColor;
+               }
+            }
+
+            figcaption {
+               @include setDefaultTransition();
+               @include setPosition(auto, 10px, 10px, auto, absolute);
+               @include setZIndex(-1);
+               transition: all ease 0.3s;
+               font-size: 1.1em;
+               padding: 5px;
+               border-radius: 10px;
+               width: 150px;
+               display: flex;
+
+               i {
+                  @include setFlexDefault();
+                  @include setSize(10px, 10px);
+                  color: $primaryColor;
+                  background-color: $white;
+                  font-size: 1.2em;
+                  padding: 10px;
+                  border-radius: 20px;
+                  margin-right: 10px;
+                  box-shadow: 1px 5px 10px lighten($grey, 55%);
+
+                  &:hover {
+                     transform: scale(1.1);
+                  }
+               }
+            }
+         }
+
+         .zoomed-poster {
+            @include setSize(90%, inherit);
+            @include setZIndex(3);
+            @include setPosition(-20px, auto, -30px, auto, absolute);
+            transform: none;
+
+            &:hover {
+               transform: translate(5px, -5px);
+            }
+
+            figcaption {
+               @include setZIndex(2);
+               bottom: -50px;
+            }
+         }
+      }
+   }
+
+   &__image {
+      @include setSize(30%, auto);
+      @include setZIndex(-1);
+      display: block;
+      margin: 50px auto;
+      position: relative;
+   }
+
+   &__disableImgRender {
+      display: none;
+   }
+
+   .screen {
+      @include setZIndex(-2);
+      height: 120px;
+      position: absolute;
+      background-color: $grey;
+   }
+}
+
+@media only screen and (max-width: 1000px) {
+   .banner {
+      &__card {
+         width: 100%;
+      }
+      .screen {
+         display: none;
+      }
+      &__image {
+         width: 40%;
+      }
+   }
+}
+
+@media only screen and (max-width: 700px) {
+   .banner {
+      margin: auto;
+
+      &__card {
+         width: 100%;
+         position: relative;
+
+         .banner__content {
+            width: 275px;
+         }
+
+         .icons-content-container {
+            p {
+               line-height: 1.4;
+            }
+         }
+      }
+
+      &__image {
+         width: 100%;
+      }
+   }
+}

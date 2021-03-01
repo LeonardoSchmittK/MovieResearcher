@@ -1,0 +1,8 @@
+.overlay {
+   @include setSize(100%, 100vh);
+   @include setZIndex(5);
+   display: none;
+   position: absolute;
+   background-color: $white;
+   opacity: 0.5;
+}

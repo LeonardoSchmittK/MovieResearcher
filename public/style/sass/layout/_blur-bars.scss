@@ -1,0 +1,21 @@
+.blur-bar {
+   @include setSize(100px, 700px);
+   @include setZIndex(4);
+   background-color: $white;
+   position: absolute;
+   display: none;
+   filter: blur(34px);
+}
+.blur-bar-left {
+   left: 0;
+}
+
+.blur-bar-right {
+   right: -10px;
+}
+
+@media only screen and (max-width: 1000px) {
+   .blur-bar {
+      width: 50px;
+   }
+}

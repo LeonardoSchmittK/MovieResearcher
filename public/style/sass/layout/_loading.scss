@@ -1,0 +1,5 @@
+.loading {
+   @include setSize(0, 1px);
+   background-color: $primaryColor;
+   box-shadow: 1px 5px 10px lighten($grey, 30%);
+}

@@ -1,4 +1,6 @@
 // Auth elements
+
+const authentication = document.querySelector(".auth");
 const btnLogin = document.querySelector(".btnLogin");
 const btnRegister = document.querySelector(".btnRegister");
 const btnLogout = document.querySelector(".btnLogout");
@@ -12,11 +14,9 @@ const errorMessage = document.querySelector(".auth__error");
 const userImg = document.querySelector("#user-img");
 const authToggle = document.querySelector(".auth__toggle");
 const authTitle = document.querySelector(".auth__title");
-const auth = document.querySelector(".auth");
+const authWrapper = document.querySelector(".auth");
 const userInfo = document.querySelector(".auth__user-info");
-const authInputEffect = [
-	...window.document.getElementsByClassName("auth__input"),
-];
+const authInputEffect = [...window.document.getElementsByClassName("auth__input")];
 const toggleAuth = document.querySelector(".toggle-auth");
 const authToggleUserIcon = document.querySelector(".toggle-auth__user-icon");
 const inputs = [...document.getElementsByClassName("auth__input")];
@@ -42,9 +42,7 @@ const btnNotice = document.querySelector(".btn-notice");
 const btnFavorites = document.querySelector(".btn-favorites");
 const btnSearched = document.querySelector(".btn-searched");
 const btnRemoveCards = document.querySelector(".btn-remove-cards");
-const headSecondaryBtns = document.querySelector(
-	".header__buttons__secondary-container"
-);
+const headSecondaryBtns = document.querySelector(".header__buttons__secondary-container");
 
 // Body elements
 
@@ -53,17 +51,15 @@ const bannerMovieImg = [document.getElementsByName("banner__movie-img")];
 const cardsHero = document.querySelector(".banner__card");
 const bannerSvg = document.querySelector("#banner__image");
 const movieCards = [];
-const footer = document.querySelector(".footer");
 const iconGoToTop = document.querySelector(".footer__icon-go-to-top");
 
-// loading
+// footer
+const footer = document.querySelector(".footer");
 
-const loading = window.document.querySelector(".loading");
-
-// Overlay
+// Miscelaneous
 
 const overlay = document.querySelector(".overlay");
-
-// features
-
+const stars = [...document.getElementsByClassName("footer__star")];
 const btnMicrophone = document.querySelector(".micro-btn");
+const blurBars = [...document.getElementsByClassName("blur-bar")];
+const loading = window.document.querySelector(".loading");

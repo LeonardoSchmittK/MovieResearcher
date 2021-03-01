@@ -1,63 +1,120 @@
 @keyframes bounce {
-	to {
-		padding-left: 10px;
-	}
+   to {
+      padding-left: 10px;
+   }
+}
+
+@keyframes rotate {
+   from {
+      transform: rotate(360deg);
+   }
+}
+
+@keyframes after-scramp {
+   0% {
+      width: 100%;
+   }
+
+   to {
+      width: 0%;
+   }
+}
+
+@keyframes page-title-color-change {
+   0% {
+      color: lighten($primaryColor, 20%);
+   }
+
+   30% {
+      color: darken($primaryColor, 10%);
+   }
+
+   50% {
+      color: darken($primaryColor, 5%);
+   }
+
+   70% {
+      color: lighten($primaryColor, 10%);
+   }
+
+   100% {
+      color: $primaryColor;
+   }
 }
 
 @keyframes cross-window {
-	from {
-		transform: translateX(50px);
-	}
-	50% {
-		transform: translateX(100px);
-	}
-	to {
-		transform: none;
-	}
+   from {
+      transform: translateX(50px);
+   }
+
+   50% {
+      transform: translateX(100px);
+   }
+
+   to {
+      transform: none;
+   }
 }
 
 @keyframes wink {
-	from {
-		opacity: 0;
-	}
-	50% {
-		opacity: 1;
-	}
-	to {
-		opacity: 0.1;
-	}
+   from {
+      opacity: 0;
+   }
+
+   50% {
+      opacity: 1;
+   }
+
+   to {
+      opacity: 0.1;
+   }
 }
 
 @keyframes opacityToggle {
-	to {
-		opacity: 0.1;
-		transform: scale(1.2);
-	}
+   to {
+      opacity: 0.1;
+      transform: scale(1.2);
+   }
 }
 
 @keyframes removePoster {
-	50% {
-		transform: translateX(200px);
-	}
-	to {
-		transform: translateX(-100px);
-		z-index: -9999;
-		visibility: hidden;
-	}
+   50% {
+      transform: translateX(200px);
+      filter: grayscale(50%);
+   }
+
+   to {
+      @include setZIndex(-1);
+      transform: translateX(-100px);
+      visibility: hidden;
+   }
 }
 
 @keyframes bounce-login {
-	from {
-		transform: translate(30px);
-		filter: drop-shadow(0 10px 30px $primaryColor);
-	}
-	50% {
-		transform: translate(-20px);
-	}
+   from {
+      transform: translate(30px);
+      filter: drop-shadow(0 10px 30px $primaryColor);
+   }
+
+   50% {
+      transform: translate(-20px);
+   }
 }
 
 @keyframes loading-complete {
-	to {
-		width: 100%;
-	}
+   to {
+      width: 100%;
+   }
+}
+
+@keyframes popErrorIcon {
+   from {
+      transform: translateX(100px);
+   }
+}
+
+@keyframes popLogoutIcon {
+   from {
+      transform: translateX(-200px);
+   }
 }

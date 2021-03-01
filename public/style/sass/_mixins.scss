@@ -1,28 +1,68 @@
 @import "./variables";
-@mixin textType($type) {
-	@if $type == "important-text" {
-		font-size: 2.8em;
-		font-family: $primaryFont;
-		color: $primaryColor;
-	} @else if $type == "secondary-text" {
-		font-size: 2.3em;
-		font-family: $secondaryFont;
-		color: $secondaryColor;
-	} @else {
-		font-size: 1.2em;
-		font-family: $thirdFont;
-		color: $secondaryColor;
-	}
+
+@mixin setTextType($type) {
+   @if $type == "important-text" {
+      font-size: 2.8em;
+      font-family: $primaryFont;
+      color: $primaryColor;
+   } @else if $type == "secondary-text" {
+      font-size: 2.3em;
+      font-family: $secondaryFont;
+      color: $secondaryColor;
+   } @else {
+      font-size: 1.2em;
+      font-family: $thirdFont;
+      color: $secondaryColor;
+   }
 }
 
-@mixin flexDefault() {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+@mixin setFlexDefault() {
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
-// @mixin flex($) {
-// 	display: flex;
-// 	justify-content: center;
-// 	align-items: center;
-// }
+@mixin setPseudoElementDefault($width: auto, $height: auto) {
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   height: $height;
+   width: $width;
+}
+
+@mixin setPadding($top, $bottom, $left, $right) {
+   padding: $top $bottom $left $right;
+}
+
+@mixin setAnimation($name, $duration, $mode, $isInfinite: false) {
+   animation: $name $duration $mode;
+   @if $isInfinite == true {
+      animation: $name $duration $mode infinite alternate;
+   }
+}
+
+@mixin setDefaultTransition() {
+   transition: all ease 0.3s;
+}
+
+@mixin setPosition($top, $bottom, $left, $right, $position: relative) {
+   position: $position;
+   top: $top;
+   bottom: $bottom;
+   left: $left;
+   right: $right;
+}
+
+@mixin setSize($width: auto, $height: auto) {
+   width: $width;
+   height: $height;
+}
+
+@mixin setMargin($top: 0, $bottom: 0, $left: 0, $right: 0) {
+   margin: $top $left $bottom $right;
+}
+
+@mixin setZIndex($layer) {
+   z-index: $layer;
+}

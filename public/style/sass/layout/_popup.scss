@@ -1,0 +1,101 @@
+.popup {
+   @include setSize(30%);
+   @include setZIndex(6);
+   border-bottom: 5px solid $warning;
+   background-color: $white;
+   display: none;
+   padding: 20px;
+   position: fixed;
+   top: 0;
+   box-shadow: inset 0px 0px 3px #dddada;
+
+   overflow: hidden;
+
+   &.toggle {
+      display: none;
+   }
+
+   &.salute {
+      border-bottom: 5px solid $primaryColor;
+   }
+
+   &__eye {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+
+      &__outer {
+         width: 100%;
+         height: 100%;
+         background-color: $white;
+         border-radius: 50%;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         opacity: 0.2;
+         box-shadow: inset 0 0 10px #afa9a9;
+      }
+
+      &__inner {
+         @include setSize(35%, 30%);
+         background-color: #201f1f;
+         border-radius: 50%;
+         @include setDefaultTransition();
+      }
+   }
+
+   &__title {
+      @include setTextType("secondary-text");
+      @include setMargin(0, 0, 0, 0);
+      width: 50%;
+      font-size: 1.7em;
+   }
+
+   &__description {
+      @include setTextType("text");
+      font-size: 0.8em;
+      color: lighten($grey, 10%);
+   }
+
+   &__icon {
+      @include setPosition(auto, -70px, -30px, auto, absolute);
+      @include setZIndex(-1);
+      font-size: 10em;
+      color: lighten($grey, 65%);
+      transform: rotate(300deg);
+   }
+
+   &__icon-close {
+      @include setSize(20px, 20px);
+      @include setFlexDefault();
+      @include setPosition(8px, auto, auto, 20px, absolute);
+      color: lighten($grey, 40%);
+      border-radius: 50%;
+      padding: 5px;
+      cursor: pointer;
+
+      &:hover {
+         background-color: lighten($grey, 65%);
+      }
+   }
+}
+
+@media only screen and (max-width: $medium) {
+   .popup {
+      width: 94vw;
+
+      &__eye {
+         height: 0;
+
+         &__outer {
+            display: none;
+         }
+      }
+   }
+}
+
+@media only screen and (max-width: 412px) {
+   .popup {
+      width: 85vw;
+   }
+}

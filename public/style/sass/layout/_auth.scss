@@ -1,0 +1,287 @@
+.toggle-auth {
+   @include setSize(100px, 30px);
+   @include setDefaultTransition();
+   background-color: $white;
+   color: $primaryColor;
+   cursor: pointer;
+   padding: 10px;
+   display: none;
+   justify-content: space-between;
+   align-items: center;
+   border-radius: 10%;
+   box-shadow: inset 0px 0px 3px #dddada;
+   border: 1px solid $white;
+
+   &:hover {
+      border: 1px solid $primaryColor;
+   }
+
+   &__user-icon {
+      font-size: 30px;
+   }
+}
+
+.auth {
+   @include setPosition(30px, auto, auto, 30px, fixed);
+   @include setDefaultTransition();
+   @include setZIndex(4);
+   max-width: 350px;
+   width: 200px;
+   padding: 15px;
+   border-radius: 20px;
+   background-color: $white;
+   font-family: $secondaryFont;
+   border: 5px solid $white;
+   box-shadow: inset 0px 0px 3px #dddada;
+
+   &__unlogged {
+      animation: bounce-login 0.2s linear alternate;
+   }
+
+   &:hover {
+      border: 5px solid $primaryColor;
+   }
+
+   &.animation-to-login {
+      animation: bounce-login 0.4s ease-in alternate;
+   }
+
+   &__toggle {
+      @include setSize(30px, 34px);
+      @include setPosition(0, auto, auto, 0, absolute);
+      @include setFlexDefault();
+      @include setDefaultTransition();
+      color: lighten($grey, 29%);
+      border-radius: 50%;
+      background-color: $white;
+      cursor: pointer;
+
+      &:hover {
+         background-color: darken($white, 5%);
+      }
+
+      .toggle.up {
+         transform: rotate(360deg);
+      }
+   }
+
+   &__user-icon {
+      @include setPosition(auto, -20px, auto, -35px, absolute);
+      display: none;
+      font-size: 2em;
+      color: lighten($grey, 60%);
+   }
+
+   &__form {
+      @include setFlexDefault();
+      display: none;
+      flex-direction: column;
+   }
+
+   &__form.toggleFormDown {
+      display: flex;
+   }
+
+   &__title {
+      @include setMargin(-5px, 0, 5px, 0);
+      @include setTextType("important-text");
+   }
+
+   &__title.removed {
+      display: none;
+   }
+
+   &__input-container {
+      position: relative;
+      height: 40px;
+   }
+
+   &__input-container + &__input-container {
+      @include setMargin(15px, 11px, 0, 0);
+   }
+
+   &__input {
+      @include setPadding(7px, 7px, 10px, 10px);
+      @include setDefaultTransition();
+      width: 154px;
+      border-radius: 18px;
+      border: 3px solid lighten($primaryColor, 10%);
+      font-family: $secondaryFont;
+      font-size: 1em;
+
+      &:focus {
+         box-shadow: 0px 0px 13px #dddadaa1;
+         border: 3px solid $primaryColor;
+         border-left: 8px solid $primaryColor;
+         border-right: 8px solid $primaryColor;
+      }
+   }
+
+   &__label {
+      @include setPadding(0, 3px, 0, 3px);
+      @include setDefaultTransition();
+      @include setPosition(10px, auto, 15px, auto, absolute);
+      background-color: $white;
+      cursor: text;
+
+      &.toggle {
+         @include setPosition(-10px, auto, 10px, auto, absolute);
+         box-shadow: 0px 0px 13px #dddadaa1;
+      }
+   }
+
+   &__separator {
+      color: $grey;
+      background-color: $white;
+      position: relative;
+   }
+
+   &__submits {
+      @include setFlexDefault();
+      width: 100%;
+      justify-content: space-evenly;
+      margin-top: -10px;
+   }
+
+   &__btn {
+      @include setFlexDefault();
+      @include setDefaultTransition();
+      padding: 10px;
+      background-color: $white;
+      box-shadow: 0px 0px 13px #dddada;
+      border-radius: 18px;
+      border: 3px solid $primaryColor;
+      color: $grey;
+
+      &:hover {
+         color: $grey;
+         transform: translateY(-3px);
+      }
+   }
+
+   &__error {
+      width: 100%;
+      @include setMargin(-20px, 30px, 0, 0);
+      font-family: $secondaryFont;
+      font-size: 15px;
+      color: $warning;
+      display: none;
+      background-color: lighten($warning, 40%);
+      padding: 20px;
+      text-align: center;
+      position: relative;
+
+      i {
+         @include setAnimation(popErrorIcon, 0.5s, ease-in-out);
+         @include setPosition(auto, 0, 0, auto, absolute);
+         font-size: 4em;
+         opacity: 0.2;
+         filter: grayscale(100%);
+      }
+   }
+
+   &__error.printError {
+      display: flex;
+   }
+
+   &__loginWithGoogle {
+      margin-top: 10px;
+      color: $red;
+
+      i {
+         padding-right: 3px;
+      }
+   }
+
+   &__perfil {
+      margin-top: 20px;
+      display: none;
+      align-items: center;
+   }
+   &__user-info {
+      @include setFlexDefault();
+      border: 3px solid $primaryColor;
+      height: 50px;
+      border-radius: 20px;
+      box-shadow: inset 0px 0px 3px rgb(221, 218, 218);
+      margin-top: -15px;
+      background-color: $white;
+   }
+
+   &__logout {
+      @include setPosition(0, auto, auto, 0, absolute);
+      @include setAnimation(popLogoutIcon, 0.3s, ease-in-out);
+      align-self: flex-end;
+      width: 30px;
+   }
+
+   &__user-img {
+      @include setSize(50px, 50px);
+      border-radius: 50%;
+      border: 5px solid $primaryColor;
+      transform: translate(-10px);
+      cursor: pointer;
+   }
+
+   &__username {
+      @include setTextType("secondary-text");
+      height: auto;
+      padding-left: 10px;
+      line-height: 1.3;
+      transform: translate(-10px);
+      font-size: 1.2em;
+      overflow: auto;
+      text-overflow: ellipsis;
+   }
+}
+
+@media only screen and (max-width: 1000px) {
+   .toggle-auth {
+      display: flex;
+      border: 2px solid $white;
+      width: 100px;
+
+      &:hover {
+         border: 2px solid $white;
+      }
+   }
+   .auth {
+      height: 30px;
+      @include setPosition(10px, auto, 10px, auto, absolute);
+      border: 5px solid $white;
+      box-shadow: inset 0px 0px 3px rgb(221, 218, 218);
+
+      &:hover {
+         border: 5px solid $white;
+      }
+
+      &__form {
+         right: 0;
+      }
+
+      &__title {
+         font-size: 2.3em;
+      }
+
+      &__input {
+         font-size: 0.8em;
+      }
+
+      &__user-info {
+         background-color: $white;
+         box-shadow: inset 0px 0px 3px rgb(221, 218, 218);
+      }
+
+      &__username {
+         background-color: $white;
+      }
+
+      &__label {
+         font-size: 0.9em;
+      }
+
+      &__user-icon {
+         display: none;
+      }
+   }
+}

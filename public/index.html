@@ -1,357 +1,348 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta
-			content="text/html; charset=UTF-8; X-Content-Type-Options=nosniff"
-			http-equiv="Content-Type"
-		/>
-		<title>Movie Researcher</title>
-		<meta
-			http-equiv="Content-Security-Policy"
-			content="upgrade-insecure-requests"
-		/>
+   <head>
+      <meta content="text/html; X-Content-Type-Options=nosniff" http-equiv="Content-Type" />
+      <meta charset="utf-8" />
+      <title>Movie Researcher</title>
+      <meta
+         name="description"
+         content="The easiest way to find out as many info of a movie or series you want in a little space by simply searching for cards "
+      />
+      <meta
+         name="keywords"
+         content="movies, researcher, series, tv, show, cinema, search, film, cards, info, css, html, javascript, ui, ux, responsive,"
+      />
+      <meta name="author" content="Leonardo Schmitt" />
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+      <meta name="viewport" content="width=device-width,initial-scale=1" />
+      <meta content="ie=edge" />
 
-		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<link
-			rel="stylesheet icon"
-			type="image/png"
-			href="resources/img/favicon.png"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://unpkg.com/tippy.js@6/themes/light.css"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://unpkg.com/tippy.js@6/animations/scale-extreme.css"
-		/>
-		<link
-			href="https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css"
-		/>
-		<!-- Icons  -->
-		<link
-			rel="stylesheet"
-			href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
-			integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
-			crossorigin="anonymous"
-		/>
-		<!-- Style-->
-		<link rel="stylesheet" href="style/css/style.css" type="text/css" />
-	</head>
-	<body>
-		<div class="loading"></div>
-		<div class="overlay"></div>
-		<div class="popup">
-			<div class="popup__eye">
-				<div class="popup__eye__outer">
-					<div class="popup__eye__inner"></div>
-				</div>
-			</div>
-			<div class="popup__notice">
-				<h2 class="popup__title">Popup Title</h2>
-				<p class="popup__description">
-					Popup Description. It could contain whatever content which needs a
-					popup call.
-				</p>
-				<i class="popup__icon fas fa-video"></i>
-				<i class="popup__icon-close fas fa-times"></i>
-			</div>
-		</div>
-		<article class="auth">
-			<div class="toggle-auth">
-				<i class="toggle-auth__user-icon far fa-user"></i>
-				<h2>Login</h2>
-			</div>
-			<span class="auth__toggle"><i class="fas fa-caret-down"></i></span>
-			<span> <i class="auth__user-icon far fa-user"></i></span>
+      <!-- Icons  -->
+      <link rel="stylesheet icon" type="image/png" href="resources/img/favicon.png" />
+      <link
+         rel="stylesheet"
+         href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+         integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
+         crossorigin="anonymous"
+      />
+      <!-- App Style-->
+      <link rel="stylesheet" href="style/css/style.css" type="text/css" />
 
-			<form class="auth__form">
-				<h2 class="auth__title">Login</h2>
+      <!-- Tippy tooltips style-->
+      <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/themes/light.css" />
+      <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale-extreme.css" />
+   </head>
+   <body role="document">
+      <div class="loading"></div>
+      <div class="overlay"></div>
 
-				<div class="auth__input-container">
-					<label class="auth__label" for="emailInput">E-mail: </label>
-					<input
-						class="auth__input"
-						minlength="6"
-						id="emailInput"
-						required
-						type="email"
-					/>
-				</div>
+      <div class="popup">
+         <div class="popup__eye">
+            <div class="popup__eye__outer">
+               <div class="popup__eye__inner"></div>
+            </div>
+         </div>
+         <div class="popup__notice">
+            <h2 class="popup__title">Popup Title</h2>
+            <p class="popup__description">
+               Popup Description. It could contain whatever content which needs a popup call.
+            </p>
+            <i class="popup__icon fas fa-video"></i>
+            <i class="popup__icon-close fas fa-times"></i>
+         </div>
+      </div>
 
-				<div class="auth__input-container beneath">
-					<label class="auth__label" for="passwordInput">Password:</label>
-					<input
-						class="auth__input"
-						minlength="6"
-						id="passwordInput"
-						required
-						type="password"
-					/>
-				</div>
+      <article class="auth">
+         <div class="toggle-auth">
+            <i class="toggle-auth__user-icon far fa-user"></i>
+            <h2>Login</h2>
+         </div>
+         <span class="auth__toggle"><i class="fas fa-caret-down"></i></span>
+         <span><i class="auth__user-icon far fa-user"></i></span>
 
-				<br />
-				<span class="auth__error">
-					<i class="auth__user-icon fas fa-exclamation-triangle"></i>
-				</span>
-				<div class="auth__submits">
-					<button class="auth__login auth__btn btnLogin btn">Log in</button>
-					<button class="auth__register auth__btn btnRegister btn">
-						Register
-					</button>
-				</div>
-				<span class="auth__separator"><sup> </sup>or<sup> </sup></span>
-				<button class="auth__loginWithGoogle btnGoogleAuth auth__btn btn">
-					<i class="fab fa-google"></i> With Google
-				</button>
-			</form>
-			<div class="auth__perfil">
-				<div class="auth__user-info">
-					<img
-						id="user-img"
-						class="auth__user-img"
-						src="resources/img/user-unlogged.png"
-					/>
-					<h2 class="auth__username">Leoeyeschmittk</h2>
-				</div>
-				<button class="auth__logout auth__btn btnLogout btn">
-					<i class="fas fa-sign-out-alt"></i>
-				</button>
-			</div>
-		</article>
-		<header class="header">
-			<div class="header__ornament">
-				<svg
-					width="503"
-					height="138"
-					viewBox="0 0 503 138"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<g filter="url(#filter0_d)">
-						<path
-							d="M48.1856 75H492L438.742 131H0L48.1856 75Z"
-							fill="#F8F8F8"
-						/>
-						<path
-							d="M4.35939 129L49.1031 77H487.338L437.884 129H4.35939Z"
-							stroke="#6C63FF"
-							stroke-width="4"
-						/>
-					</g>
-					<path
-						d="M442.705 72.8422L255.059 35.4514L264.955 3.36982L477.927 72.8422L442.705 72.8422Z"
-						fill="white"
-						stroke="#6C63FF"
-						stroke-width="4"
-					/>
-					<path
-						d="M410 53L419 55.5L417.5 65.7271L411.916 64.7143L407 63.7018L410 53Z"
-						fill="#958EFD"
-					/>
-					<path
-						d="M432.425 60.0573L439.221 61.9478L437.988 70.043L433.766 69.2954L430.051 68.5417L432.425 60.0573Z"
-						fill="#958EFD"
-					/>
-					<path
-						d="M381.918 43.2271L391.386 46.3451L387.559 59.9099L381.939 59.0311L377 58.1039L381.918 43.2271Z"
-						fill="#958EFD"
-					/>
-					<path
-						d="M357.477 35.1575L366.915 38.3886L362.295 54.8886L356.64 54.1382L352 52.5L357.477 35.1575Z"
-						fill="#958EFD"
-					/>
-					<path
-						d="M329 26L339 29L333.373 48.7751L327.817 47.6795L322.816 46.8598L329 26Z"
-						fill="#958EFD"
-					/>
-					<path
-						d="M303 18L312.5 21L305.505 43.3776L300.863 42.4947L295.5 41.5L303 18Z"
-						fill="#958EFD"
-					/>
-					<path
-						d="M279.713 9.31137L289.287 12.5868L281.525 38.9105L277.013 38.1465L271 37.0033L279.713 9.31137Z"
-						fill="#958EFD"
-					/>
-					<defs>
-						<filter
-							id="filter0_d"
-							x="0"
-							y="75"
-							width="503"
-							height="63"
-							filterUnits="userSpaceOnUse"
-							color-interpolation-filters="sRGB"
-						>
-							<feFlood flood-opacity="0" result="BackgroundImageFix" />
-							<feColorMatrix
-								in="SourceAlpha"
-								type="matrix"
-								values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-							/>
-							<feOffset dx="11" dy="7" />
-							<feColorMatrix
-								type="matrix"
-								values="0 0 0 0 0.423529 0 0 0 0 0.388235 0 0 0 0 1 0 0 0 1 0"
-							/>
-							<feBlend
-								mode="normal"
-								in2="BackgroundImageFix"
-								result="effect1_dropShadow"
-							/>
-							<feBlend
-								mode="normal"
-								in="SourceGraphic"
-								in2="effect1_dropShadow"
-								result="shape"
-							/>
-						</filter>
-					</defs>
-				</svg>
-				<h1 class="header__title">Movie Researcher</h1>
-			</div>
-			<div class="header__search-bar">
-				<i class="header__search-icon fas fa-search"></i>
+         <form class="auth__form">
+            <h2 class="auth__title">Login</h2>
 
-				<input id="search-movie" class="header__search-movie" type="search" />
-			</div>
+            <div class="auth__input-container">
+               <input
+                  class="auth__input"
+                  minlength="6"
+                  id="emailInput"
+                  aria-label="Your email"
+                  required
+                  type="email"
+               />
+               <label class="auth__label" for="emailInput">E-mail:</label>
+            </div>
 
-			<header class="header__buttons">
-				<div class="header__buttons__secondary-container">
-					<button
-						data-text="Change the view way of cards"
-						class="header__buttons__btn btn-changeView btn tooltip"
-					>
-						<i class="fas fa-desktop"></i>
-					</button>
-					<button
-						data-text="Show a curiosity"
-						class="header__buttons__btn btn-notice btn tooltip"
-					>
-						<i class="fas fa-question"></i>
-					</button>
-					<button
-						data-text="Remove all cards"
-						class="header__buttons__btn btn-remove-cards btn tooltip"
-					>
-						<i class="fas fa-trash-alt"></i>
-					</button>
-					<button
-						data-text="Show your favorite movies"
-						class="header__buttons__btn btn-favorites btn tooltip"
-					>
-						<i class="fas fa-star"></i>
-					</button>
-					<button
-						data-text="Show your searched movies"
-						class="header__buttons__btn btn-searched btn tooltip"
-					>
-						<i class="fas fa-history"></i>
-					</button>
-				</div>
-				<button
-					data-text="Speak a movie!"
-					class="header__buttons__btn micro-btn btn tooltip"
-				>
-					<i class="fas fa-microphone"></i>
-				</button>
-				<button class="header__search-button btn" type="button">
-					Search<i class="fas fa-arrow-right"></i>
-				</button>
-			</header>
-		</header>
-		<div class="blur-bar blur-bar-left"></div>
-		<div class="blur-bar blur-bar-right"></div>
-		<div id="screens" class="banner screens-animation">
-			<section>
-				<ul class="banner__card">
-					<img
-						class="banner__image"
-						id="banner__image"
-						src="./resources/img/bg-cinema-4.png"
-					/>
-				</ul>
-			</section>
-		</div>
-		<footer class="footer">
-			<div class="footer__info">
-				<div class="footer__main-info">
-					Made by
-					<mark
-						>@LeonardoSchmittk
-						<a
-							class="footer_link"
-							target="_blank"
-							href="https://github.com/LeonardoSchmittK"
-						>
-							<i class="footer__icon fab fa-github-alt"></i
-						></a>
-						<a target="_blank" href="https://linkedin.com/">
-							<i
-								data-text="Go to the top"
-								class="footer__icon fab fa-linkedin-in"
-							></i></a
-					></mark>
-					&reg;2021
-				</div>
+            <div class="auth__input-container beneath">
+               <input
+                  class="auth__input"
+                  minlength="6"
+                  id="passwordInput"
+                  type="password"
+                  aria-label="Your password"
+                  required
+               />
+               <label class="auth__label" for="passwordInput">Password:</label>
+            </div>
 
-				<div class="footer__buttons">
-					<button
-						data-text="Go to the top"
-						class="footer__icon-go-to-top btn tooltip"
-					>
-						<i class="fas fa-arrow-up"></i>
-					</button>
-					<button
-						data-text="Contact me: Leoeyeschmittk@gmail.com"
-						class="footer__icon-contact btn tooltip"
-					>
-						<a
-							target="_blank"
-							href="https://mail.google.com/mail/u/0/#inbox?compose=new"
-							><i class="fas fa-envelope"></i
-						></a>
-					</button>
-				</div>
-			</div>
+            <br />
 
-			<div class="footer__rating">
-				<h4 class="footer__rating-title">Avaliate the app!</h4>
-				<div class="footer__stars">
-					<i class="footer__star far fa-star"></i>
-					<i class="footer__star far fa-star"></i>
-					<i class="footer__star far fa-star"></i>
-					<i class="footer__star far fa-star"></i>
-					<i class="footer__star far fa-star"></i>
-				</div>
-			</div>
-		</footer>
-		<noscript>The browser does not support JavaScript</noscript>
-		<script
-			defer
-			src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"
-		></script>
-		<script
-			defer
-			src="https://www.gstatic.com/firebasejs/7.23.0/firebase-auth.js"
-		></script>
-		<script
-			defer
-			src="https://www.gstatic.com/firebasejs/8.2.5/firebase-firestore.js"
-		></script>
-		<script defer src="script/firebaseConfig.js"></script>
-		<script defer src="https://unpkg.com/@popperjs/core@2"></script>
-		<script defer src="https://unpkg.com/tippy.js@6"></script>
-		<script defer src="script/DOMelements.js"></script>
-		<script defer src="script/globalFunctions.js"></script>
-		<script defer src="script/globalFunctionsFirebase.js"></script>
-		<script defer src="script/tippy.js"></script>
-		<script defer src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-		<script defer src="script/firebaseAuth.js"></script>
-		<script defer src="script/index.js"></script>
-		<script defer src="script/typed.js"></script>
-		<script defer src="script/index.js"></script>
-		<script defer src="script/animations.js"></script>
-	</body>
+            <span class="auth__error">
+               <i class="auth__user-icon fas fa-exclamation-triangle"></i>
+            </span>
+
+            <div class="auth__submits">
+               <button class="auth__login auth__btn btnLogin btn">Log in</button>
+               <button class="auth__register auth__btn btnRegister btn">Register</button>
+            </div>
+
+            <span class="auth__separator">or</span>
+
+            <button class="auth__loginWithGoogle btnGoogleAuth auth__btn btn">
+               <i class="fab fa-google"></i>
+               With Google
+            </button>
+         </form>
+
+         <div class="auth__perfil">
+            <div class="auth__user-info">
+               <img id="user-img" class="auth__user-img" src="resources/img/user-unlogged.png" />
+               <h2 class="auth__username">Leoeyeschmittk</h2>
+            </div>
+            <button class="auth__logout auth__btn btnLogout btn">
+               <i class="fas fa-sign-out-alt"></i>
+            </button>
+         </div>
+      </article>
+
+      <header class="header dark-scheme">
+         <div class="header__ornament">
+            <svg
+               width="503"
+               height="138"
+               viewBox="0 0 503 138"
+               fill="none"
+               xmlns="http://www.w3.org/2000/svg"
+            >
+               <g filter="url(#filter0_d)">
+                  <path d="M48.1856 75H492L438.742 131H0L48.1856 75Z" fill="#F8F8F8" />
+                  <path
+                     d="M4.35939 129L49.1031 77H487.338L437.884 129H4.35939Z"
+                     stroke="#6C63FF"
+                     stroke-width="4"
+                  />
+               </g>
+               <path
+                  d="M442.705 72.8422L255.059 35.4514L264.955 3.36982L477.927 72.8422L442.705 72.8422Z"
+                  fill="white"
+                  stroke="#6C63FF"
+                  stroke-width="4"
+               />
+               <path
+                  d="M410 53L419 55.5L417.5 65.7271L411.916 64.7143L407 63.7018L410 53Z"
+                  fill="#958EFD"
+               />
+               <path
+                  d="M432.425 60.0573L439.221 61.9478L437.988 70.043L433.766 69.2954L430.051 68.5417L432.425 60.0573Z"
+                  fill="#958EFD"
+               />
+               <path
+                  d="M381.918 43.2271L391.386 46.3451L387.559 59.9099L381.939 59.0311L377 58.1039L381.918 43.2271Z"
+                  fill="#958EFD"
+               />
+               <path
+                  d="M357.477 35.1575L366.915 38.3886L362.295 54.8886L356.64 54.1382L352 52.5L357.477 35.1575Z"
+                  fill="#958EFD"
+               />
+               <path
+                  d="M329 26L339 29L333.373 48.7751L327.817 47.6795L322.816 46.8598L329 26Z"
+                  fill="#958EFD"
+               />
+               <path
+                  d="M303 18L312.5 21L305.505 43.3776L300.863 42.4947L295.5 41.5L303 18Z"
+                  fill="#958EFD"
+               />
+               <path
+                  d="M279.713 9.31137L289.287 12.5868L281.525 38.9105L277.013 38.1465L271 37.0033L279.713 9.31137Z"
+                  fill="#958EFD"
+               />
+               <defs>
+                  <filter
+                     id="filter0_d"
+                     x="0"
+                     y="75"
+                     width="503"
+                     height="63"
+                     filterUnits="userSpaceOnUse"
+                     color-interpolation-filters="sRGB"
+                  >
+                     <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                     <feColorMatrix
+                        in="SourceAlpha"
+                        type="matrix"
+                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                     />
+                     <feOffset dx="11" dy="7" />
+                     <feColorMatrix
+                        type="matrix"
+                        values="0 0 0 0 0.423529 0 0 0 0 0.388235 0 0 0 0 1 0 0 0 1 0"
+                     />
+                     <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                     <feBlend
+                        mode="normal"
+                        in="SourceGraphic"
+                        in2="effect1_dropShadow"
+                        result="shape"
+                     />
+                  </filter>
+               </defs>
+            </svg>
+            <h1 class="header__title">Movie Researcher</h1>
+         </div>
+
+         <div class="header__search-bar">
+            <i class="header__search-icon fas fa-search"></i>
+            <input id="search-movie" class="header__search-movie" type="search" />
+         </div>
+
+         <header class="header__buttons">
+            <div class="header__buttons__secondary-container">
+               <button
+                  data-text="Change the view way of cards"
+                  aria-label="Change the view way of card"
+                  class="header__buttons__btn btn-changeView btn tooltip"
+               >
+                  <i class="fas fa-desktop"></i>
+               </button>
+               <button
+                  data-text="Show a curiosity"
+                  aria-label="Show a curiosity"
+                  class="header__buttons__btn btn-notice btn tooltip"
+               >
+                  <i class="fas fa-question"></i>
+               </button>
+               <button
+                  data-text="Remove all cards"
+                  aria-label="Remove all cards"
+                  class="header__buttons__btn btn-remove-cards btn tooltip"
+               >
+                  <i class="fas fa-trash-alt"></i>
+               </button>
+               <button
+                  data-text="Show your favorite movies"
+                  aria-label="Show your favorite movies"
+                  class="header__buttons__btn btn-favorites btn tooltip"
+               >
+                  <i class="fas fa-star"></i>
+               </button>
+               <button
+                  data-text="Show your searched movies"
+                  aria-label="Show your searched movies"
+                  class="header__buttons__btn btn-searched btn tooltip"
+               >
+                  <i class="fas fa-history"></i>
+               </button>
+            </div>
+            <button data-text="Speak a movie!" class="header__buttons__btn micro-btn btn tooltip">
+               <i class="fas fa-microphone"></i>
+            </button>
+            <button class="header__search-button btn" type="button">
+               Search
+               <i class="fas fa-arrow-right"></i>
+            </button>
+         </header>
+      </header>
+
+      <div class="blur-bar blur-bar-left"></div>
+      <div class="blur-bar blur-bar-right"></div>
+
+      <div id="screens" class="banner screens-animation">
+         <section>
+            <ul class="banner__card">
+               <img class="banner__image" id="banner__image" src="./resources/img/bg-body.png" />
+            </ul>
+         </section>
+      </div>
+
+      <footer class="footer">
+         <div class="footer__info">
+            <div class="footer__main-info">
+               Made by
+               <mark>
+                  @LeonardoSchmittk
+                  <a
+                     class="footer_link"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     href="https://github.com/LeonardoSchmittK"
+                  >
+                     <i class="footer__icon fab fa-github-alt"></i>
+                  </a>
+                  <a target="_blank" rel="noopener noreferrer" href="https://linkedin.com/">
+                     <i data-text="Go to the top" class="footer__icon fab fa-linkedin-in"></i>
+                  </a>
+               </mark>
+               &reg;2021
+            </div>
+
+            <div class="footer__buttons">
+               <button data-text="Go to the top" class="footer__icon-go-to-top btn tooltip">
+                  <i class="fas fa-arrow-up"></i>
+               </button>
+               <button
+                  data-text="Contact me: Leoeyeschmittk@gmail.com"
+                  class="footer__icon-contact btn tooltip"
+               >
+                  <a
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     href="https://mail.google.com/mail/u/0/#inbox?compose=new"
+                  >
+                     <i class="fas fa-envelope"></i>
+                  </a>
+               </button>
+
+               <button class="footer__icon-tweet btn tooltip" data-text="Tweet it!">
+                  <a
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     href="https://twitter.com/intent/tweet/?text=Check+this+out+!? https://movieresearcher.webapp"
+                  >
+                     <i class="fab fa-twitter"></i>
+                  </a>
+               </button>
+            </div>
+         </div>
+
+         <div class="footer__rating">
+            <h4 class="footer__rating-title">Avaliate the app!</h4>
+            <div class="footer__stars">
+               <i class="footer__star far fa-star"></i>
+               <i class="footer__star far fa-star"></i>
+               <i class="footer__star far fa-star"></i>
+               <i class="footer__star far fa-star"></i>
+               <i class="footer__star far fa-star"></i>
+            </div>
+         </div>
+      </footer>
+      <noscript>The browser does not support JavaScript</noscript>
+      <script defer src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+      <script defer src="https://www.gstatic.com/firebasejs/7.23.0/firebase-auth.js"></script>
+      <script defer src="https://www.gstatic.com/firebasejs/8.2.5/firebase-firestore.js"></script>
+      <script defer src="script/firebaseConfig.js"></script>
+      <script defer src="https://unpkg.com/@popperjs/core@2"></script>
+      <script defer src="https://unpkg.com/tippy.js@6"></script>
+      <script defer src="script/DOMelements.js"></script>
+      <script defer src="script/rating.js"></script>
+      <script defer src="script/globalFunctions.js"></script>
+      <script defer src="script/firebaseAliases.js"></script>
+      <script defer src="script/tippy.js"></script>
+      <script defer src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+      <script defer src="script/firebaseAuth.js"></script>
+      <script defer src="script/typed.js"></script>
+      <script defer src="script/index.js"></script>
+      <script defer src="script/animations.js"></script>
+   </body>
 </html>
