@@ -6,4 +6,4 @@
 **/.firebaserc
 
 .runtimeconfig.json
-.firebase/
+/.firebase
