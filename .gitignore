@@ -1,9 +1,9 @@
 /node_modules 
 
-### Firebase ###
+firebase.json
+.firebase
 .idea
 **/node_modules/*
 **/.firebaserc
 
 .runtimeconfig.json
-/.firebase
