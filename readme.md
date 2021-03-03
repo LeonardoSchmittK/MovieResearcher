@@ -5,6 +5,8 @@
 
 ![screenshot](public/resources/img/screenshot.png)
 
+#### Run using _npm run dev_
+
 ### Challenges:
 
 -  Animations and SVG;
