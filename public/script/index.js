@@ -592,19 +592,18 @@ const mainAppExecution = (function () {
 
    function startRecognition() {
       btnMicrophone.classList.add("mic-on");
-      let SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
-      const recognition = new SpeechRecognition();
-      recognition.interimResults = true;
+      const recognition = new window.webkitSpeechRecognition();
+      // recognition.interimResults = true;
       recognition.lang = "en-US";
       recognition.continuous = true;
+
       recognition.start();
-      recognition.onresult = () => getContent(event);
+      recognition.onresult = (event) => getContent(event, recognition);
    }
 
-   function getContent(e) {
-      let i = e.resultIndex;
-      let resultsLength = results.length;
-
+   function getContent(e, recognition) {
+      let resultsLength = e.results.length;
+      console.log(recognition);
       for (let i = e.resultIndex; i < resultsLength; i++) {
          console.log(e.results[i]);
 

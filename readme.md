@@ -5,7 +5,7 @@
 
 ![screenshot](public/resources/img/screenshot.png)
 
-## Challenges:
+### Challenges:
 
 -  Animations and SVG;
 -  Responsitivity;
@@ -16,7 +16,7 @@
 -  Sass in the npm form
 -  As much functional as possible;
 
-## Stack:
+### Stack:
 
 -  Vanilla JavaScript;
 -  Node-Sass;
