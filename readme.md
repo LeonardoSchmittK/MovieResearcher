@@ -1,6 +1,6 @@
 # Movie Researcher :cinema:
 
--  Type in whichever film/series and the main info about it will print out through cards. Also, you can add label your favorite ones;
+-  Type in whichever film/series and the main info about it will print out through cards. Also, you can add your favorite ones;
 -  Movies API used: *https://omdbapi.com*
 
 ![screenshot](public/resources/img/screenshot.png)
