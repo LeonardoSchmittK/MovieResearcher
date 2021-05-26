@@ -1,7 +1,7 @@
 {
 	"name": "search-movies",
 	"version": "1.0.0",
-	"description": "A app to search for movies or series using an API",
+	"description": "An app to search for movies or series using an API",
 	"main": "index.js",
 	"scripts": {
 		"sass": "node-sass --watch public/style/sass -o public/style/css",
